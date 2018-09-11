@@ -42,10 +42,16 @@
     function create ()
     {
         this.add.image(400, 300, 'sky');
-        star1 = this.matter.add.image(400, 300, 'star',null, {frictionAir: 0, ignoreGravity: true});
+        star1 = this.matter.add.image(400, 300, 'star',null, {frictionAir: 0, isStatic:true});
         star2 = this.matter.add.image(400, 400, 'star',null, {frictionAir: 0, ignoreGravity: true});
         this.matter.add.joint(star1, star2, 50, 0.0);
         this.matter.add.mouseSpring();
+        //Phaser.GameObject.Graphic.strokeCircle(200, 300, 64);
+
+        var f1 = gui.addFolder('Player');
+        f1.add(star1.body.velocity.x, 'XSpeed').listen();
+        f1.add(star1.body.velocity.y, 'XSpeed').listen();
+        f1.open();
     }
 
     function update ()
