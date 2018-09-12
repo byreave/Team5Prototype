@@ -27,6 +27,7 @@ export default class Player {
     }
 
     takeoff() {
+      this.sprite.body.allowGravity = true;
       var direction = this.getCurrentArcDirection();
       direction = direction.normalize(); //debug found
       var arcSpeed = this.getArcSpeed();
@@ -121,7 +122,7 @@ export default class Player {
 
     //for playable
     orbitPlanet(planet) {
-      var radio = new Phaser.Math.Vector2(planet.sprite.x - this.sprite.x, planet.sprite.y - this.sprite.x);
+      var radio = new Phaser.Math.Vector2(planet.sprite.x - this.sprite.x, planet.sprite.y - this.sprite.y);
       if(radio.x < 0)
         this.angle = Math.atan(radio.y / radio.x);
       else if (radio.x > 0)
@@ -134,8 +135,9 @@ export default class Player {
         this.isCCW = false;
       else
         this.isCCW = true;
+      console.log(radio);
       console.log(this.angle);
-
+      this.sprite.body.allowGravity = false;
       this.orbit = planet;
     }
     orbitUpdate(delta)

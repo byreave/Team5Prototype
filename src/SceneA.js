@@ -2,6 +2,7 @@
 import Player from "./Player.js";
 import Planet from "./Planet.js";
 import * as dat from "dat.gui"
+import PlanetGenerator from "./PlanetGenerator.js"
 import Moon from "./Moon.js";
     
 export default class SceneA extends Phaser.Scene {
@@ -24,11 +25,13 @@ export default class SceneA extends Phaser.Scene {
         this.planets = new Array();
         this.add.image(400, 300, 'sky');
         var gui = new dat.GUI();
-        this.player = new Player(this, 0, 50);
-        for(var i = 0; i < 5; i ++)
-        {
-            this.planets.push(new Planet(this, 150 + 110 * i, 50, 50, "Planet" + i.toString()));
-        }
+        this.player = new Player(this, 0, 0);
+        this.planetGenerator = new PlanetGenerator(this);
+        this.planetGenerator.AutoGenerateAScreen();
+        //for(var i = 0; i < 5; i ++)
+        //{
+        //    this.planets.push(new Planet(this, 150 + 110 * i, 50, 50, "Planet" + i.toString()));
+        //}
         //this.moon1 = new Moon(this, this.planet1, 0.0);
         //this.moon1.setOrbiting(true);
         var f1 = gui.addFolder('Test');
@@ -41,7 +44,10 @@ export default class SceneA extends Phaser.Scene {
         f1.add(this.player, "isCCW").listen();
 
         f1.open();
+        this.cameras.main.setBounds(0, 0, 3200, 600);
+
         console.log(this);
+
     }
 
     update (timestep, delta)
@@ -53,5 +59,6 @@ export default class SceneA extends Phaser.Scene {
         {
             p.update(delta);
         }
+        this.cameras.main.scrollX = this.player.sprite.x - 400;
     }
 }
