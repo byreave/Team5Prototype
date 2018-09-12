@@ -21,23 +21,37 @@ export default class SceneA extends Phaser.Scene {
 
     create ()
     {
+        this.planets = new Array();
         this.add.image(400, 300, 'sky');
         var gui = new dat.GUI();
-        this.player = new Player(this, 0, 300);
-        this.planet1 = new Planet(this, 200, 300, 50);
-        this.planet1.drawOrbit();
-        this.moon1 = new Moon(this, this.planet1, 0.0);
-        this.moon1.setOrbiting(true);
+        this.player = new Player(this, 0, 50);
+        for(var i = 0; i < 5; i ++)
+        {
+            this.planets.push(new Planet(this, 150 + 110 * i, 50, 50, "Planet" + i.toString()));
+        }
+        //this.moon1 = new Moon(this, this.planet1, 0.0);
+        //this.moon1.setOrbiting(true);
         var f1 = gui.addFolder('Test');
         f1.add(this.player.sprite.body.velocity, "x").listen();
         f1.add(this.player.sprite.body.velocity, "y").listen();
+        f1.add(this.player.sprite, "x").listen();
+        f1.add(this.player.sprite, "y").listen();
+
         f1.add(this.player, "angle").listen();
+        f1.add(this.player, "isCCW").listen();
+
         f1.open();
+        console.log(this);
     }
 
     update (timestep, delta)
     {
         this.player.update(delta);
-        this.moon1.OrbitUpdate(delta);
+        this.player.orbitUpdate(delta);
+        //this.moon1.OrbitUpdate(delta);
+        for(var p of this.planets)
+        {
+            p.update(delta);
+        }
     }
 }

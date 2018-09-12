@@ -7,8 +7,9 @@ var config = {
     physics: {
         default: 'arcade',
         arcade:{
+            debug: true,
             gravity:{
-                scale: 0
+                y:30
             }
         }
     },
