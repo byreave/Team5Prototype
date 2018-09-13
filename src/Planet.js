@@ -20,8 +20,8 @@ export default class Planet {
         
         this.sprite.setCircle(
           radius/this.scale, 
-          -(radius - this.sprite.displayWidth / 2)/this.scale, 
-          -(radius - this.sprite.displayHeight / 2)/this.scale);
+          -(radius - this.sprite.displayWidth / 2) / this.scale, 
+          -(radius - this.sprite.displayHeight / 2) / this.scale);
         this.collider = this.scene.physics.add.collider(this.scene.player.sprite, this.sprite, this.enterPlanet, function () {
           this.physics.world.removeCollider(this.collider);
         }, this.scene);
