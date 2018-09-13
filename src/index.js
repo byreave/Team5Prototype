@@ -6,10 +6,10 @@ var config = {
     height: 600,
     physics: {
         default: 'arcade',
-        arcade:{
+        arcade: {
             debug: true,
-            gravity:{
-                y:30
+            gravity: {
+                y: 0
             }
         }
     },
