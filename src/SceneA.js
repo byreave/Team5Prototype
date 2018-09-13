@@ -77,7 +77,7 @@ export default class SceneA extends Phaser.Scene {
             this.background.image.x = this.background.image2.width + this.player.x;
         }
         if(this.background.image2.x <= -this.background.image2.width + this.player.x) {
-            this.background.image2.x = this.background.image.width + this.player.x;
+            this.background.image2.x = this.background.image.width + this.player.x ;
         }
     }
 }
