@@ -23,21 +23,15 @@ export default class SceneA extends Phaser.Scene {
         //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
         // Read sprites from the atlas
-        this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
+        // this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
 
-        this.load.image('planet1', '_LocalAssets/Planet1_static.png');
-        this.load.image('planet2', '_LocalAssets/Planet2_static.png');
+        this.load.image('planet1', 'assets/Planet1_static.png');
+        this.load.image('planet2', 'assets/Planet2_static.png');
     }
     
     create ()
     {
-        // Create animation resources
-        // TEMP: temp gems animation
-        this.anims.create({
-            key: 'diamond',
-            frames: this.anims.generateFrameNames('gems', {prefix:'diamond_', end: 15, zeroPad: 4}),
-            repeat: -1
-        });
+        // Create animation resources here
 
         this.planets = new Array();
         // this.add.image(400, 300, 'sky');
