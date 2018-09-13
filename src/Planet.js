@@ -2,17 +2,32 @@ export default class Planet {
     constructor(scene, x, y, radius, name, texture = "bomb") {
         this.scene = scene;
         this.name = name;
+
         this.sprite = scene.physics.add
           .sprite(x, y, texture);
+
+        this.scale = 0.2;
+
+        this.sprite.setScale(this.scale);
+        
+        this.colliderRadius = radius;
+        
         this.sprite.body.immovable = true;
         this.sprite.name = name;
         this.sprite.body.allowGravity = false;
         var circle = new Phaser.Geom.Circle(x, y, radius);
+<<<<<<< HEAD
         this.sprite.setScale(2);
 
         radius = radius / this.sprite.scaleX;
+=======
+>>>>>>> 8d067d02a199b9547ccc4bca2f2835c88a211c38
         this.gravityCircle = circle;
-        this.sprite.setCircle(radius, -(radius - this.sprite.displayWidth / (2* this.sprite.scaleX)),  -(radius - this.sprite.displayHeight / (2** this.sprite.scaleY)));
+        
+        this.sprite.setCircle(
+          radius/this.scale, 
+          -(radius - this.sprite.displayWidth / 2) / this.scale, 
+          -(radius - this.sprite.displayHeight / 2) / this.scale);
         this.collider = this.scene.physics.add.collider(this.scene.player.sprite, this.sprite, this.enterPlanet, function () {
           this.physics.world.removeCollider(this.collider);
         }, this.scene);
