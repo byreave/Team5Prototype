@@ -21,10 +21,18 @@ export default class SceneA extends Phaser.Scene {
         // debugger
         this.load.image('back', 'assets/space.png');
         //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-    }
 
+        // Read sprites from the atlas
+        // this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
+
+        this.load.image('planet1', 'assets/Planet1_static.png');
+        this.load.image('planet2', 'assets/Planet2_static.png');
+    }
+    
     create ()
-    { 
+    {
+        // Create animation resources here
+
         this.planets = new Array();
         // this.add.image(400, 300, 'sky');
         this.background = new Back(this, 0,0.5,100);
@@ -52,7 +60,6 @@ export default class SceneA extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 3200, 600);
         this.make = false;
         // console.log(this);
-
     }
 
     update (timestep, delta)
