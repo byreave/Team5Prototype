@@ -1,5 +1,3 @@
-import 'phaser';
-import SceneA from "./SceneA.js"
 import "phaser";
 import SceneA from "./SceneA.js";
 var config = {
