@@ -12,6 +12,7 @@ export default class Player {
       this.keys = scene.input.keyboard.createCursorKeys();
       //console.log(this.keys);
       this.orbit;
+      this.landedOn = 0;
       this.angle = 0.0;
       this.isCCW = true;
     }
@@ -19,7 +20,7 @@ export default class Player {
     stop(){
       this.sprite.setVelocityX(0);
       this.sprite.setVelocityY(0);
-      console.log("asdf");
+      this.landedOn++;
     }
   
     land() {
