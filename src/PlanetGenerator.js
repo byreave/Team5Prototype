@@ -31,4 +31,22 @@ export default class PlanetGenerator {
             this.scene.planets.push(newPlanet);
         }
     }
+
+    GenerateAScreen(make) {
+        if (make) {
+            var temp = this.XSpan;
+            this.XSpan *= 2;
+            for(var i = temp; i < this.XSpan; i += this.XStep)
+            {
+                var x = i, y = this.YStart + Math.random(this.YSpan + 1);
+                var radius = Math.floor(Math.random() * (this.radiusMax - this.radiusMin)) + this.radiusMin;
+                var texture = this.texturePack[Math.floor(Math.random() * this.texturePack.length)];
+                var newPlanet = this.GenerateOnePlanet(x, y, radius, texture, "Planet" + this.totalNumber.toString());
+                this.totalNumber ++;
+                this.scene.planets.push(newPlanet);
+            }
+        }
+        return false;
+    }
+
   }
