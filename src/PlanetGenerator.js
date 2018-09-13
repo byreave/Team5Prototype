@@ -10,6 +10,7 @@ export default class PlanetGenerator {
         this.radiusMin = 50;
         this.radiusMax = 100;
         this.texturePack = ["bomb"];
+
         this.totalNumber = 0; //for naming
     }
     

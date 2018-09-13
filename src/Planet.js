@@ -2,11 +2,20 @@ export default class Planet {
     constructor(scene, x, y, radius, name, texture = "bomb") {
         this.scene = scene;
         this.name = name;
+
+        // this.sprite = scene.physics.add
+        //   .sprite(x, y, texture);
         this.sprite = scene.physics.add
-          .sprite(x, y, texture);
+          .sprite(x, y, 'gems').play('diamond');
+        // this.sprite = scene.physics.add
+        //   .sprite(x, y, 'gems');
+
+        console.log("Planet: see if code works");
+
         this.sprite.body.immovable = true;
         this.sprite.name = name;
         this.sprite.body.allowGravity = false;
+
         var circle = new Phaser.Geom.Circle(x, y, radius);
         this.gravityCircle = circle;
         this.sprite.setCircle(radius, -(radius - this.sprite.displayWidth / 2),  -(radius - this.sprite.displayHeight / 2));

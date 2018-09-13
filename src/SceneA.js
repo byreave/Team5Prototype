@@ -18,10 +18,20 @@ export default class SceneA extends Phaser.Scene {
         this.load.image('star', 'assets/star.png');
         this.load.image('bomb', 'assets/bomb.png');
         //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
+        // Read sprites from the atlas
+        this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
     }
 
     create ()
     {
+        // TEMP: paint gems animation on screen
+        this.anims.create({
+            key: 'diamond',
+            frames: this.anims.generateFrameNames('gems', {prefix:'diamond_', end: 15, zeroPad: 4}),
+            repeat: -1
+        });
+        
         this.planets = new Array();
         this.add.image(400, 300, 'sky');
         var gui = new dat.GUI();
@@ -47,7 +57,9 @@ export default class SceneA extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 3200, 600);
 
         console.log(this);
+        
 
+        this.add.sprite(400, 100, 'gems').play('diamond');
     }
 
     update (timestep, delta)
