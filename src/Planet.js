@@ -5,18 +5,23 @@ export default class Planet {
 
         this.sprite = scene.physics.add
           .sprite(x, y, texture);
-        this.sprite.displayHeight = 10;
-        this.sprite.displayWidth = 10;
 
+        this.scale = 0.2;
+
+        this.sprite.setScale(this.scale);
+        
         this.colliderRadius = radius;
-
+        
         this.sprite.body.immovable = true;
         this.sprite.name = name;
         this.sprite.body.allowGravity = false;
-
         var circle = new Phaser.Geom.Circle(x, y, radius);
         this.gravityCircle = circle;
-        this.sprite.setCircle(radius, -(radius - this.sprite.displayWidth / 2),  -(radius - this.sprite.displayHeight / 2));
+        
+        this.sprite.setCircle(
+          radius/this.scale, 
+          -(radius - this.sprite.displayWidth / 2)/this.scale, 
+          -(radius - this.sprite.displayHeight / 2)/this.scale);
         this.collider = this.scene.physics.add.collider(this.scene.player.sprite, this.sprite, this.enterPlanet, function () {
           this.physics.world.removeCollider(this.collider);
         }, this.scene);
