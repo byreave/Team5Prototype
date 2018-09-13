@@ -24,17 +24,21 @@ export default class SceneA extends Phaser.Scene {
 
         // Read sprites from the atlas
         this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
-    }
 
+        this.load.image('planet1', '_LocalAssets/Planet1_static.png');
+        this.load.image('planet2', '_LocalAssets/Planet2_static.png');
+    }
+    
     create ()
     {
-        // TEMP: paint gems animation on screen
+        // Create animation resources
+        // TEMP: temp gems animation
         this.anims.create({
             key: 'diamond',
             frames: this.anims.generateFrameNames('gems', {prefix:'diamond_', end: 15, zeroPad: 4}),
             repeat: -1
         });
-        
+
         this.planets = new Array();
         // this.add.image(400, 300, 'sky');
         this.background = new Back(this, 0,0.5,100);
@@ -62,8 +66,6 @@ export default class SceneA extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 3200, 600);
         this.make = false;
         // console.log(this);
-
-        this.add.sprite(400, 100, 'gems').play('diamond');
     }
 
     update (timestep, delta)

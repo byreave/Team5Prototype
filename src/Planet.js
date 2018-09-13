@@ -3,14 +3,12 @@ export default class Planet {
         this.scene = scene;
         this.name = name;
 
-        // this.sprite = scene.physics.add
-        //   .sprite(x, y, texture);
         this.sprite = scene.physics.add
-          .sprite(x, y, 'gems').play('diamond');
-        // this.sprite = scene.physics.add
-        //   .sprite(x, y, 'gems');
+          .sprite(x, y, texture);
+        this.sprite.displayHeight = 10;
+        this.sprite.displayWidth = 10;
 
-        console.log("Planet: see if code works");
+        this.colliderRadius = radius;
 
         this.sprite.body.immovable = true;
         this.sprite.name = name;
