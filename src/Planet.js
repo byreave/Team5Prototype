@@ -1,9 +1,9 @@
 export default class Planet {
-    constructor(scene, x, y, radius, name) {
+    constructor(scene, x, y, radius, name, texture = "bomb") {
         this.scene = scene;
         this.name = name;
         this.sprite = scene.physics.add
-          .sprite(x, y, "bomb");
+          .sprite(x, y, texture);
         this.sprite.body.immovable = true;
         this.sprite.name = name;
         this.sprite.body.allowGravity = false;
