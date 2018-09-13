@@ -8,7 +8,7 @@ export default class Planet {
         this.sprite.name = name;
         this.sprite.body.allowGravity = false;
         var circle = new Phaser.Geom.Circle(x, y, radius);
-        this.sprite.setScale(2);
+        this.sprite.setScale(0.5);
 
         radius = radius / this.sprite.scaleX;
         this.gravityCircle = circle;
