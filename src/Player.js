@@ -3,7 +3,10 @@ export default class Player {
     this.scene = scene;
     this.fuel = 100;
     this.fuelSpendSpeed = 5; //per second
-    this.sprite = scene.physics.add.sprite(x, y, "character").setScale(0.1);
+    this.sprite = scene.physics.add
+      .sprite(x, y, "character")
+      .setScale(0.1)
+      .setAngle(0);
     this.speed = 2; //radian per sec
     this.acceleration = 30;
     this.isLanded = false;
@@ -42,14 +45,17 @@ export default class Player {
     if (this.isLanded == false) {
       // boost identifier
       var isBoosting = false;
+      var currentDir = new Phaser.Math.Vector2()
+        .copy(this.sprite.body.velocity)
+        .normalize();
 
       // Horizontal movement
       if (keys.left.isDown) {
         if (this.fuel >= 0) {
-          isBoosting = true;
           sprite.setAccelerationX(-this.acceleration);
           //fuel consume
           this.fuel -= (this.fuelSpendSpeed * delta) / 1000;
+          isBoosting = true;
         } else {
           //not enough fuel
           console.log("Not Enough Fuel!!");
@@ -97,6 +103,11 @@ export default class Player {
       isBoosting
         ? this.sprite.play("hermes", true, 0)
         : this.sprite.setFrame(0);
+
+      // set sprite direction
+      var aimAngle =
+        currentDir.angle(new Phaser.Math.Vector2(0, 1)) + Math.PI / 2;
+      this.sprite.setRotation(aimAngle);
     } else {
       if (keys.space.isDown) {
         this.takeoff();
