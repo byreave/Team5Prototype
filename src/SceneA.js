@@ -29,27 +29,6 @@ export default class SceneA extends Phaser.Scene {
 
     create() {
         // Create animation resources here
-
-        this.planets = new Array();
-        // this.add.image(400, 300, 'sky');
-        this.background = new Back(this, 0, 100, 300);
-        var gui = new dat.GUI();
-        this.player = new Player(this, 0, 0);
-        this.planetGenerator = new PlanetGenerator(this);
-        this.planetGenerator.AutoGenerateAScreen();
-        //for(var i = 0; i < 5; i ++)
-        //{
-        //    this.planets.push(new Planet(this, 150 + 110 * i, 50, 50, "Planet" + i.toString()));
-        //}
-        //this.moon1 = new Moon(this, this.planet1, 0.0);
-        //this.moon1.setOrbiting(true);
-        console.log(this.planets.length);
-        var f1 = gui.addFolder('Test');
-        f1.add(this.player.sprite.body.velocity, "x").listen();
-        f1.add(this.player.sprite.body.velocity, "y").listen();
-        f1.add(this.player.sprite, "x").listen();
-        f1.add(this.player.sprite, "y").listen();
-
         this.planets = new Array();
         // this.add.image(400, 300, 'sky');
         this.background = new Back(this, 0, 0.5, 100);
@@ -72,20 +51,12 @@ export default class SceneA extends Phaser.Scene {
 
         f1.add(this.player, "angle").listen();
         f1.add(this.player, "isCCW").listen();
+        f1.open();
     }
     update(timestep, delta) {
         this.player.update(delta);
-        this.player.orbitUpdate(delta);
-        //this.moon1.OrbitUpdate(delta);
-        for (var p of this.planets) {
-            p.update(delta);
-        }
-        if (this.player.landedOn == this.planets.length - 3) {
-            this.make = true;
-            this.make = this.planetGenerator.GenerateAScreen(this.make);
-        }
+
         this.cameras.main.scrollX = this.player.sprite.x - 400;
-        this.background.update(delta);
 
     }
 }

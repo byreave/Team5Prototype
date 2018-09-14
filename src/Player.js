@@ -141,20 +141,20 @@ export default class Player {
       } else if (this.angle <= Math.PI / 2) {
         this.sprite.setX(
           this.orbit.sprite.x -
-            Math.cos(this.angle) * this.orbit.gravityCircle.radius
+          Math.cos(this.angle) * this.orbit.gravityCircle.radius
         );
         this.sprite.setY(
           this.orbit.sprite.y +
-            Math.sin(this.angle) * this.orbit.gravityCircle.radius
+          Math.sin(this.angle) * this.orbit.gravityCircle.radius
         );
       } else if (this.angle <= Math.PI) {
         this.sprite.setX(
           this.orbit.sprite.x +
-            Math.cos(Math.PI - this.angle) * this.orbit.gravityCircle.radius
+          Math.cos(Math.PI - this.angle) * this.orbit.gravityCircle.radius
         );
         this.sprite.setY(
           this.orbit.sprite.y +
-            Math.sin(Math.PI - this.angle) * this.orbit.gravityCircle.radius
+          Math.sin(Math.PI - this.angle) * this.orbit.gravityCircle.radius
         );
       } else if (this.angle > Math.PI) {
         this.isCCW = false;

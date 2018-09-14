@@ -16,15 +16,7 @@ export default class Planet {
       -(radius - this.sprite.displayWidth / (2 * this.sprite.scaleX)),
       -(radius - this.sprite.displayHeight / (2 * this.sprite.scaleY))
     );
-    this.collider = this.scene.physics.add.collider(
-      this.scene.player.sprite,
-      this.sprite,
-      this.enterPlanet,
-      function() {
-        this.physics.world.removeCollider(this.collider);
-      },
-      this.scene
-    );
+
     this.drawOrbit();
   }
 
@@ -47,6 +39,7 @@ export default class Planet {
     this.sprite.destroy();
   }
 
+  //for playable, discarded
   enterPlanet(playerSprite, planetSprite) {
     if (playerSprite.y > planetSprite.y && this.player.isLanded == false) {
       this.player.stop();
@@ -64,7 +57,6 @@ export default class Planet {
         }
       }
 
-      //this.planet1.body.refresh();
     }
   }
 }
