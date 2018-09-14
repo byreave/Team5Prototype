@@ -6,57 +6,71 @@ import Back from "./Back.js";
 import Moon from "./Moon.js";
 
 export default class SceneA extends Phaser.Scene {
-    constructor() {
-        super();
-        this.level = 0;
-    }
+  constructor() {
+    super();
+    this.level = 0;
+  }
 
-    preload() {
-        this.load.image('sky', 'assets/sky.png');
-        //this.load.image('ground', 'assets/platform.png');
-        this.load.image('star', 'assets/star.png');
-        this.load.image('bomb', 'assets/bomb.png');
-        // debugger
-        this.load.image('back', 'assets/space.png');
-        //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+  preload() {
+    this.load.image("sky", "assets/sky.png");
+    //this.load.image('ground', 'assets/platform.png');
+    this.load.image("star", "assets/star.png");
+    this.load.image("bomb", "assets/bomb.png");
+    // debugger
+    this.load.image("back", "assets/space.png");
+    //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
-        // Read sprites from the atlas
-        // this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
+    this.load.image("planet1", "assets/Planet1_static.png");
+    this.load.image("planet2", "assets/Planet2_static.png");
 
-        this.load.image('planet1', 'assets/Planet1_static.png');
-        this.load.image('planet2', 'assets/Planet2_static.png');
-    }
+    // Read sprites from the atlas
+    // this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
+    this.load.atlas(
+      "character",
+      "assets/Hermes_animated.png",
+      "assets/Hermes_animated.json"
+    );
+  }
 
-    create() {
-        // Create animation resources here
-        this.planets = new Array();
-        // this.add.image(400, 300, 'sky');
-        this.background = new Back(this, 0, 0.5, 100);
-        var gui = new dat.GUI();
-        this.player = new Player(this, 0, 0);
-        this.planetGenerator = new PlanetGenerator(this);
-        this.planetGenerator.AutoGenerateAScreen();
-        //for(var i = 0; i < 5; i ++)
-        //{
-        //    this.planets.push(new Planet(this, 150 + 110 * i, 50, 50, "Planet" + i.toString()));
-        //}
-        //this.moon1 = new Moon(this, this.planet1, 0.0);
-        //this.moon1.setOrbiting(true);
-        console.log(this.planets.length);
-        var f1 = gui.addFolder("Test");
-        f1.add(this.player.sprite.body.velocity, "x").listen();
-        f1.add(this.player.sprite.body.velocity, "y").listen();
-        f1.add(this.player.sprite, "x").listen();
-        f1.add(this.player.sprite, "y").listen();
+  create() {
+    // Create animation resources here
+    this.anims.create({
+      key: "hermes",
+      frames: this.anims.generateFrameNames("character", {
+        prefix: "Hermes_",
+        end: 7,
+        zeroPad: 4
+      }),
+      repeat: -1
+    });
 
-        f1.add(this.player, "angle").listen();
-        f1.add(this.player, "isCCW").listen();
-        f1.open();
-    }
-    update(timestep, delta) {
-        this.player.update(delta);
+    this.planets = new Array();
+    // this.add.image(400, 300, 'sky');
+    this.background = new Back(this, 0, 0.5, 100);
+    var gui = new dat.GUI();
+    this.player = new Player(this, 0, 0);
+    this.planetGenerator = new PlanetGenerator(this);
+    this.planetGenerator.AutoGenerateAScreen();
+    //for(var i = 0; i < 5; i ++)
+    //{
+    //    this.planets.push(new Planet(this, 150 + 110 * i, 50, 50, "Planet" + i.toString()));
+    //}
+    //this.moon1 = new Moon(this, this.planet1, 0.0);
+    //this.moon1.setOrbiting(true);
+    console.log(this.planets.length);
+    var f1 = gui.addFolder("Test");
+    f1.add(this.player.sprite.body.velocity, "x").listen();
+    f1.add(this.player.sprite.body.velocity, "y").listen();
+    f1.add(this.player.sprite, "x").listen();
+    f1.add(this.player.sprite, "y").listen();
 
-        this.cameras.main.scrollX = this.player.sprite.x - 400;
+    f1.add(this.player, "angle").listen();
+    f1.add(this.player, "isCCW").listen();
+    f1.open();
+  }
+  update(timestep, delta) {
+    this.player.update(delta);
 
-    }
+    this.cameras.main.scrollX = this.player.sprite.x - 400;
+  }
 }

@@ -3,7 +3,7 @@ export default class Player {
     this.scene = scene;
     this.fuel = 100;
     this.fuelSpendSpeed = 5; //per second
-    this.sprite = scene.physics.add.sprite(x, y, "star", 0);
+    this.sprite = scene.physics.add.sprite(x, y, "character").setScale(0.1);
     this.speed = 2; //radian per sec
     this.acceleration = 30;
     this.isLanded = false;
@@ -40,9 +40,13 @@ export default class Player {
     const sprite = this.sprite;
 
     if (this.isLanded == false) {
+      // boost identifier
+      var isBoosting = false;
+
       // Horizontal movement
       if (keys.left.isDown) {
         if (this.fuel >= 0) {
+          isBoosting = true;
           sprite.setAccelerationX(-this.acceleration);
           //fuel consume
           this.fuel -= (this.fuelSpendSpeed * delta) / 1000;
@@ -55,6 +59,7 @@ export default class Player {
           sprite.setAccelerationX(this.acceleration);
           //fuel consume
           this.fuel -= (this.fuelSpendSpeed * delta) / 1000;
+          isBoosting = true;
         } else {
           //not enough fuel
           console.log("Not Enough Fuel!!");
@@ -69,6 +74,7 @@ export default class Player {
           sprite.setAccelerationY(-this.acceleration);
           //fuel consume
           this.fuel -= (this.fuelSpendSpeed * delta) / 1000;
+          isBoosting = true;
         } else {
           //not enough fuel
           console.log("Not Enough Fuel!!");
@@ -78,6 +84,7 @@ export default class Player {
           sprite.setAccelerationY(this.acceleration);
           //fuel consume
           this.fuel -= (this.fuelSpendSpeed * delta) / 1000;
+          isBoosting = true;
         } else {
           //not enough fuel
           console.log("Not Enough Fuel!!");
@@ -85,6 +92,11 @@ export default class Player {
       } else {
         sprite.setAccelerationY(0);
       }
+
+      // stop/play boosting animation
+      isBoosting
+        ? this.sprite.play("hermes", true, 0)
+        : this.sprite.setFrame(0);
     } else {
       if (keys.space.isDown) {
         this.takeoff();
@@ -141,20 +153,20 @@ export default class Player {
       } else if (this.angle <= Math.PI / 2) {
         this.sprite.setX(
           this.orbit.sprite.x -
-          Math.cos(this.angle) * this.orbit.gravityCircle.radius
+            Math.cos(this.angle) * this.orbit.gravityCircle.radius
         );
         this.sprite.setY(
           this.orbit.sprite.y +
-          Math.sin(this.angle) * this.orbit.gravityCircle.radius
+            Math.sin(this.angle) * this.orbit.gravityCircle.radius
         );
       } else if (this.angle <= Math.PI) {
         this.sprite.setX(
           this.orbit.sprite.x +
-          Math.cos(Math.PI - this.angle) * this.orbit.gravityCircle.radius
+            Math.cos(Math.PI - this.angle) * this.orbit.gravityCircle.radius
         );
         this.sprite.setY(
           this.orbit.sprite.y +
-          Math.sin(Math.PI - this.angle) * this.orbit.gravityCircle.radius
+            Math.sin(Math.PI - this.angle) * this.orbit.gravityCircle.radius
         );
       } else if (this.angle > Math.PI) {
         this.isCCW = false;
