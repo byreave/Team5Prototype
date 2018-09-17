@@ -72,23 +72,23 @@ export default class SceneA extends Phaser.Scene {
         if (this.levelManager.moveTo != null) {
             switch(this.levelManager.moveTo) {
                 case "up":
-                this.cameras.main.scrollY = this.cameras.main.scrollY - 1000;
+                this.cameras.main.scrollY = this.cameras.main.scrollY - 1080;
                 this.levelManager.moveTo = null;
                 break;
                 case "down":
-                this.cameras.main.scrollY = this.cameras.main.scrollY + 1000;
+                this.cameras.main.scrollY = this.cameras.main.scrollY + 1080;
                 this.levelManager.moveTo = null;
                 break;
                 case "left":
-                this.cameras.main.scrollX = this.cameras.main.scrollX + 1850;
+                this.cameras.main.scrollX = this.cameras.main.scrollX - 1920;
                 this.levelManager.moveTo = null;
                 break;
                 case "right":
                 this.levelManager.moveTo = null;
-                this.cameras.main.scrollX = this.cameras.main.scrollX - 1850;
+                this.cameras.main.scrollX = this.cameras.main.scrollX + 1920;
                 break;
             }
-            this.background.image.x = this.cameras.main.scrollX + 950;
+            this.background.image.x = this.cameras.main.scrollX + 960;
             this.background.image.y = this.cameras.main.scrollY + 540;
         }
     }
