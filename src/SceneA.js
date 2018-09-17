@@ -46,7 +46,7 @@ export default class SceneA extends Phaser.Scene {
             repeat: -1
         });
         //BG
-        this.background = new Back(this, 0, 0.5, 100);
+        this.background = new Back(this, 960, 0.5, 540);
         //Player
         this.player = new Player(this, 0, 200);
 
@@ -63,11 +63,12 @@ export default class SceneA extends Phaser.Scene {
         f1.add(this.player.sprite, "x").listen();
         f1.add(this.player.sprite, "y").listen();
         f1.add(this.player, "isCCW").listen();
+        f1.add(this.player, "fuel").listen();
         f1.open();
     }
     update(timestep, delta) {
         this.player.update(delta);
         this.levelManager.currentLevel.update(delta);
-        this.cameras.main.scrollX = this.player.sprite.x - 400;
+        //this.cameras.main.scrollX = this.player.sprite.x - 400;
     }
 }

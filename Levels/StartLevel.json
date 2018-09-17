@@ -11,6 +11,17 @@
             "isTextureRandom": false,
             "displayWidth": 0,
             "displayHeight": 0
+        },
+        "p2": {
+            "x": 200,
+            "y": 0,
+            "radius": 50,
+            "radiusSpan": 50,
+            "name": "Start2",
+            "texture": "planet1",
+            "isTextureRandom": false,
+            "displayWidth": 0,
+            "displayHeight": 0
         }
     },
     "moons": {
@@ -22,6 +33,15 @@
             "startPos": 0,
             "isCCW": true,
             "IsCCWRandom": false
+        },
+        "m2": {
+            "orbit": "Start2",
+            "name": "StartMoon",
+            "texture": "star",
+            "IsTextureRandom": false,
+            "startPos": 2,
+            "isCCW": true,
+            "IsCCWRandom": true
         }
     },
     "exits": {

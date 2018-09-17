@@ -1,6 +1,7 @@
 import Planet from "./Planet.js";
 import Moon from "./Moon.js";
 import PlanetGenerator from "./PlanetGenerator.js";
+import Exit from "./Exit.js";
 export default class Level {
     constructor(scene, pos) {
         this.scene = scene;
@@ -18,6 +19,12 @@ export default class Level {
         this.levelLeft = null;
         this.levelRight = null;
         this.levelDown = null;
+
+        this.exitsUp = null;
+        this.exitsDown = null;
+        this.exitsLeft = null;
+        this.exitsRight = null;
+
     }
 
     createPlanetsFormJson(file) {
@@ -66,6 +73,48 @@ export default class Level {
             var moon = new Moon(this.scene, orbit, startPos, isCCW, texture, name);
             this.moons.set(moon.sprite, moon);//use sprite to tell the moon object, it's easier to tell collision object
         }
+        //Exits
+        //Up
+        if (data.exits.up.On == true && (this.levelUp == null || this.levelUp.exitsDown == null)) { //two levels share an exit, check
+            this.exitsUp = new Exit(this.scene, this, 'up', data.exits.up.PlanetTexture, data.exits.up.PlanetRadius, data.exits.up.MoonTexture, data.exits.up.isCCW);
+            this.moons.set(this.exitsUp.moon.sprite, this.exitsUp.moon);
+            this.exits.push(this.exitsUp);
+        } else if (data.exits.up.On == true && this.levelUp != null && this.levelUp.exitsDown != null) {
+            this.exitsUp = this.levelUp.exitsDown;
+            this.moons.set(this.exitsUp.moon.sprite, this.exitsUp.moon);
+            this.exits.push(this.exitsUp);
+        }
+        //Down
+        if (data.exits.down.On == true && (this.levelDown == null || this.levelDown.exitsUp == null)) {
+            this.exitsDown = new Exit(this.scene, this, 'down', data.exits.down.PlanetTexture, data.exits.down.PlanetRadius, data.exits.down.MoonTexture, data.exits.down.isCCW);
+            this.moons.set(this.exitsDown.moon.sprite, this.exitsDown.moon);
+            this.exits.push(this.exitsDown);
+        } else if (data.exits.down.On == true && this.levelDown != null && this.levelDown.exitsUp != null) {
+            this.exitsDown = this.levelDown.exitsUp;
+            this.moons.set(this.exitsDown.moon.sprite, this.exitsDown.moon);
+            this.exits.push(this.exitsDown);
+        }
+        //Left left
+        if (data.exits.left.On == true && (this.levelLeft == null || this.levelLeft.exitsRight == null)) {
+            this.exitsLeft = new Exit(this.scene, this, 'left', data.exits.left.PlanetTexture, data.exits.left.PlanetRadius, data.exits.left.MoonTexture, data.exits.left.isCCW);
+            this.moons.set(this.exitsLeft.moon.sprite, this.exitsLeft.moon);
+            this.exits.push(this.exitsLeft);
+        } else if (data.exits.left.On == true && this.levelLeft != null && this.levelLeft.exitsRight != null) {
+            this.exitsLeft = this.levelLeft.exitsRight;
+            this.moons.set(this.exitsLeft.moon.sprite, this.exitsLeft.moon);
+            this.exits.push(this.exitsLeft);
+        }
+        //Right right
+        if (data.exits.right.On == true && (this.levelRight == null || this.levelRight.exitsLeft == null)) {
+            this.exitsRight = new Exit(this.scene, this, 'right', data.exits.right.PlanetTexture, data.exits.right.PlanetRadius, data.exits.right.MoonTexture, data.exits.right.isCCW);
+            this.moons.set(this.exitsRight.moon.sprite, this.exitsRight.moon);
+            this.exits.push(this.exitsRight);
+        } else if (data.exits.right.On == true && this.levelRight != null && this.levelRight.exitsLeft != null) {
+            this.exitsRight = this.levelRight.exitsLeft;
+            this.moons.set(this.exitsRight.moon.sprite, this.exitsRight.moon);
+            this.exits.push(this.exitsRight);
+
+        }
     }
 
     update(delta) {
@@ -76,6 +125,10 @@ export default class Level {
         //moons
         for (var m of this.moons.values()) {
             m.OrbitUpdate(delta);
+        }
+
+        for (var e of this.exits) {
+            e.update(delta);
         }
     }
 }

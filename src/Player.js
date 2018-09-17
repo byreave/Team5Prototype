@@ -19,6 +19,7 @@ export default class Player {
     this.landedOn = 0;
     //this.angle = 0.0;
     this.isCCW = true;
+    this.isLeaving = false; //for moon collider
   }
 
   stop() {
@@ -30,6 +31,8 @@ export default class Player {
   land(moonSprite) {
     this.isLanded = true;
     this.moon = this.level.moons.get(moonSprite);
+    if (this.moon.isOrbiting == false)
+      this.moon.isOrbiting = true;
     this.orbit = this.moon.orbit;
     this.isCCW = this.moon.isCCW;
     this.sprite.setVelocityX(0);
@@ -46,6 +49,7 @@ export default class Player {
     this.sprite.setVelocityX(-arcSpeed * direction.x);
     this.sprite.setVelocityY(-arcSpeed * direction.y);
     this.isLanded = false;
+    this.isLeaving = true;
   }
   update(delta) {
     const keys = this.keys;
@@ -68,7 +72,6 @@ export default class Player {
         } else {
           //not enough fuel
           sprite.setAccelerationX(0);
-          console.log("Not Enough Fuel!!");
         }
       } else if (keys.right.isDown) {
         if (this.fuel >= 0) {
@@ -79,7 +82,6 @@ export default class Player {
         } else {
           //not enough fuel
           sprite.setAccelerationX(0);
-          console.log("Not Enough Fuel!!");
         }
       } else {
         sprite.setAccelerationX(0);
@@ -95,7 +97,6 @@ export default class Player {
         } else {
           //not enough fuel
           sprite.setAccelerationX(0);
-          console.log("Not Enough Fuel!!");
         }
       } else if (keys.down.isDown) {
         if (this.fuel >= 0) {
@@ -106,7 +107,6 @@ export default class Player {
         } else {
           //not enough fuel
           sprite.setAccelerationX(0);
-          console.log("Not Enough Fuel!!");
         }
       } else {
         sprite.setAccelerationY(0);
@@ -126,6 +126,15 @@ export default class Player {
       this.sprite.setY(this.moon.sprite.y);
       if (keys.space.isDown) {
         this.takeoff();
+      }
+    }
+    //moon collider
+    if (this.isLeaving == true) {
+
+      if ((this.moon.sprite.x - this.sprite.x) * (this.moon.sprite.x - this.sprite.x)
+        + (this.moon.sprite.y - this.sprite.y) * (this.moon.sprite.y - this.sprite.y)
+        > 2 * this.moon.sprite.displayWidth * this.moon.sprite.displayWidth + 2 * this.sprite.displayWidth * this.sprite.displayHeight) { //distance vs two object size(approximately)
+        this.isLeaving = false;
       }
     }
   }

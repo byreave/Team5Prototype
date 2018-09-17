@@ -22,57 +22,64 @@ export default class LevelManager {
     }
     createLevelAround(centerLevel) {
         if (centerLevel.levelUp == null) {
-            var newLevel = new Level(this.scene, centerLevel.pos + new Phaser.Math.Vector2(0, -this.levelHeight));
+
+            var newLevel = new Level(this.scene, new Phaser.Math.Vector2(centerLevel.centerPoint.x, centerLevel.centerPoint.y - this.levelHeight));
+            newLevel.levelDown = centerLevel;
             newLevel.createPlanetsFormJson(this.getRandomLevelFile());
             centerLevel.levelUp = newLevel;
             this.levels.push(newLevel);
         }
         if (centerLevel.levelDown == null) {
-            var newLevel = new Level(this.scene, centerLevel.pos + new Phaser.Math.Vector2(0, this.levelHeight));
+            var newLevel = new Level(this.scene, new Phaser.Math.Vector2(centerLevel.centerPoint.x, centerLevel.centerPoint.y + this.levelHeight));
+            newLevel.levelUp = centerLevel;
             newLevel.createPlanetsFormJson(this.getRandomLevelFile());
             centerLevel.levelDown = newLevel;
             this.levels.push(newLevel);
         }
         if (centerLevel.levelLeft == null) {
-            var newLevel = new Level(this.scene, centerLevel.pos + new Phaser.Math.Vector2(-this.levelWidth, 0));
+            var newLevel = new Level(this.scene, new Phaser.Math.Vector2(centerLevel.centerPoint.x - this.levelWidth, centerLevel.centerPoint.y));
+            newLevel.levelRight = centerLevel;
             newLevel.createPlanetsFormJson(this.getRandomLevelFile());
             centerLevel.levelLeft = newLevel;
             this.levels.push(newLevel);
         }
         if (centerLevel.levelRight == null) {
-            var newLevel = new Level(this.scene, centerLevel.pos + new Phaser.Math.Vector2(this.levelWidth, 0));
+            var newLevel = new Level(this.scene, new Phaser.Math.Vector2(centerLevel.centerPoint.x + this.levelWidth, centerLevel.centerPoint.y));
+            newLevel.levelLeft = centerLevel;
             newLevel.createPlanetsFormJson(this.getRandomLevelFile());
             centerLevel.levelRight = newLevel;
             this.levels.push(newLevel);
         }
     }
 
-    //0 up 1 down 2 left 3 right
-    switchLevel(direction) {
-        if (direction == 0) {
+    //para exit for change its direction
+    switchLevel(direction, exit) {
+        if (direction == 'up') {
             this.currentLevel = this.currentLevel.levelUp;
             this.createLevelAround(this.currentLevel);
             this.scene.player.level = this.currentLevel;
+            exit.direction = 'down';
+            console.log("changed to upper level");
             //TO DO Camera Move:
 
         }
-        else if (direction == 1) {
+        else if (direction == 'down') {
             this.currentLevel = this.currentLevel.levelUp;
             this.createLevelAround(this.currentLevel);
             this.scene.player.level = this.currentLevel;
-
+            exit.direction = 'up';
         }
-        else if (direction == 2) {
+        else if (direction == 'left') {
             this.currentLevel = this.currentLevel.levelLeft;
             this.createLevelAround(this.currentLevel);
             this.scene.player.level = this.currentLevel;
-
+            exit.direction = 'right';
         }
-        else if (direction == 3) {
+        else if (direction == 'right') {
             this.currentLevel = this.currentLevel.levelRight;
             this.createLevelAround(this.currentLevel);
             this.scene.player.level = this.currentLevel;
-
+            exit.direction = 'left';
         }
     }
 

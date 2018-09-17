@@ -1,6 +1,6 @@
 {
     "name": 1,
-    "Planets": {
+    "planets": {
         "p1": {
             "x": 400,
             "y": 300,
@@ -13,7 +13,7 @@
             "displayHeight": 0
         }
     },
-    "Moons": {
+    "moons": {
         "m1": {
             "orbit": "Start",
             "name": "StartMoon",
@@ -24,7 +24,7 @@
             "IsCCWRandom": false
         }
     },
-    "Exits": {
+    "exits": {
         "up": {
             "On": true,
             "PlanetTexture": "planet1",

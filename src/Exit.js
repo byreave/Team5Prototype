@@ -6,28 +6,46 @@ export default class Exit {
         this.scene = scene;
         this.x;
         this.y;
+        this.pos;
+        this.level = level
+        this.direction = direction;
         if (direction == 'up') {
-            this.x = level.centerPoint.x
-            this.y = level.centerPoint.y - level.levelHeight;
+            this.x = level.centerPoint.x;
+            this.y = level.centerPoint.y - level.levelHeight / 2;
+            this.pos = 3 * Math.PI / 2;
         }
         else if (direction == 'down') {
             this.x = level.centerPoint.x;
-            this.y = level.centerPoint.y + level.levelHeight;
+            this.y = level.centerPoint.y + level.levelHeight / 2;
+            this.pos = Math.PI / 2;
         }
         else if (direction == 'left') {
-            this.x = level.centerPoint.x - level.levelWidth;
+            this.x = level.centerPoint.x - level.levelWidth / 2;
             this.y = level.centerPoint.y;
+            this.pos = 0;
         }
         else if (direction == 'right') {
-            this.x = level.centerPoint.x + levelWidth;
+            this.x = level.centerPoint.x + level.levelWidth / 2;
             this.y = level.centerPoint.y;
+            this.pos = Math.PI;
         }
-        this.planet = new Planet(this.scene, this.x, this.y, PlanetRadius, Level.name + direction + "exit", PlanetTexture);
-        this.moon = new Moon(this.scene, this.planet, 0, isCCW, MoonTexture, Level.name + direction + "exitMoon");
+        this.planet = new Planet(this.scene, this.x, this.y, PlanetRadius, level.name + direction + "exit", PlanetTexture);
+        this.moon = new Moon(this.scene, this.planet, this.pos, isCCW, MoonTexture, level.name + direction + "exitMoon");
+        this.moon.isExit = true;
+        this.moon.exit = this;
+        this.moon.isOrbiting = false;
     }
 
     update(delta) {
         this.planet.update(delta);
         this.moon.OrbitUpdate(delta);
+    }
+    playerIncomingExit(moonSprite, playerSprite) {
+
+        if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
+            console.log("asdsa");
+            this.scene.player.land(moonSprite);
+            this.scene.levelManager.switchLevel(this.direction, this);
+        }
     }
 }

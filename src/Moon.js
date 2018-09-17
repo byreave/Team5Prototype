@@ -7,13 +7,15 @@ export default class Moon {
         this.speed = 1; //radian per second
         this.angle = startPos;
         this.isCCW = isCCW;
+        this.isExit = false;
+        this.exit = null;
         this.sprite = scene.physics.add.sprite(
             orbit.sprite.x + Math.cos(startPos) * orbit.gravityCircle.radius,
             orbit.sprite.y - Math.sin(startPos) * orbit.gravityCircle.radius,
             texture
         );
         this.sprite.name = name;
-        this.scene.physics.add.overlap(this.sprite, this.scene.player.sprite, this.playerIncoming, null, this.scene);
+        this.collider = this.scene.physics.add.overlap(this.sprite, this.scene.player.sprite, this.playerIncoming.bind(this), null, this.scene);
     }
 
     setStartingPos(angle) {
@@ -94,8 +96,13 @@ export default class Moon {
     }
 
     playerIncoming(moonSprite, playerSprite) {
-        if (this.player.isLanded == false) {
-            this.player.land(moonSprite);
+        if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
+            if (this.isExit == false)
+                this.player.land(moonSprite);
+            else {
+                this.scene.player.land(moonSprite);
+                this.scene.levelManager.switchLevel(this.exit.direction, this.exit);
+            }
         }
     }
 }
