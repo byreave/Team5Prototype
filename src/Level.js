@@ -79,7 +79,7 @@ export default class Level {
             this.exitsUp = new Exit(this.scene, this, 'up', data.exits.up.PlanetTexture, data.exits.up.PlanetRadius, data.exits.up.MoonTexture, data.exits.up.isCCW);
             this.moons.set(this.exitsUp.moon.sprite, this.exitsUp.moon);
             this.exits.push(this.exitsUp);
-        } else if (data.exits.up.On == true && this.levelUp != null && this.levelUp.exitsDown != null) {
+        } else if (this.levelUp != null && this.levelUp.exitsDown != null) {
             this.exitsUp = this.levelUp.exitsDown;
             this.moons.set(this.exitsUp.moon.sprite, this.exitsUp.moon);
             this.exits.push(this.exitsUp);
@@ -89,7 +89,7 @@ export default class Level {
             this.exitsDown = new Exit(this.scene, this, 'down', data.exits.down.PlanetTexture, data.exits.down.PlanetRadius, data.exits.down.MoonTexture, data.exits.down.isCCW);
             this.moons.set(this.exitsDown.moon.sprite, this.exitsDown.moon);
             this.exits.push(this.exitsDown);
-        } else if (data.exits.down.On == true && this.levelDown != null && this.levelDown.exitsUp != null) {
+        } else if (this.levelDown != null && this.levelDown.exitsUp != null) {
             this.exitsDown = this.levelDown.exitsUp;
             this.moons.set(this.exitsDown.moon.sprite, this.exitsDown.moon);
             this.exits.push(this.exitsDown);
@@ -99,7 +99,7 @@ export default class Level {
             this.exitsLeft = new Exit(this.scene, this, 'left', data.exits.left.PlanetTexture, data.exits.left.PlanetRadius, data.exits.left.MoonTexture, data.exits.left.isCCW);
             this.moons.set(this.exitsLeft.moon.sprite, this.exitsLeft.moon);
             this.exits.push(this.exitsLeft);
-        } else if (data.exits.left.On == true && this.levelLeft != null && this.levelLeft.exitsRight != null) {
+        } else if (this.levelLeft != null && this.levelLeft.exitsRight != null) {
             this.exitsLeft = this.levelLeft.exitsRight;
             this.moons.set(this.exitsLeft.moon.sprite, this.exitsLeft.moon);
             this.exits.push(this.exitsLeft);
@@ -109,7 +109,7 @@ export default class Level {
             this.exitsRight = new Exit(this.scene, this, 'right', data.exits.right.PlanetTexture, data.exits.right.PlanetRadius, data.exits.right.MoonTexture, data.exits.right.isCCW);
             this.moons.set(this.exitsRight.moon.sprite, this.exitsRight.moon);
             this.exits.push(this.exitsRight);
-        } else if (data.exits.right.On == true && this.levelRight != null && this.levelRight.exitsLeft != null) {
+        } else if (this.levelRight != null && this.levelRight.exitsLeft != null) {
             this.exitsRight = this.levelRight.exitsLeft;
             this.moons.set(this.exitsRight.moon.sprite, this.exitsRight.moon);
             this.exits.push(this.exitsRight);

@@ -40,12 +40,4 @@ export default class Exit {
         this.planet.update(delta);
         this.moon.OrbitUpdate(delta);
     }
-    playerIncomingExit(moonSprite, playerSprite) {
-
-        if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
-            console.log("asdsa");
-            this.scene.player.land(moonSprite);
-            this.scene.levelManager.switchLevel(this.direction, this);
-        }
-    }
 }

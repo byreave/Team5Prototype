@@ -102,6 +102,7 @@ export default class Moon {
             else {
                 this.scene.player.land(moonSprite);
                 this.scene.levelManager.switchLevel(this.exit.direction, this.exit);
+                console.log(this.scene.levelManager);
             }
         }
     }

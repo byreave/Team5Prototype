@@ -65,7 +65,7 @@ export default class LevelManager {
 
         }
         else if (direction == 'down') {
-            this.currentLevel = this.currentLevel.levelUp;
+            this.currentLevel = this.currentLevel.levelDown;
             this.createLevelAround(this.currentLevel);
             this.scene.player.level = this.currentLevel;
             exit.direction = 'up';

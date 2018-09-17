@@ -33,6 +33,7 @@ export default class Player {
     this.moon = this.level.moons.get(moonSprite);
     if (this.moon.isOrbiting == false)
       this.moon.isOrbiting = true;
+    console.log(this.moon);
     this.orbit = this.moon.orbit;
     this.isCCW = this.moon.isCCW;
     this.sprite.setVelocityX(0);
