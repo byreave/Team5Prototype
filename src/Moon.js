@@ -98,7 +98,7 @@ export default class Moon {
     playerIncoming(moonSprite, playerSprite) {
         if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
             if (this.isExit == false)
-                this.player.land(moonSprite);
+                this.scene.player.land(moonSprite);
             else {
                 this.scene.player.land(moonSprite);
                 this.scene.levelManager.switchLevel(this.exit.direction, this.exit);
