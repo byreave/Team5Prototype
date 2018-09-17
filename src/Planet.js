@@ -5,7 +5,7 @@ export default class Planet {
     this.sprite = scene.physics.add.sprite(x, y, texture);
     this.sprite.body.immovable = true;
     this.sprite.name = name;
-    this.sprite.body.allowGravity = false;
+    //this.sprite.body.allowGravity = false;
     var circle = new Phaser.Geom.Circle(x, y, radius);
     this.sprite.setScale(0.2);
 

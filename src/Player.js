@@ -1,5 +1,5 @@
 export default class Player {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, level) {
     this.scene = scene;
     this.fuel = 100;
     this.fuelSpendSpeed = 5; //per second
@@ -13,9 +13,11 @@ export default class Player {
     this.sprite.setVelocityX(100);
     this.keys = scene.input.keyboard.createCursorKeys();
     //console.log(this.keys);
-    this.orbit;
+    this.orbit;//planets player orbiting around ps:not moons
+    this.moon; // the moon player come across
+    this.level = level;
     this.landedOn = 0;
-    this.angle = 0.0;
+    //this.angle = 0.0;
     this.isCCW = true;
   }
 
@@ -25,12 +27,19 @@ export default class Player {
     this.landedOn++;
   }
 
-  land() {
+  land(moonSprite) {
     this.isLanded = true;
+    this.moon = this.level.moons.get(moonSprite);
+    this.orbit = this.moon.orbit;
+    this.isCCW = this.moon.isCCW;
+    this.sprite.setVelocityX(0);
+    this.sprite.setVelocityY(0);
+    this.sprite.setAccelerationX(0);
+    this.sprite.setAccelerationY(0);
+
   }
 
   takeoff() {
-    this.sprite.body.allowGravity = true;
     var direction = this.getCurrentArcDirection();
     direction = direction.normalize(); //debug found
     var arcSpeed = this.getArcSpeed();
@@ -58,6 +67,7 @@ export default class Player {
           isBoosting = true;
         } else {
           //not enough fuel
+          sprite.setAccelerationX(0);
           console.log("Not Enough Fuel!!");
         }
       } else if (keys.right.isDown) {
@@ -68,6 +78,7 @@ export default class Player {
           isBoosting = true;
         } else {
           //not enough fuel
+          sprite.setAccelerationX(0);
           console.log("Not Enough Fuel!!");
         }
       } else {
@@ -83,6 +94,7 @@ export default class Player {
           isBoosting = true;
         } else {
           //not enough fuel
+          sprite.setAccelerationX(0);
           console.log("Not Enough Fuel!!");
         }
       } else if (keys.down.isDown) {
@@ -93,6 +105,7 @@ export default class Player {
           isBoosting = true;
         } else {
           //not enough fuel
+          sprite.setAccelerationX(0);
           console.log("Not Enough Fuel!!");
         }
       } else {
@@ -109,6 +122,8 @@ export default class Player {
         currentDir.angle(new Phaser.Math.Vector2(0, 1)) + Math.PI / 2;
       this.sprite.setRotation(aimAngle);
     } else {
+      this.sprite.setX(this.moon.sprite.x);
+      this.sprite.setY(this.moon.sprite.y);
       if (keys.space.isDown) {
         this.takeoff();
       }
@@ -164,20 +179,20 @@ export default class Player {
       } else if (this.angle <= Math.PI / 2) {
         this.sprite.setX(
           this.orbit.sprite.x -
-            Math.cos(this.angle) * this.orbit.gravityCircle.radius
+          Math.cos(this.angle) * this.orbit.gravityCircle.radius
         );
         this.sprite.setY(
           this.orbit.sprite.y +
-            Math.sin(this.angle) * this.orbit.gravityCircle.radius
+          Math.sin(this.angle) * this.orbit.gravityCircle.radius
         );
       } else if (this.angle <= Math.PI) {
         this.sprite.setX(
           this.orbit.sprite.x +
-            Math.cos(Math.PI - this.angle) * this.orbit.gravityCircle.radius
+          Math.cos(Math.PI - this.angle) * this.orbit.gravityCircle.radius
         );
         this.sprite.setY(
           this.orbit.sprite.y +
-            Math.sin(Math.PI - this.angle) * this.orbit.gravityCircle.radius
+          Math.sin(Math.PI - this.angle) * this.orbit.gravityCircle.radius
         );
       } else if (this.angle > Math.PI) {
         this.isCCW = false;

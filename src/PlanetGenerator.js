@@ -17,6 +17,7 @@ export default class PlanetGenerator {
     //with a moon
     GenerateOnePlanet(x, y, radius, texture, name) {
         var planet = new Planet(this.scene, x, y, radius, name, texture);
+        console.log(planet);
         return planet;
     }
 
