@@ -7,7 +7,7 @@ export default class LevelManager {
         this.levels = new Array();
         this.levelWidth = 1920;
         this.levelHeight = 1080;
-
+        this.moveTo = null;
         this.levelJSON = ['StartLevel', 'level1'];
     }
 
@@ -61,6 +61,7 @@ export default class LevelManager {
             exit.direction = 'down';
             console.log("changed to upper level");
             //TO DO Camera Move:
+            this.moveTo = "up";
 
         }
         else if (direction == 'down') {
@@ -68,18 +69,21 @@ export default class LevelManager {
             this.createLevelAround(this.currentLevel);
             this.scene.player.level = this.currentLevel;
             exit.direction = 'up';
+            this.moveTo = "down";
         }
         else if (direction == 'left') {
             this.currentLevel = this.currentLevel.levelLeft;
             this.createLevelAround(this.currentLevel);
             this.scene.player.level = this.currentLevel;
             exit.direction = 'right';
+            this.moveTo = "left";
         }
         else if (direction == 'right') {
             this.currentLevel = this.currentLevel.levelRight;
             this.createLevelAround(this.currentLevel);
             this.scene.player.level = this.currentLevel;
             exit.direction = 'left';
+            this.moveTo = "right";
         }
     }
 
