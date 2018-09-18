@@ -2,6 +2,7 @@ import Player from './Player.js';
 import * as dat from 'dat.gui';
 import Back from './Back.js';
 import LevelManager from './LevelManager.js';
+import { deflateSync } from 'zlib';
 
 export default class SceneA extends Phaser.Scene {
 	constructor() {
@@ -49,6 +50,10 @@ export default class SceneA extends Phaser.Scene {
 		this.background = new Back(this, 960, 0.5, 540);
 		//Player
 		this.player = new Player(this, 0, 200);
+		//Camera time to move to other screen(second)
+		this.camTime = 3;
+		this.oldCamScrollX = 0;
+		this.oldCamScrollY = 0;
 
 		//Level Manager
 		this.levelManager = new LevelManager(this);
@@ -70,22 +75,45 @@ export default class SceneA extends Phaser.Scene {
 		this.player.update(delta);
 		this.levelManager.currentLevel.update(delta);
 		if (this.levelManager.moveTo != null) {
+			var destination = 0;
+			var speed = 0;
 			switch (this.levelManager.moveTo) {
 				case 'up':
-					this.cameras.main.scrollY = this.cameras.main.scrollY - 1080;
-					this.levelManager.moveTo = null;
+					destination = this.oldCamScrollY - this.levelManager.levelHeight;
+					speed = this.levelManager.levelHeight / this.camTime;
+					if (this.cameras.main.scrollY > destination) {
+						this.cameras.main.scrollY = this.cameras.main.scrollY - speed * delta / 1000;
+					} else {
+						this.levelManager.moveTo = null;
+						this.oldCamScrollY = destination;
+					}
 					break;
 				case 'down':
-					this.cameras.main.scrollY = this.cameras.main.scrollY + 1080;
-					this.levelManager.moveTo = null;
+					destination = this.oldCamScrollY + this.levelManager.levelHeight;
+					speed = this.levelManager.levelHeight / this.camTime;
+					if (this.cameras.main.scrollY < destination) this.cameras.main.scrollY += speed * delta / 1000;
+					else {
+						this.levelManager.moveTo = null;
+						this.oldCamScrollY = destination;
+					}
 					break;
 				case 'left':
-					this.cameras.main.scrollX = this.cameras.main.scrollX - 1920;
-					this.levelManager.moveTo = null;
+					destination = this.oldCamScrollX - this.levelManager.levelWidth;
+					speed = this.levelManager.levelWidth / this.camTime;
+					if (this.cameras.main.scrollX > destination) this.cameras.main.scrollX -= speed * delta / 1000;
+					else {
+						this.levelManager.moveTo = null;
+						this.oldCamScrollX = destination;
+					}
 					break;
 				case 'right':
-					this.levelManager.moveTo = null;
-					this.cameras.main.scrollX = this.cameras.main.scrollX + 1920;
+					destination = this.oldCamScrollX + this.levelManager.levelWidth;
+					speed = this.levelManager.levelWidth / this.camTime;
+					if (this.cameras.main.scrollX < destination) this.cameras.main.scrollX += speed * delta / 1000;
+					else {
+						this.levelManager.moveTo = null;
+						this.oldCamScrollX = destination;
+					}
 					break;
 			}
 			this.background.image.x = this.cameras.main.scrollX + 960;
