@@ -88,10 +88,12 @@ export default class Moon {
             if (this.isExit == false) {
                 this.scene.player.land(moonSprite);
                 this.scene.score += 10 + 10 * this.scene.streak;
+                this.scene.streak++;
             }
             else {
                 this.scene.player.land(moonSprite);
                 this.scene.score += 10 + 10 * this.scene.streak;
+                this.scene.streak++;
                 this.scene.levelManager.switchLevel(this.exit.direction, this.exit);
                 console.log(this.scene.levelManager);
             }
