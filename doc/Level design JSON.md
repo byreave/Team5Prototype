@@ -21,6 +21,8 @@
 	* startPos //in radian 0 is straight right and rotate ccwly
 	* isCCW
 	* isCCWRandom
+	* speed
+	* isGolden
 * }
 * Exits
 * {

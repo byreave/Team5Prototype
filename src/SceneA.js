@@ -11,6 +11,8 @@ export default class SceneA extends Phaser.Scene {
     }
 
     preload() {
+        //font
+        this.load.bitmapFont('pusab', 'assets/font.png', 'assets/font.fnt');
         this.load.image('sky', 'assets/sky.png');
         //this.load.image('ground', 'assets/platform.png');
         this.load.image('star', 'assets/star.png');
@@ -96,18 +98,18 @@ export default class SceneA extends Phaser.Scene {
         this.levelManager.createALevelAt(new Phaser.Math.Vector2(960, 540), 'StartLevel');
         console.log(this.levelManager);
         //Score
-        this.scoreText = this.add.text(
+        this.scoreText = this.add.bitmapText(
             this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 16,
-            this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 16,
+            this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 16, 'pusab',
             'Score: 0',
-            { fontSize: '64px', fill: '#FFF' }
+            48
         );
         this.scoreText.setScrollFactor(0);
-        this.streakText = this.add.text(
+        this.streakText = this.add.bitmapText(
             this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 16,
-            this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 64,
+            this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 96, 'pusab',
             'Streak: 0',
-            { fontSize: '64px', fill: '#FFF' }
+            48
         );
         this.streakText.setScrollFactor(0);
         var gui = new dat.GUI();
@@ -118,7 +120,6 @@ export default class SceneA extends Phaser.Scene {
         f1.add(this.player.sprite, 'x').listen();
         f1.add(this.player.sprite, 'y').listen();
         f1.add(this.player, 'isCCW').listen();
-        f1.add(this.player, 'fuel').listen();
         f1.add(this, 'score').listen();
         f1.add(this, 'streak').listen();
 

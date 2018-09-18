@@ -55,6 +55,8 @@ export default class Level {
             }
             var name = m.name;
             var texture = m.texture;
+            var isGolden = m.isGolden;
+            var speed = m.speed;
             if (m.isTextureRandom) {
                 texture = this.planetGen.moonTexturePack[Math.floor(Math.random() * this.texturePack.length)];
             }
@@ -70,7 +72,7 @@ export default class Level {
                 }
             }
 
-            var moon = new Moon(this.scene, orbit, startPos, isCCW, texture, name);
+            var moon = new Moon(this.scene, orbit, startPos, isCCW, texture, name, speed, isGolden);
             this.moons.set(moon.sprite, moon);//use sprite to tell the moon object, it's easier to tell collision object
         }
         //Exits

@@ -1,12 +1,13 @@
 export default class Moon {
-    constructor(scene, orbit, startPos, isCCW, texture, name) {
+    constructor(scene, orbit, startPos, isCCW, texture, name, speed = 2, isGolden = false) {
         this.scene = scene;
         this.name = name;
         this.isOrbiting = true;
         this.orbit = orbit;
-        this.speed = 2; //radian per second
+        this.speed = speed; //radian per second
         this.angle = startPos;
         this.isCCW = isCCW;
+        this.isGolden = isGolden;
         this.isExit = false;
         this.exit = null;
         this.sprite = scene.physics.add.sprite(
@@ -87,7 +88,10 @@ export default class Moon {
         if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
             if (this.isExit == false) {
                 this.scene.player.land(moonSprite);
-                this.scene.score += 10 + 10 * this.scene.streak;
+                if (this.isGolden == false)
+                    this.scene.score += 10 + 10 * this.scene.streak;
+                else
+                    this.scene.score += 200;
                 this.scene.streak++;
             }
             else {
