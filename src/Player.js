@@ -30,6 +30,8 @@ export default class Player {
 
   land(moonSprite) {
     this.isLanded = true;
+    //bring to top
+    this.scene.children.bringToTop(this.sprite);
     this.moon = this.level.moons.get(moonSprite);
     if (this.moon.isOrbiting == false)
       this.moon.isOrbiting = true;
