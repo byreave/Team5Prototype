@@ -43,6 +43,7 @@ export default class Player {
   takeoff() {
     var direction = this.getCurrentArcDirection();
     direction = direction.normalize(); //debug found
+    //var arcSpeed = this.moon.launchSpeed;
     var arcSpeed = this.getArcSpeed();
     this.sprite.setVelocityX(-arcSpeed * direction.x);
     this.sprite.setVelocityY(-arcSpeed * direction.y);
@@ -90,17 +91,7 @@ export default class Player {
 
       // Vertical movement
       if (keys.up.isDown) {
-        if (this.fuel >= 0) {
-          this.scene.streak = 0;
-          sprite.setAccelerationY(-this.acceleration);
-          //fuel consume
-          this.fuel -= this.fuelSpendSpeed * delta / 1000;
-          isBoosting = true;
-        } else {
-          //not enough fuel
-          sprite.setAccelerationX(0);
-          sprite.setAccelerationY(0);
-        }
+
       } else if (keys.down.isDown) {
         if (this.fuel >= 0) {
           this.scene.streak = 0;
@@ -154,7 +145,7 @@ export default class Player {
   }
 
   getArcSpeed() {
-    return this.speed * this.orbit.gravityCircle.radius;
+    return this.moon.speed * this.orbit.gravityCircle.radius;
   }
 
   getCurrentArcDirection() {

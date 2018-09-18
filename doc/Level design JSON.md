@@ -1,7 +1,7 @@
 #JSON File Formatting
 ## Objects
 * name
-* Planets
+* planets
 * {
 	* x,y
 	* radius
@@ -12,7 +12,7 @@
 	* displayWidth
 	* displayHeight
 * }
-* Moons
+* moons
 * {
 	* orbit //name of the planet
 	* name
@@ -23,8 +23,9 @@
 	* isCCWRandom
 	* speed
 	* isGolden
+	* launchSpeed
 * }
-* Exits
+* exits
 * {
 	* up
 	* {
