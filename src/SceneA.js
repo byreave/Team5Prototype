@@ -18,8 +18,11 @@ export default class SceneA extends Phaser.Scene {
 		this.load.image('back', 'assets/space.png');
 		//this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
+		// Resources for planets and moon
 		this.load.image('planet1', 'assets/Planet1_static.png');
 		this.load.image('planet2', 'assets/Planet2_static.png');
+
+		this.load.image('moon', 'assets/Moon 1.png');
 
 		//Json files for levels
 		this.load.json('StartLevel', 'Levels/StartLevel.json');
