@@ -79,8 +79,12 @@ export default class SceneA extends Phaser.Scene {
 
 		//BG
 		this.background = new Back(this, 960, 0.5, 540);
+
 		//Player
 		this.player = new Player(this, 0, 200);
+		this.score = 0;
+		this.streak = 0;
+
 		//Camera time to move to other screen(second)
 		this.camTime = 3;
 		this.oldCamScrollX = 0;
@@ -89,8 +93,21 @@ export default class SceneA extends Phaser.Scene {
 		//Level Manager
 		this.levelManager = new LevelManager(this);
 		//generating level
-		this.levelManager.createALevelAt(new Phaser.Math.Vector2(960, 540), 'level2');
+		this.levelManager.createALevelAt(new Phaser.Math.Vector2(960, 540), 'StartLevel');
 		console.log(this.levelManager);
+		//Score
+		this.scoreText = this.add.text(
+			this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 16,
+			this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 16,
+			'Score: 0',
+			{ fontSize: '32px', fill: '#000' }
+		);
+		this.streakText = this.add.text(
+			this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 48,
+			this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 16,
+			'Streak: 0',
+			{ fontSize: '32px', fill: '#000' }
+		);
 		var gui = new dat.GUI();
 
 		var f1 = gui.addFolder('Test');
@@ -100,11 +117,17 @@ export default class SceneA extends Phaser.Scene {
 		f1.add(this.player.sprite, 'y').listen();
 		f1.add(this.player, 'isCCW').listen();
 		f1.add(this.player, 'fuel').listen();
+		f1.add(this, 'score').listen();
+		f1.add(this, 'streak').listen();
+
 		f1.open();
 	}
 	update(timestep, delta) {
 		this.player.update(delta);
 		this.levelManager.currentLevel.update(delta);
+		//Score
+		this.scoreText.setText('Score: ' + this.score);
+		this.scoreText.setText('Streak: ' + this.streak);
 		if (this.levelManager.moveTo != null) {
 			var destination = 0;
 			var speed = 0;

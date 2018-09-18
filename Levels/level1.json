@@ -2,12 +2,23 @@
 	"name": 1,
 	"planets": {
 		"p1": {
-			"x": 400,
+			"x": -400,
 			"y": 300,
 			"radius": 50,
 			"radiusSpan": 50,
 			"name": "Start",
 			"texture": "planet1",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p2": {
+			"x": 400,
+			"y": 300,
+			"radius": 50,
+			"radiusSpan": 50,
+			"name": "p2",
+			"texture": "planet2",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
@@ -17,6 +28,15 @@
 		"m1": {
 			"orbit": "Start",
 			"name": "StartMoon",
+			"texture": "star",
+			"IsTextureRandom": false,
+			"startPos": 0,
+			"isCCW": true,
+			"IsCCWRandom": false
+		},
+		"m2": {
+			"orbit": "p2",
+			"name": "p2Moon",
 			"texture": "star",
 			"IsTextureRandom": false,
 			"startPos": 0,
