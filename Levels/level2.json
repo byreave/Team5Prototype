@@ -1,0 +1,100 @@
+{
+	"name": 1,
+	"planets": {
+		"p1": {
+			"x": -550,
+			"y": -200,
+			"radius": 200,
+			"radiusSpan": 0,
+			"name": "Planet_1",
+			"texture": "planet1",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p2": {
+			"x": 100,
+			"y": 150,
+			"radius": 250,
+			"radiusSpan": 0,
+			"name": "Planet_2",
+			"texture": "planet1",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p3": {
+			"x": 600,
+			"y": -150,
+			"radius": 170,
+			"radiusSpan": 0,
+			"name": "Planet_3",
+			"texture": "planet1",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		}
+	},
+	"moons": {
+		"m1": {
+			"orbit": "Planet_1",
+			"name": "Moon_1",
+			"texture": "star",
+			"IsTextureRandom": false,
+			"startPos": 0,
+			"isStartPosRandom": true,
+			"isCCW": true,
+			"IsCCWRandom": true
+		},
+		"m2": {
+			"orbit": "Planet_2",
+			"name": "Moon_2",
+			"texture": "star",
+			"IsTextureRandom": false,
+			"startPos": 0,
+			"isStartPosRandom": true,
+			"isCCW": true,
+			"IsCCWRandom": true
+		},
+		"m3": {
+			"orbit": "Planet_3",
+			"name": "Moon_3",
+			"texture": "star",
+			"IsTextureRandom": false,
+			"startPos": 0,
+			"isStartPosRandom": true,
+			"isCCW": true,
+			"IsCCWRandom": true
+		}
+	},
+	"exits": {
+		"up": {
+			"On": false,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"down": {
+			"On": false,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"left": {
+			"On": false,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"right": {
+			"On": false,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		}
+	}
+}
