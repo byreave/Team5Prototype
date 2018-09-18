@@ -4,7 +4,7 @@
 		"p1": {
 			"x": -550,
 			"y": -200,
-			"radius": 200,
+			"radius": 100,
 			"radiusSpan": 0,
 			"name": "Planet_1",
 			"texture": "planet1",
@@ -15,7 +15,7 @@
 		"p2": {
 			"x": 100,
 			"y": 150,
-			"radius": 250,
+			"radius": 150,
 			"radiusSpan": 0,
 			"name": "Planet_2",
 			"texture": "planet1",
@@ -26,7 +26,7 @@
 		"p3": {
 			"x": 600,
 			"y": -150,
-			"radius": 170,
+			"radius": 85,
 			"radiusSpan": 0,
 			"name": "Planet_3",
 			"texture": "planet1",
@@ -69,7 +69,7 @@
 	},
 	"exits": {
 		"up": {
-			"On": false,
+			"On": true,
 			"PlanetTexture": "planet1",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
@@ -83,7 +83,7 @@
 			"isCCW": false
 		},
 		"left": {
-			"On": false,
+			"On": true,
 			"PlanetTexture": "planet1",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
