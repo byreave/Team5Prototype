@@ -1,57 +1,57 @@
 {
-    "name": 1,
-    "planets": {
-        "p1": {
-            "x": 400,
-            "y": 300,
-            "radius": 50,
-            "radiusSpan": 50,
-            "name": "Start",
-            "texture": "planet1",
-            "isTextureRandom": false,
-            "displayWidth": 0,
-            "displayHeight": 0
-        }
-    },
-    "moons": {
-        "m1": {
-            "orbit": "Start",
-            "name": "StartMoon",
-            "texture": "star",
-            "IsTextureRandom": false,
-            "startPos": 0,
-            "isCCW": true,
-            "IsCCWRandom": false
-        }
-    },
-    "exits": {
-        "up": {
-            "On": true,
-            "PlanetTexture": "planet1",
-            "PlanetRadius": 50,
-            "MoonTexture": "star",
-            "isCCW": false
-        },
-        "down": {
-            "On": true,
-            "PlanetTexture": "planet1",
-            "PlanetRadius": 50,
-            "MoonTexture": "star",
-            "isCCW": false
-        },
-        "left": {
-            "On": true,
-            "PlanetTexture": "planet1",
-            "PlanetRadius": 50,
-            "MoonTexture": "star",
-            "isCCW": false
-        },
-        "right": {
-            "On": false,
-            "PlanetTexture": "planet1",
-            "PlanetRadius": 50,
-            "MoonTexture": "star",
-            "isCCW": false
-        }
-    }
+	"name": 1,
+	"planets": {
+		"p1": {
+			"x": 400,
+			"y": 300,
+			"radius": 50,
+			"radiusSpan": 50,
+			"name": "Start",
+			"texture": "planet1",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		}
+	},
+	"moons": {
+		"m1": {
+			"orbit": "Start",
+			"name": "StartMoon",
+			"texture": "star",
+			"IsTextureRandom": false,
+			"startPos": 0,
+			"isCCW": true,
+			"IsCCWRandom": false
+		}
+	},
+	"exits": {
+		"up": {
+			"On": true,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"down": {
+			"On": true,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"left": {
+			"On": true,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"right": {
+			"On": false,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		}
+	}
 }

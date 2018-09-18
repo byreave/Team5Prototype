@@ -20,9 +20,6 @@ export default class SceneA extends Phaser.Scene {
 		//this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
 		// Resources for planets and moon
-		this.load.image('planet1', 'assets/Planet1_static.png');
-		this.load.image('planet2', 'assets/Planet2_static.png');
-
 		this.load.image('moon', 'assets/Moon 1.png');
 
 		//Json files for levels
@@ -33,6 +30,9 @@ export default class SceneA extends Phaser.Scene {
 		// Read sprites from the atlas
 		// this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
 		this.load.atlas('character', 'assets/Hermes_animated.png', 'assets/Hermes_animated.json');
+		this.load.atlas('planet1', 'assets/Planet_1.png', 'assets/Planet_1.json');
+		this.load.atlas('planet2', 'assets/Planet_2.png', 'assets/Planet_2.json');
+		this.load.atlas('planet3', 'assets/Planet_3.png', 'assets/Planet_3.json');
 	}
 
 	create() {
@@ -46,6 +46,37 @@ export default class SceneA extends Phaser.Scene {
 			}),
 			repeat: -1
 		});
+
+		this.anims.create({
+			key: 'planet1',
+			frames: this.anims.generateFrameNames('planet1', {
+				prefix: 'Planet1_',
+				end: 23,
+				zeroPad: 4
+			}),
+			repeat: -1
+		});
+
+		this.anims.create({
+			key: 'planet2',
+			frames: this.anims.generateFrameNames('planet2', {
+				prefix: 'Planet2_',
+				end: 35,
+				zeroPad: 4
+			}),
+			repeat: -1
+		});
+
+		this.anims.create({
+			key: 'planet3',
+			frames: this.anims.generateFrameNames('planet3', {
+				prefix: 'Planet3_',
+				end: 29,
+				zeroPad: 4
+			}),
+			repeat: -1
+		});
+
 		//BG
 		this.background = new Back(this, 960, 0.5, 540);
 		//Player
