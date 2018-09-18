@@ -100,13 +100,13 @@ export default class SceneA extends Phaser.Scene {
 			this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 16,
 			this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 16,
 			'Score: 0',
-			{ fontSize: '32px', fill: '#000' }
+			{ fontSize: '64px', fill: '#FFF' }
 		);
 		this.streakText = this.add.text(
-			this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 48,
-			this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 16,
+			this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 16,
+			this.levelManager.currentLevel.centerPoint.y - this.levelManager.levelHeight / 2 + 64,
 			'Streak: 0',
-			{ fontSize: '32px', fill: '#000' }
+			{ fontSize: '64px', fill: '#FFF' }
 		);
 		var gui = new dat.GUI();
 
@@ -122,12 +122,13 @@ export default class SceneA extends Phaser.Scene {
 
 		f1.open();
 	}
+
 	update(timestep, delta) {
 		this.player.update(delta);
 		this.levelManager.currentLevel.update(delta);
 		//Score
 		this.scoreText.setText('Score: ' + this.score);
-		this.scoreText.setText('Streak: ' + this.streak);
+		this.streakText.setText('Streak: ' + this.streak);
 		if (this.levelManager.moveTo != null) {
 			var destination = 0;
 			var speed = 0;
