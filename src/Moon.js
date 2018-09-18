@@ -4,7 +4,7 @@ export default class Moon {
         this.name = name;
         this.isOrbiting = true;
         this.orbit = orbit;
-        this.speed = 1; //radian per second
+        this.speed = 2; //radian per second
         this.angle = startPos;
         this.isCCW = isCCW;
         this.isExit = false;
