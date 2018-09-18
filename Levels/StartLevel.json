@@ -1,117 +1,117 @@
 {
-    "name": "StartLevel",
-    "planets": {
-        "p1": {
-            "x": 0,
-            "y": 0,
-            "radius": 60,
-            "radiusSpan": 50,
-            "name": "Start",
-            "texture": "planet1",
-            "isTextureRandom": false,
-            "displayWidth": 0,
-            "displayHeight": 0
-        },
-        "p2": {
-            "x": 200,
-            "y": 0,
-            "radius": 50,
-            "radiusSpan": 50,
-            "name": "Start2",
-            "texture": "planet2",
-            "isTextureRandom": false,
-            "displayWidth": 0,
-            "displayHeight": 0
-        },
-        "p3": {
-            "x": -200,
-            "y": -200,
-            "radius": 70,
-            "radiusSpan": 50,
-            "name": "Start3",
-            "texture": "planet1",
-            "isTextureRandom": false,
-            "displayWidth": 0,
-            "displayHeight": 0
-        },
-        "p4": {
-            "x": 500,
-            "y": -200,
-            "radius": 80,
-            "radiusSpan": 50,
-            "name": "Start4",
-            "texture": "planet2",
-            "isTextureRandom": false,
-            "displayWidth": 0,
-            "displayHeight": 0
-        }
-    },
-    "moons": {
-        "m1": {
-            "orbit": "Start",
-            "name": "StartMoon",
-            "texture": "moon",
-            "IsTextureRandom": false,
-            "startPos": 0,
-            "isCCW": true,
-            "IsCCWRandom": false
-        },
-        "m2": {
-            "orbit": "Start2",
-            "name": "StartMoon2",
-            "texture": "moon",
-            "IsTextureRandom": false,
-            "startPos": 1,
-            "isCCW": true,
-            "IsCCWRandom": true
-        },
-        "m3": {
-            "orbit": "Start3",
-            "name": "StartMoon3",
-            "texture": "moon",
-            "IsTextureRandom": false,
-            "startPos": 2,
-            "isCCW": true,
-            "IsCCWRandom": true
-        },
-        "m4": {
-            "orbit": "Start4",
-            "name": "StartMoon4",
-            "texture": "moon",
-            "IsTextureRandom": false,
-            "startPos": 1.5,
-            "isCCW": true,
-            "IsCCWRandom": true
-        }
-    },
-    "exits": {
-        "up": {
-            "On": true,
-            "PlanetTexture": "planet1",
-            "PlanetRadius": 50,
-            "MoonTexture": "star",
-            "isCCW": false
-        },
-        "down": {
-            "On": true,
-            "PlanetTexture": "planet1",
-            "PlanetRadius": 50,
-            "MoonTexture": "star",
-            "isCCW": false
-        },
-        "left": {
-            "On": true,
-            "PlanetTexture": "planet1",
-            "PlanetRadius": 50,
-            "MoonTexture": "star",
-            "isCCW": false
-        },
-        "right": {
-            "On": false,
-            "PlanetTexture": "planet1",
-            "PlanetRadius": 50,
-            "MoonTexture": "star",
-            "isCCW": false
-        }
-    }
+	"name": "StartLevel",
+	"planets": {
+		"p1": {
+			"x": 0,
+			"y": 0,
+			"radius": 60,
+			"radiusSpan": 50,
+			"name": "Start",
+			"texture": "planet1",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p2": {
+			"x": 200,
+			"y": 0,
+			"radius": 50,
+			"radiusSpan": 50,
+			"name": "Start2",
+			"texture": "planet2",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p3": {
+			"x": -200,
+			"y": -200,
+			"radius": 70,
+			"radiusSpan": 50,
+			"name": "Start3",
+			"texture": "planet1",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p4": {
+			"x": 500,
+			"y": -200,
+			"radius": 80,
+			"radiusSpan": 50,
+			"name": "Start4",
+			"texture": "planet2",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		}
+	},
+	"moons": {
+		"m1": {
+			"orbit": "Start",
+			"name": "StartMoon",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 0,
+			"isCCW": true,
+			"IsCCWRandom": false
+		},
+		"m2": {
+			"orbit": "Start2",
+			"name": "StartMoon2",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 1,
+			"isCCW": true,
+			"IsCCWRandom": true
+		},
+		"m3": {
+			"orbit": "Start3",
+			"name": "StartMoon3",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 2,
+			"isCCW": true,
+			"IsCCWRandom": true
+		},
+		"m4": {
+			"orbit": "Start4",
+			"name": "StartMoon4",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 1.5,
+			"isCCW": true,
+			"IsCCWRandom": true
+		}
+	},
+	"exits": {
+		"up": {
+			"On": true,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"down": {
+			"On": true,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"left": {
+			"On": true,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"right": {
+			"On": false,
+			"PlanetTexture": "planet1",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		}
+	}
 }

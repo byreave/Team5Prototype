@@ -18,7 +18,7 @@
 			"radius": 150,
 			"radiusSpan": 0,
 			"name": "Planet_2",
-			"texture": "planet1",
+			"texture": "planet2",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
@@ -29,7 +29,7 @@
 			"radius": 85,
 			"radiusSpan": 0,
 			"name": "Planet_3",
-			"texture": "planet1",
+			"texture": "planet3",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
@@ -76,7 +76,7 @@
 			"isCCW": false
 		},
 		"down": {
-			"On": false,
+			"On": true,
 			"PlanetTexture": "planet1",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
@@ -90,7 +90,7 @@
 			"isCCW": false
 		},
 		"right": {
-			"On": false,
+			"On": true,
 			"PlanetTexture": "planet1",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
