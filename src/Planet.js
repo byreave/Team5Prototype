@@ -12,11 +12,11 @@ export default class Planet {
 
     radius = radius / this.sprite.scaleX;
     this.gravityCircle = circle;
-    this.sprite.setCircle(
-      radius,
-      -(radius - this.sprite.displayWidth / (2 * this.sprite.scaleX)),
-      -(radius - this.sprite.displayHeight / (2 * this.sprite.scaleY))
-    );
+    //this.sprite.setCircle(
+    //  radius,
+    //  -(radius - this.sprite.displayWidth / (2 * this.sprite.scaleX)),
+    //  -(radius - this.sprite.displayHeight / (2 * this.sprite.scaleY))
+    //);
 
     this.drawOrbit();
   }

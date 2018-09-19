@@ -4,6 +4,11 @@ export default class Player {
     this.fuel = 100;
     this.fuelSpendSpeed = 5; //per second
     this.sprite = scene.physics.add.sprite(x, y, 'character').setScale(0.15).setAngle(0);
+    this.traBG = scene.add.image(x, y, 'TraBG').setVisible(false);
+    this.traLine = scene.add.image(x, y, 'TraLine').setVisible(false);
+    this.traLine.setOrigin(0, 0.5);
+
+    //this.traLine.setOrigin(0, this.traLine.displayHeight);
     this.acceleration = 30;
     this.isLanded = false;
     this.sprite.setVelocityX(100);
@@ -29,21 +34,27 @@ export default class Player {
 
   land(moonSprite) {
     this.isLanded = true;
+    this.traBG.setVisible(true);
+    this.traLine.setVisible(true);
     //bring to top
+    this.scene.children.bringToTop(this.traBG);
+    this.scene.children.bringToTop(this.traLine);
     this.scene.children.bringToTop(this.sprite);
     this.moon = this.level.moons.get(moonSprite);
-    if (this.moon.isOrbiting == false) this.moon.isOrbiting = true;
     console.log(this.moon);
+    if (this.moon.isOrbiting == false) this.moon.isOrbiting = true;
     this.orbit = this.moon.orbit;
     this.isCCW = this.moon.isCCW;
     this.sprite.setVelocityX(0);
     this.sprite.setVelocityY(0);
     this.sprite.setAccelerationX(0);
     this.sprite.setAccelerationY(0);
+    this.speedDirect = this.getCurrentArcDirection();
+
   }
 
   takeoff() {
-    var direction = this.getCurrentArcDirection();
+    var direction = this.speedDirect;
     direction = direction.normalize(); //debug found
     this.scene.graphics.clear();
     //var arcSpeed = this.moon.launchSpeed;
@@ -52,10 +63,15 @@ export default class Player {
     this.sprite.setVelocityY(-arcSpeed * direction.y);
     this.isLanded = false;
     this.isLeaving = true;
+    this.traBG.setVisible(false);
+    this.traLine.setVisible(false);
+
   }
   update(delta) {
     const keys = this.keys;
     const sprite = this.sprite;
+
+
 
     if (this.isLanded == false) {
       // boost identifier
@@ -101,16 +117,27 @@ export default class Player {
       this.sprite.setY(this.moon.sprite.y);
       //Control launch angle
       if (keys.up.isDown) {
-        if (this.angle <= Math.PI / 4)
+        if (this.angle <= Math.PI / 4) {
           this.angle += this.joystickSensi * delta / 1000;
+
+        }
       }
       if (keys.down.isDown) {
-        if (this.angle >= - Math.PI / 4)
+        if (this.angle >= - Math.PI / 4) {
           this.angle -= this.joystickSensi * delta / 1000;
+        }
       }
-      //this.speedDirect = this.getCurrentArcDirection();
-      //this.speedDirect.x = this.speedDirect.x * Math.cos(this.angle) - this.speedDirect.y * Math.sin(this.angle);
-      //this.speedDirect.y = this.speedDirect.x * Math.sin(this.angle) + this.speedDirect.y * Math.cos(this.angle);
+      this.speedDirect = this.getCurrentArcDirection();
+      this.speedDirect.x = this.speedDirect.x * Math.cos(this.angle) - this.speedDirect.y * Math.sin(this.angle);
+      this.speedDirect.y = this.speedDirect.x * Math.sin(this.angle) + this.speedDirect.y * Math.cos(this.angle);
+
+      //traBG
+      this.traBG.setX(this.sprite.x);
+      this.traBG.setY(this.sprite.y);
+      //traLine
+      this.traLine.setX(this.sprite.x)
+      this.traLine.setY(this.sprite.y);
+      this.traLine.setRotation(this.speedDirect.angle(new Phaser.Math.Vector2(1, 0)) + Math.PI);
       if (keys.space.isDown) {
         this.takeoff();
       }

@@ -20,7 +20,9 @@ export default class SceneA extends Phaser.Scene {
         // debugger
         this.load.image('back', 'assets/space.png');
         //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
-
+        //Trajectory
+        this.load.image('TraLine', 'assets/TrajectoryLine.png');
+        this.load.image('TraBG', 'assets/TrajectoryBG.png');
         // Resources for planets and moon
         this.load.image('moon', 'assets/Moon 1.png');
 
@@ -135,11 +137,9 @@ export default class SceneA extends Phaser.Scene {
     update(timestep, delta) {
         this.player.update(delta);
         this.levelManager.currentLevel.update(delta);
-        //line
-
         if (this.player.isLanded) {
-            //this.graphics.clear();
-            //this.graphics.lineBetween(this.player.sprite.x, this.player.sprite.y, this.player.sprite.x - this.player.speedDirect.x, this.player.sprite.y - this.player.speedDirect.y);
+            this.graphics.clear();
+            this.graphics.lineBetween(this.player.sprite.x, this.player.sprite.y, this.player.sprite.x - this.player.speedDirect.x, this.player.sprite.y - this.player.speedDirect.y);
         }
         //Score
         this.scoreText.setText('Score: ' + this.score);
