@@ -27,7 +27,8 @@ export default class Planet {
 		this.graphics = this.scene.add.graphics({
 			lineStyle: { width: 2, color: 0x00ff00 },
 			fillStyle: { color: 0xff00ff }
-		});
+    });
+    this.graphics.setAlpha(0.2);
 		this.gravityCircle.x = this.sprite.x;
 		this.gravityCircle.y = this.sprite.y;
 		this.graphics.strokeCircleShape(this.gravityCircle);
