@@ -40,4 +40,8 @@ export default class Exit {
         this.planet.update(delta);
         this.moon.OrbitUpdate(delta);
     }
+    destroy() {
+        this.planet.destroy();
+        this.moon.destroy();
+    }
 }

@@ -115,7 +115,6 @@ export default class Level {
             this.exitsRight = this.levelRight.exitsLeft;
             this.moons.set(this.exitsRight.moon.sprite, this.exitsRight.moon);
             this.exits.push(this.exitsRight);
-
         }
     }
 
@@ -132,5 +131,23 @@ export default class Level {
         for (var e of this.exits) {
             e.update(delta);
         }
+    }
+    destroy() {
+        for (var p of this.planets) {
+            p.destroy();
+        }
+        this.planets.splice(0, this.planets.length);
+        //moons
+        for (var m of this.moons.values()) {
+            if (m.isExit == false)
+                m.destroy();
+        }
+        this.moons.clear();
+        this.exits.splice(0, this.exits.length);
+        this.exitsUp = null;
+        this.exitsDown = null;
+        this.exitsLeft = null;
+        this.exitsRight = null;
+
     }
 }

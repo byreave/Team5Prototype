@@ -138,8 +138,8 @@ export default class SceneA extends Phaser.Scene {
         //line
 
         if (this.player.isLanded) {
-            this.graphics.clear();
-            this.graphics.lineBetween(this.player.sprite.x, this.player.sprite.y, this.player.sprite.x - this.player.speedDirect.x, this.player.sprite.y - this.player.speedDirect.y);
+            //this.graphics.clear();
+            //this.graphics.lineBetween(this.player.sprite.x, this.player.sprite.y, this.player.sprite.x - this.player.speedDirect.x, this.player.sprite.y - this.player.speedDirect.y);
         }
         //Score
         this.scoreText.setText('Score: ' + this.score);

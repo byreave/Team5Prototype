@@ -38,6 +38,7 @@ export default class Planet {
 
   destroy() {
     this.sprite.destroy();
+    this.graphics.destroy();
   }
 
   //for playable, discarded

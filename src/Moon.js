@@ -42,7 +42,7 @@ export default class Moon {
     }
 
     getCurrentArcDirection() {
-        if (this.isCCW)
+        if (this.isCCW == false)
             return new Phaser.Math.Vector2(this.orbit.sprite.y - this.sprite.y, this.sprite.x - this.orbit.sprite.x);
         else return new Phaser.Math.Vector2(this.sprite.y - this.orbit.sprite.y, this.orbit.sprite.x - this.sprite.x);
     }
@@ -52,7 +52,12 @@ export default class Moon {
         if (this.isOrbiting) {
             if (this.isCCW) this.angle += this.speed * delta / 1000;
             else this.angle -= this.speed * delta / 1000;
-            if (this.angle <= Math.PI / 2 && this.angle >= 0) {
+            var pos = new Phaser.Math.Vector2();
+            pos.x = this.orbit.sprite.x + this.orbit.gravityCircle.radius * Math.cos(this.angle);// - this.orbit.gravityCircle.radius * Math.sin(this.angle);
+            pos.y = this.orbit.sprite.y + this.orbit.gravityCircle.radius * Math.sin(this.angle);// + this.orbit.gravityCircle.radius * Math.cos(this.angle);
+            this.sprite.setX(pos.x);
+            this.sprite.setY(pos.y);
+            /*if (this.angle <= Math.PI / 2 && this.angle >= 0) {
                 this.sprite.setX(this.orbit.sprite.x + Math.cos(this.angle) * this.orbit.gravityCircle.radius);
                 this.sprite.setY(this.orbit.sprite.y - Math.sin(this.angle) * this.orbit.gravityCircle.radius);
             } else if (this.angle <= Math.PI) {
@@ -77,7 +82,7 @@ export default class Moon {
                     this.orbit.sprite.y + Math.sin(Math.PI * 2 - this.angle) * this.orbit.gravityCircle.radius
                 );
             } else if (this.angle >= 2 * Math.PI) this.angle -= Math.PI * 2;
-            else if (this.angle <= 0) this.angle = Math.PI * 2;
+            else if (this.angle <= 0) this.angle = Math.PI * 2;*/
         }
     }
 

@@ -43,7 +43,7 @@ export default class Player {
   }
 
   takeoff() {
-    var direction = this.speedDirect;
+    var direction = this.getCurrentArcDirection();
     direction = direction.normalize(); //debug found
     this.scene.graphics.clear();
     //var arcSpeed = this.moon.launchSpeed;
@@ -108,9 +108,9 @@ export default class Player {
         if (this.angle >= - Math.PI / 4)
           this.angle -= this.joystickSensi * delta / 1000;
       }
-      this.speedDirect = this.getCurrentArcDirection();
-      this.speedDirect.x = this.speedDirect.x * Math.cos(this.angle) - this.speedDirect.y * Math.sin(this.angle);
-      this.speedDirect.y = this.speedDirect.x * Math.sin(this.angle) + this.speedDirect.y * Math.cos(this.angle);
+      //this.speedDirect = this.getCurrentArcDirection();
+      //this.speedDirect.x = this.speedDirect.x * Math.cos(this.angle) - this.speedDirect.y * Math.sin(this.angle);
+      //this.speedDirect.y = this.speedDirect.x * Math.sin(this.angle) + this.speedDirect.y * Math.cos(this.angle);
       if (keys.space.isDown) {
         this.takeoff();
       }
@@ -142,7 +142,7 @@ export default class Player {
   }
 
   getCurrentArcDirection() {
-    if (this.isCCW)
+    if (this.isCCW == false)
       return new Phaser.Math.Vector2(this.orbit.sprite.y - this.sprite.y, this.sprite.x - this.orbit.sprite.x);
     else return new Phaser.Math.Vector2(this.sprite.y - this.orbit.sprite.y, this.orbit.sprite.x - this.sprite.x);
   }
