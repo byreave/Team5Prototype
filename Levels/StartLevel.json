@@ -2,45 +2,34 @@
 	"name": "StartLevel",
 	"planets": {
 		"p1": {
-			"x": 0,
-			"y": 0,
-			"radius": 60,
-			"radiusSpan": 50,
-			"name": "Start",
+			"x": -0,
+			"y": -250,
+			"radius": 130,
+			"radiusSpan": 0,
+			"name": "p1",
 			"texture": "planet1",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
 		"p2": {
-			"x": 200,
-			"y": 0,
-			"radius": 50,
-			"radiusSpan": 50,
-			"name": "Start2",
+			"x": -350,
+			"y": 50,
+			"radius": 150,
+			"radiusSpan": 0,
+			"name": "p2",
 			"texture": "planet2",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
 		"p3": {
-			"x": -200,
-			"y": -200,
-			"radius": 70,
-			"radiusSpan": 50,
-			"name": "Start3",
+			"x": 550,
+			"y": 150,
+			"radius": 100,
+			"radiusSpan": 0,
+			"name": "p3",
 			"texture": "planet1",
-			"isTextureRandom": false,
-			"displayWidth": 0,
-			"displayHeight": 0
-		},
-		"p4": {
-			"x": 500,
-			"y": -200,
-			"radius": 80,
-			"radiusSpan": 50,
-			"name": "Start4",
-			"texture": "planet2",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
@@ -48,40 +37,37 @@
 	},
 	"moons": {
 		"m1": {
-			"orbit": "Start",
-			"name": "StartMoon",
+			"orbit": "p1",
+			"name": "moon1",
 			"texture": "moon",
 			"IsTextureRandom": false,
 			"startPos": 0,
 			"isCCW": true,
-			"IsCCWRandom": false
+			"IsCCWRandom": false,
+			"speed": 1,
+			"isGoden": false
 		},
 		"m2": {
-			"orbit": "Start2",
-			"name": "StartMoon2",
+			"orbit": "p2",
+			"name": "moon2",
 			"texture": "moon",
 			"IsTextureRandom": false,
 			"startPos": 1,
 			"isCCW": true,
-			"IsCCWRandom": true
+			"IsCCWRandom": true,
+			"speed": 0.4,
+			"isGoden": false
 		},
 		"m3": {
-			"orbit": "Start3",
-			"name": "StartMoon3",
+			"orbit": "p3",
+			"name": "moon3",
 			"texture": "moon",
 			"IsTextureRandom": false,
 			"startPos": 2,
 			"isCCW": true,
-			"IsCCWRandom": true
-		},
-		"m4": {
-			"orbit": "Start4",
-			"name": "StartMoon4",
-			"texture": "moon",
-			"IsTextureRandom": false,
-			"startPos": 1.5,
-			"isCCW": true,
-			"IsCCWRandom": true
+			"IsCCWRandom": true,
+			"speed": 1.5,
+			"isGoden": false
 		}
 	},
 	"exits": {

@@ -28,6 +28,8 @@ export default class SceneA extends Phaser.Scene {
         this.load.json('StartLevel', 'Levels/StartLevel.json');
         this.load.json('level1', 'Levels/level1.json');
         this.load.json('level2', 'Levels/level2.json');
+        this.load.json('level3', 'Levels/level3.json');
+        this.load.json('level4', 'Levels/level4.json');
 
         // Read sprites from the atlas
         // this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
