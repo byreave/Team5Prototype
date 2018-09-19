@@ -10,6 +10,7 @@ export default class Moon {
         this.isGolden = isGolden;
         this.isExit = false;
         this.exit = null;
+        this.isVisited = false;
         this.sprite = scene.physics.add.sprite(
             orbit.sprite.x + Math.cos(startPos) * orbit.gravityCircle.radius,
             orbit.sprite.y - Math.sin(startPos) * orbit.gravityCircle.radius,
@@ -88,18 +89,25 @@ export default class Moon {
         if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
             if (this.isExit == false) {
                 this.scene.player.land(moonSprite);
-                if (this.isGolden == false)
-                    this.scene.score += 10 + 10 * this.scene.streak;
-                else
-                    this.scene.score += 200;
-                this.scene.streak++;
+                if (this.isVisited == false) {
+                    this.isVisited = true;
+                    if (this.isGolden == false)
+                        this.scene.score += 10 + 10 * this.scene.streak;
+                    else
+                        this.scene.score += 200;
+                    this.scene.streak++;
+
+                }
+
             }
             else {
                 this.scene.player.land(moonSprite);
-                this.scene.score += 10 + 10 * this.scene.streak;
-                this.scene.streak++;
+                if (this.isVisited == false) {
+                    this.isVisited = true;
+                    this.scene.score += 10 + 10 * this.scene.streak;
+                    this.scene.streak++;
+                }
                 this.scene.levelManager.switchLevel(this.exit.direction, this.exit);
-                console.log(this.scene.levelManager);
             }
         }
     }
