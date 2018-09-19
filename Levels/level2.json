@@ -1,34 +1,34 @@
 {
-	"name": 1,
+	"name": "EasyLevel1",
 	"planets": {
 		"p1": {
-			"x": -550,
-			"y": -200,
-			"radius": 100,
+			"x": -0,
+			"y": -250,
+			"radius": 130,
 			"radiusSpan": 0,
-			"name": "Planet_1",
-			"texture": "planet1",
-			"isTextureRandom": false,
-			"displayWidth": 0,
-			"displayHeight": 0
-		},
-		"p2": {
-			"x": 100,
-			"y": 150,
-			"radius": 150,
-			"radiusSpan": 0,
-			"name": "Planet_2",
+			"name": "p1",
 			"texture": "planet2",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
-		"p3": {
-			"x": 600,
-			"y": -150,
-			"radius": 85,
+		"p2": {
+			"x": -450,
+			"y": 50,
+			"radius": 150,
 			"radiusSpan": 0,
-			"name": "Planet_3",
+			"name": "p2",
+			"texture": "planet1",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p3": {
+			"x": 550,
+			"y": 150,
+			"radius": 100,
+			"radiusSpan": 0,
+			"name": "p3",
 			"texture": "planet3",
 			"isTextureRandom": false,
 			"displayWidth": 0,
@@ -37,34 +37,37 @@
 	},
 	"moons": {
 		"m1": {
-			"orbit": "Planet_1",
-			"name": "Moon_1",
+			"orbit": "p1",
+			"name": "moon1",
 			"texture": "moon",
 			"IsTextureRandom": false,
 			"startPos": 0,
-			"isStartPosRandom": true,
 			"isCCW": true,
-			"IsCCWRandom": true
+			"IsCCWRandom": false,
+			"speed": 0.8,
+			"isGoden": false
 		},
 		"m2": {
-			"orbit": "Planet_2",
-			"name": "Moon_2",
+			"orbit": "p2",
+			"name": "moon2",
 			"texture": "moon",
 			"IsTextureRandom": false,
-			"startPos": 0,
-			"isStartPosRandom": true,
+			"startPos": 1,
 			"isCCW": true,
-			"IsCCWRandom": true
+			"IsCCWRandom": true,
+			"speed": 0.7,
+			"isGoden": false
 		},
 		"m3": {
-			"orbit": "Planet_3",
-			"name": "Moon_3",
+			"orbit": "p3",
+			"name": "moon3",
 			"texture": "moon",
 			"IsTextureRandom": false,
-			"startPos": 0,
-			"isStartPosRandom": true,
+			"startPos": 2,
 			"isCCW": true,
-			"IsCCWRandom": true
+			"IsCCWRandom": true,
+			"speed": 0.9,
+			"isGoden": false
 		}
 	},
 	"exits": {
@@ -90,7 +93,7 @@
 			"isCCW": false
 		},
 		"right": {
-			"On": true,
+			"On": false,
 			"PlanetTexture": "planet1",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
