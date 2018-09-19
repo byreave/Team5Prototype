@@ -86,7 +86,11 @@ export default class SceneA extends Phaser.Scene {
         this.player = new Player(this, 0, 200);
         this.score = 0;
         this.streak = 0;
-
+        //graphic for debug
+        this.graphics = this.add.graphics({
+            lineStyle: { width: 2, color: 0x00ff00 },
+            fillStyle: { color: 0xff00ff }
+        });
         //Camera time to move to other screen(second)
         this.camTime = 3;
         this.oldCamScrollX = 0;
@@ -129,6 +133,12 @@ export default class SceneA extends Phaser.Scene {
     update(timestep, delta) {
         this.player.update(delta);
         this.levelManager.currentLevel.update(delta);
+        //line
+
+        if (this.player.isLanded) {
+            this.graphics.clear();
+            this.graphics.lineBetween(this.player.sprite.x, this.player.sprite.y, this.player.sprite.x - this.player.speedDirect.x, this.player.sprite.y - this.player.speedDirect.y);
+        }
         //Score
         this.scoreText.setText('Score: ' + this.score);
         this.streakText.setText('Streak: ' + this.streak);

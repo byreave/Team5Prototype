@@ -1,5 +1,5 @@
 export default class Moon {
-    constructor(scene, orbit, startPos, isCCW, texture, name, speed = 2, isGolden = false, launchSpeed = 300) {
+    constructor(scene, orbit, startPos, isCCW, texture, name, speed = 2, isGolden = false) {
         this.scene = scene;
         this.name = name;
         this.isOrbiting = true;
@@ -10,7 +10,6 @@ export default class Moon {
         this.isGolden = isGolden;
         this.isExit = false;
         this.exit = null;
-        this.launchSpeed = launchSpeed;
         this.sprite = scene.physics.add.sprite(
             orbit.sprite.x + Math.cos(startPos) * orbit.gravityCircle.radius,
             orbit.sprite.y - Math.sin(startPos) * orbit.gravityCircle.radius,

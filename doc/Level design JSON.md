@@ -23,7 +23,6 @@
 	* isCCWRandom
 	* speed
 	* isGolden
-	* launchSpeed
 * }
 * exits
 * {

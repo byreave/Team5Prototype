@@ -4,7 +4,6 @@ export default class Player {
     this.fuel = 100;
     this.fuelSpendSpeed = 5; //per second
     this.sprite = scene.physics.add.sprite(x, y, 'character').setScale(0.15).setAngle(0);
-    this.speed = 2; //radian per sec
     this.acceleration = 30;
     this.isLanded = false;
     this.sprite.setVelocityX(100);
@@ -14,7 +13,10 @@ export default class Player {
     this.moon; // the moon player come across
     this.level = level;
     this.landedOn = 0;
-    //this.angle = 0.0;
+    this.angle = 0.0; //joystick control
+    this.speedDirect;//joystick speed direction
+
+    this.joystickSensi = 0.5;
     this.isCCW = true;
     this.isLeaving = false; //for moon collider
   }
@@ -41,8 +43,9 @@ export default class Player {
   }
 
   takeoff() {
-    var direction = this.getCurrentArcDirection();
+    var direction = this.speedDirect;
     direction = direction.normalize(); //debug found
+    this.scene.graphics.clear();
     //var arcSpeed = this.moon.launchSpeed;
     var arcSpeed = this.getArcSpeed();
     this.sprite.setVelocityX(-arcSpeed * direction.x);
@@ -61,29 +64,13 @@ export default class Player {
 
       // Horizontal movement
       if (keys.left.isDown) {
-        if (this.fuel >= 0) {
-          this.scene.streak = 0;
-          sprite.setAccelerationX(-this.acceleration);
-          //fuel consume
-          this.fuel -= this.fuelSpendSpeed * delta / 1000;
-          isBoosting = true;
-        } else {
-          //not enough fuel
-          sprite.setAccelerationX(0);
-          sprite.setAccelerationY(0);
-        }
+        this.scene.streak = 0;
+        sprite.setAccelerationX(-this.acceleration);
+        isBoosting = true;
       } else if (keys.right.isDown) {
-        if (this.fuel >= 0) {
-          this.scene.streak = 0;
-          sprite.setAccelerationX(this.acceleration);
-          //fuel consume
-          this.fuel -= this.fuelSpendSpeed * delta / 1000;
-          isBoosting = true;
-        } else {
-          //not enough fuel
-          sprite.setAccelerationX(0);
-          sprite.setAccelerationY(0);
-        }
+        this.scene.streak = 0;
+        sprite.setAccelerationX(this.acceleration);
+        isBoosting = true;
       } else {
         sprite.setAccelerationX(0);
         sprite.setAccelerationY(0);
@@ -91,19 +78,13 @@ export default class Player {
 
       // Vertical movement
       if (keys.up.isDown) {
-
+        this.scene.streak = 0;
+        sprite.setAccelerationY(-this.acceleration);
+        isBoosting = true;
       } else if (keys.down.isDown) {
-        if (this.fuel >= 0) {
-          this.scene.streak = 0;
-          sprite.setAccelerationY(this.acceleration);
-          //fuel consume
-          this.fuel -= this.fuelSpendSpeed * delta / 1000;
-          isBoosting = true;
-        } else {
-          //not enough fuel
-          sprite.setAccelerationX(0);
-          sprite.setAccelerationY(0);
-        }
+        this.scene.streak = 0;
+        sprite.setAccelerationY(this.acceleration);
+        isBoosting = true;
       } else {
         sprite.setAccelerationX(0);
         sprite.setAccelerationY(0);
@@ -118,6 +99,18 @@ export default class Player {
     } else {
       this.sprite.setX(this.moon.sprite.x);
       this.sprite.setY(this.moon.sprite.y);
+      //Control launch angle
+      if (keys.up.isDown) {
+        if (this.angle <= Math.PI / 4)
+          this.angle += this.joystickSensi * delta / 1000;
+      }
+      if (keys.down.isDown) {
+        if (this.angle >= - Math.PI / 4)
+          this.angle -= this.joystickSensi * delta / 1000;
+      }
+      this.speedDirect = this.getCurrentArcDirection();
+      this.speedDirect.x = this.speedDirect.x * Math.cos(this.angle) - this.speedDirect.y * Math.sin(this.angle);
+      this.speedDirect.y = this.speedDirect.x * Math.sin(this.angle) + this.speedDirect.y * Math.cos(this.angle);
       if (keys.space.isDown) {
         this.takeoff();
       }
