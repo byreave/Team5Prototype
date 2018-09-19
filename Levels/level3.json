@@ -1,46 +1,35 @@
 {
-	"name": "exampleLevel",
+	"name": "EasyLevel2",
 	"planets": {
 		"p1": {
-			"x": -650,
-			"y": -200,
-			"radius": 130,
+			"x": 0,
+			"y": 250,
+			"radius": 110,
 			"radiusSpan": 0,
-			"name": "Start",
+			"name": "p1",
 			"texture": "planet1",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
 		"p2": {
-			"x": 100,
-			"y": 50,
-			"radius": 250,
+			"x": -350,
+			"y": -150,
+			"radius": 140,
 			"radiusSpan": 0,
-			"name": "Start2",
+			"name": "p2",
 			"texture": "planet2",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
 		"p3": {
-			"x": 550,
-			"y": -50,
-			"radius": 70,
+			"x": 500,
+			"y": -150,
+			"radius": 170,
 			"radiusSpan": 0,
-			"name": "Start3",
+			"name": "p3",
 			"texture": "planet1",
-			"isTextureRandom": false,
-			"displayWidth": 0,
-			"displayHeight": 0
-		},
-		"p4": {
-			"x": -700,
-			"y": 400,
-			"radius": 70,
-			"radiusSpan": 0,
-			"name": "Golden",
-			"texture": "planet3",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
@@ -48,8 +37,8 @@
 	},
 	"moons": {
 		"m1": {
-			"orbit": "Start",
-			"name": "StartMoon",
+			"orbit": "p1",
+			"name": "moon1",
 			"texture": "moon",
 			"IsTextureRandom": false,
 			"startPos": 0,
@@ -59,37 +48,26 @@
 			"isGoden": false
 		},
 		"m2": {
-			"orbit": "Start2",
-			"name": "StartMoon2",
+			"orbit": "p2",
+			"name": "moon2",
 			"texture": "moon",
 			"IsTextureRandom": false,
 			"startPos": 1,
 			"isCCW": true,
 			"IsCCWRandom": true,
-			"speed": 0.4,
+			"speed": 0.7,
 			"isGoden": false
 		},
 		"m3": {
-			"orbit": "Start3",
-			"name": "StartMoon3",
+			"orbit": "p3",
+			"name": "moon3",
 			"texture": "moon",
 			"IsTextureRandom": false,
 			"startPos": 2,
 			"isCCW": true,
 			"IsCCWRandom": true,
-			"speed": 1.5,
+			"speed": 0.6,
 			"isGoden": false
-		},
-		"m4": {
-			"orbit": "Golden",
-			"name": "StartMoon4",
-			"texture": "moon",
-			"IsTextureRandom": false,
-			"startPos": 1.5,
-			"isCCW": true,
-			"IsCCWRandom": true,
-			"speed": 5,
-			"isGoden": true
 		}
 	},
 	"exits": {
