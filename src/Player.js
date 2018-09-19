@@ -17,6 +17,18 @@ export default class Player {
     //this.angle = 0.0;
     this.isCCW = true;
     this.isLeaving = false; //for moon collider
+    this.lives = 5;
+    this.livearray = new Array(5);
+    this.livearray[0] = scene.add.image(30, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[1] = scene.add.image(70, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[2] = scene.add.image(110, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[3] = scene.add.image(150, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[4] = scene.add.image(190, 1050, 'life').setScale(0.5).setAngle(0);
+    for(var i = 0; i < 5; i++) {
+      this.livearray[i].setScrollFactor(0);
+    }
+    this.lastLanded = null;
+    this.isDestroy = false;
   }
 
   stop() {
@@ -28,6 +40,7 @@ export default class Player {
   land(moonSprite) {
     this.isLanded = true;
     //bring to top
+    this.lastLanded = moonSprite;
     this.scene.children.bringToTop(this.sprite);
     this.moon = this.level.moons.get(moonSprite);
     if (this.moon.isOrbiting == false) this.moon.isOrbiting = true;
@@ -35,6 +48,16 @@ export default class Player {
     this.orbit = this.moon.orbit;
     this.isCCW = this.moon.isCCW;
     this.sprite.setVelocityX(0);
+    this.sprite.setVelocityY(0);
+    this.sprite.setAccelerationX(0);
+    this.sprite.setAccelerationY(0);
+  }
+
+  startOnDestroy(camera){
+    this.sprite.x = 100 + camera.main.scrollX;
+    this.sprite.y = 200 + camera.main.scrollY;
+    this.speed = 2; //radian per sec
+    this.sprite.setVelocityX(100);
     this.sprite.setVelocityY(0);
     this.sprite.setAccelerationX(0);
     this.sprite.setAccelerationY(0);
@@ -49,98 +72,139 @@ export default class Player {
     this.isLanded = false;
     this.isLeaving = true;
   }
-  update(delta) {
-    const keys = this.keys;
-    const sprite = this.sprite;
+  update(delta, destroy) {
+    if (!destroy) {
+      const keys = this.keys;
+      const sprite = this.sprite;
 
-    if (this.isLanded == false) {
-      // boost identifier
-      var isBoosting = false;
-      var currentDir = new Phaser.Math.Vector2().copy(this.sprite.body.velocity).normalize();
+      if (this.isLanded == false) {
+        // boost identifier
+        var isBoosting = false;
+        var currentDir = new Phaser.Math.Vector2().copy(this.sprite.body.velocity).normalize();
 
-      // Horizontal movement
-      if (keys.left.isDown) {
-        if (this.fuel >= 0) {
-          this.scene.streak = 0;
-          sprite.setAccelerationX(-this.acceleration);
-          //fuel consume
-          this.fuel -= this.fuelSpendSpeed * delta / 1000;
-          isBoosting = true;
+        // Horizontal movement
+        if (keys.left.isDown) {
+          if (this.fuel >= 0) {
+            this.scene.streak = 0;
+            sprite.setAccelerationX(-this.acceleration);
+            //fuel consume
+            this.fuel -= this.fuelSpendSpeed * delta / 1000;
+            isBoosting = true;
+          } else {
+            //not enough fuel
+            sprite.setAccelerationX(0);
+            sprite.setAccelerationY(0);
+          }
+        } else if (keys.right.isDown) {
+          if (this.fuel >= 0) {
+            this.scene.streak = 0;
+            sprite.setAccelerationX(this.acceleration);
+            //fuel consume
+            this.fuel -= this.fuelSpendSpeed * delta / 1000;
+            isBoosting = true;
+          } else {
+            //not enough fuel
+            sprite.setAccelerationX(0);
+            sprite.setAccelerationY(0);
+          }
         } else {
-          //not enough fuel
           sprite.setAccelerationX(0);
           sprite.setAccelerationY(0);
         }
-      } else if (keys.right.isDown) {
-        if (this.fuel >= 0) {
-          this.scene.streak = 0;
-          sprite.setAccelerationX(this.acceleration);
-          //fuel consume
-          this.fuel -= this.fuelSpendSpeed * delta / 1000;
-          isBoosting = true;
+
+        // Vertical movement
+        if (keys.up.isDown) {
+          if (this.fuel >= 0) {
+            this.scene.streak = 0;
+            sprite.setAccelerationY(-this.acceleration);
+            //fuel consume
+            this.fuel -= this.fuelSpendSpeed * delta / 1000;
+            isBoosting = true;
+          } else {
+            //not enough fuel
+            sprite.setAccelerationX(0);
+            sprite.setAccelerationY(0);
+          }
+        } else if (keys.down.isDown) {
+          if (this.fuel >= 0) {
+            this.scene.streak = 0;
+            sprite.setAccelerationY(this.acceleration);
+            //fuel consume
+            this.fuel -= this.fuelSpendSpeed * delta / 1000;
+            isBoosting = true;
+          } else {
+            //not enough fuel
+            sprite.setAccelerationX(0);
+            sprite.setAccelerationY(0);
+          }
         } else {
-          //not enough fuel
           sprite.setAccelerationX(0);
           sprite.setAccelerationY(0);
         }
+
+        // stop/play boosting animation
+        isBoosting ? this.sprite.play('hermes', true, 0) : this.sprite.setFrame(0);
+
+        // set sprite direction
+        var aimAngle = currentDir.angle(new Phaser.Math.Vector2(0, 1)) + Math.PI / 2;
+        this.sprite.setRotation(aimAngle);
       } else {
-        sprite.setAccelerationX(0);
-        sprite.setAccelerationY(0);
-      }
-
-      // Vertical movement
-      if (keys.up.isDown) {
-        if (this.fuel >= 0) {
-          this.scene.streak = 0;
-          sprite.setAccelerationY(-this.acceleration);
-          //fuel consume
-          this.fuel -= this.fuelSpendSpeed * delta / 1000;
-          isBoosting = true;
-        } else {
-          //not enough fuel
-          sprite.setAccelerationX(0);
-          sprite.setAccelerationY(0);
+        this.sprite.setX(this.moon.sprite.x);
+        this.sprite.setY(this.moon.sprite.y);
+        if (keys.space.isDown) {
+          this.takeoff();
         }
-      } else if (keys.down.isDown) {
-        if (this.fuel >= 0) {
-          this.scene.streak = 0;
-          sprite.setAccelerationY(this.acceleration);
-          //fuel consume
-          this.fuel -= this.fuelSpendSpeed * delta / 1000;
-          isBoosting = true;
-        } else {
-          //not enough fuel
-          sprite.setAccelerationX(0);
-          sprite.setAccelerationY(0);
-        }
-      } else {
-        sprite.setAccelerationX(0);
-        sprite.setAccelerationY(0);
       }
-
-      // stop/play boosting animation
-      isBoosting ? this.sprite.play('hermes', true, 0) : this.sprite.setFrame(0);
-
-      // set sprite direction
-      var aimAngle = currentDir.angle(new Phaser.Math.Vector2(0, 1)) + Math.PI / 2;
-      this.sprite.setRotation(aimAngle);
-    } else {
-      this.sprite.setX(this.moon.sprite.x);
-      this.sprite.setY(this.moon.sprite.y);
-      if (keys.space.isDown) {
-        this.takeoff();
+      //moon collider
+      if (this.isLeaving == true) {
+        if (
+          (this.moon.sprite.x - this.sprite.x) * (this.moon.sprite.x - this.sprite.x) +
+          (this.moon.sprite.y - this.sprite.y) * (this.moon.sprite.y - this.sprite.y) >
+          2 * this.moon.sprite.displayWidth * this.moon.sprite.displayWidth +
+          2 * this.sprite.displayWidth * this.sprite.displayHeight
+        ) {
+          //distance vs two object size(approximately)
+          this.isLeaving = false;
+        }
       }
     }
-    //moon collider
-    if (this.isLeaving == true) {
-      if (
-        (this.moon.sprite.x - this.sprite.x) * (this.moon.sprite.x - this.sprite.x) +
-        (this.moon.sprite.y - this.sprite.y) * (this.moon.sprite.y - this.sprite.y) >
-        2 * this.moon.sprite.displayWidth * this.moon.sprite.displayWidth +
-        2 * this.sprite.displayWidth * this.sprite.displayHeight
-      ) {
-        //distance vs two object size(approximately)
-        this.isLeaving = false;
+    
+  }
+
+  reducelife(player, moon = true, camera = null) {
+    // console.log(player.lives -= 1);
+    if (player.lives != 0 && moon) {
+      player.lives -= 1;
+      player.livearray[player.lives].destroy();
+      
+      //TODO: following three things:
+      //1. Change player sprite to kaboom animation sprite / Add Kaboom sprite to player.sprite.X,player.sprite.Y and make player invisible
+      //2. make this.isDestroy to true on Kaboom animation on start
+      //3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
+      player.land(player.lastLanded);
+
+    } else if(player.lives != 0 && !moon) {
+      player.lives -= 1;
+      player.livearray[player.lives].destroy();
+      //TODO: following three things:
+      //1. Change player sprite to kaboom animation sprite / Add Kaboom sprite to player.sprite.X,player.sprite.Y and make player invisible
+      //2. make this.isDestroy to true on Kaboom animation on start
+      //3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
+      player.startOnDestroy(camera);
+    } else if (player.lives == 0) {
+      
+    }
+  }
+
+  checkPlayerpos(player, camera) {
+    
+    if (!player.isLanded && this.lastLanded != null) {
+      if (player.sprite.x <= camera.main.scrollX || player.sprite.x >= (camera.main.scrollX + 1920) || player.sprite.y <= camera.main.scrollY || player.sprite.y >= (camera.main.scrollY + 1080)) {
+        this.reducelife(player);
+      }
+    } else if(!player.isLanded && this.lastLanded == null) {
+      if (player.sprite.x <= camera.main.scrollX || player.sprite.x >= (camera.main.scrollX + 1920) || player.sprite.y <= camera.main.scrollY || player.sprite.y >= (camera.main.scrollY + 1080)) {
+        this.reducelife(player, false, camera);
       }
     }
   }

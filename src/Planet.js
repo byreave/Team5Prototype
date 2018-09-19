@@ -9,7 +9,6 @@ export default class Planet {
 		//this.sprite.body.allowGravity = false;
 		var circle = new Phaser.Geom.Circle(x, y, radius);
 		this.sprite.setScale(radius / 100);
-
 		radius = radius / this.sprite.scaleX;
 		this.gravityCircle = circle;
 		this.sprite.setCircle(
@@ -20,6 +19,9 @@ export default class Planet {
 
 		this.drawOrbit();
 	}
+
+
+
 
 	drawOrbit() {
 		this.graphics = this.scene.add.graphics({

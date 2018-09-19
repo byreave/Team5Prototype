@@ -17,7 +17,8 @@ export default class SceneA extends Phaser.Scene {
         this.load.image('bomb', 'assets/bomb.png');
         // debugger
         this.load.image('back', 'assets/space.png');
-        //this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+        
+        this.load.image('life', 'assets/life.png');
 
         // Resources for planets and moon
         this.load.image('moon', 'assets/Moon 1.png');
@@ -81,7 +82,7 @@ export default class SceneA extends Phaser.Scene {
         this.background = new Back(this, 960, 0.5, 540);
 
         //Player
-        this.player = new Player(this, 0, 200);
+        this.player = new Player(this, 100, 200);
         this.score = 0;
         this.streak = 0;
 
@@ -126,7 +127,7 @@ export default class SceneA extends Phaser.Scene {
     }
 
     update(timestep, delta) {
-        this.player.update(delta);
+        this.player.update(delta, this.player.isDestroy);
         this.levelManager.currentLevel.update(delta);
         //Score
         this.scoreText.setText('Score: ' + this.score);
@@ -175,6 +176,9 @@ export default class SceneA extends Phaser.Scene {
             }
             this.background.image.x = this.cameras.main.scrollX + 960;
             this.background.image.y = this.cameras.main.scrollY + 540;
+
         }
+        // console.log(this.cameras);
+        this.player.checkPlayerpos(this.player, this.cameras);
     }
 }
