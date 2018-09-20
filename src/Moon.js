@@ -93,6 +93,7 @@ export default class Moon {
     playerIncoming(moonSprite, playerSprite) {
         if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
             if (this.isExit == false) {
+                this.scene.catch.play();
                 this.scene.player.land(moonSprite);
                 if (this.isVisited == false) {
                     this.isVisited = true;
@@ -106,6 +107,7 @@ export default class Moon {
 
             }
             else {
+                this.scene.catch.play();
                 this.scene.player.land(moonSprite);
                 if (this.isVisited == false) {
                     this.isVisited = true;

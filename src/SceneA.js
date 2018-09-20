@@ -44,6 +44,13 @@ export default class SceneA extends Phaser.Scene {
         this.load.atlas('planet1', 'assets/Planet_1.png', 'assets/Planet_1.json');
         this.load.atlas('planet2', 'assets/Planet_2.png', 'assets/Planet_2.json');
         this.load.atlas('planet3', 'assets/Planet_3.png', 'assets/Planet_3.json');
+        
+        //Sound Files
+        this.load.audio('launch', 'assets/launch.mp3');
+        this.load.audio('fail', 'assets/fail.mp3');
+        this.load.audio('gold', 'assets/goldmoon.mp3');
+        this.load.audio('SFX', 'assets/Hermes.mp3');
+        this.load.audio('catch', 'assets/catch.mp3');
     }
 
     create() {
@@ -87,6 +94,15 @@ export default class SceneA extends Phaser.Scene {
             }),
             repeat: -1
         });
+
+        // Sounds
+        this.gold = this.sound.add('gold', {loop: false});
+        this.fail = this.sound.add('fail', {loop: false});
+        this.launch = this.sound.add('launch', {loop: false});
+        this.SoundFX = this.sound.add("SFX", {loop: true});
+        this.catch = this.sound.add('catch', {loop: false});
+        this.SoundFX.play();
+        // this.sound.setDecodeCallback([ this.goldy, this.fall, this.launch ], callbackSound, this);
 
         //BG
         this.background = new Back(this, 960, 0.5, 540);
@@ -138,6 +154,10 @@ export default class SceneA extends Phaser.Scene {
 
         f1.open();
     }
+
+    // callbackSound() {
+
+    // }
 
     update(timestep, delta) {
         this.player.update(delta, this.player.isDestroy);

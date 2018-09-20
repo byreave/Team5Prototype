@@ -24,14 +24,13 @@ export default class Player {
     this.joystickSensi = 0.5;
     this.isCCW = true;
     this.isLeaving = false; //for moon collider
-    this.lives = 0;
-    this.livearray = new Array(5);
+    this.lives = 4;
+    this.livearray = new Array(4);
     this.livearray[0] = scene.add.image(30, 1050, 'life').setScale(0.5).setAngle(0);
     this.livearray[1] = scene.add.image(70, 1050, 'life').setScale(0.5).setAngle(0);
     this.livearray[2] = scene.add.image(110, 1050, 'life').setScale(0.5).setAngle(0);
     this.livearray[3] = scene.add.image(150, 1050, 'life').setScale(0.5).setAngle(0);
-    this.livearray[4] = scene.add.image(190, 1050, 'life').setScale(0.5).setAngle(0);
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 4; i++) {
       this.livearray[i].setScrollFactor(0);
     }
     this.lastLanded = null;
@@ -77,6 +76,7 @@ export default class Player {
   }
 
   takeoff() {
+    this.scene.launch.play();
     var direction = this.speedDirect;
     direction = direction.normalize(); //debug found
     this.scene.graphics.clear();
@@ -185,19 +185,21 @@ export default class Player {
       //3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
       scene.player.startOnDestroy(scene.cameras);
     } else if (scene.player.lives == 0) {
+      scene.SFX.pause();
       scene.scene.start('end');
       // scene.scene.destroy();
     }
   }
 
   checkPlayerpos(scene) {
-
     if (!scene.player.isLanded && this.lastLanded != null) {
       if (scene.player.sprite.x <= scene.cameras.main.scrollX || scene.player.sprite.x >= (scene.cameras.main.scrollX + 1920) || scene.player.sprite.y <= scene.cameras.main.scrollY || scene.player.sprite.y >= (scene.cameras.main.scrollY + 1080)) {
+        scene.fail.play();
         this.reducelife(scene);
       }
     } else if (!scene.player.isLanded && this.lastLanded == null) {
       if (scene.player.sprite.x <= scene.cameras.main.scrollX || scene.player.sprite.x >= (scene.cameras.main.scrollX + 1920) || scene.player.sprite.y <= scene.cameras.main.scrollY || scene.player.sprite.y >= (scene.cameras.main.scrollY + 1080)) {
+        scene.fail.play();
         this.reducelife(scene, false);
       }
     }
