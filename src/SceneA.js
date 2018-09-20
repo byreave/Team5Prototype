@@ -178,25 +178,26 @@ export default class SceneA extends Phaser.Scene {
 		//BG
 		this.background = new Back(this, 960, 0.5, 540);
 
-		//Player
-		this.player = new Player(this, 100, 200);
-		this.score = 0;
-		this.streak = 0;
 		//graphic for debug
 		this.graphics = this.add.graphics({
 			lineStyle: { width: 2, color: 0x00ff00 },
 			fillStyle: { color: 0xff00ff }
 		});
 		//Camera time to move to other screen(second)
+		//Player
+		this.player = new Player(this, 100, 200);
+		this.score = 0;
+		this.streak = 0;
 		this.camTime = 3;
 		this.oldCamScrollX = 0;
 		this.oldCamScrollY = 0;
 
 		//Level Manager
 		this.levelManager = new LevelManager(this);
+		this.notYetFirstLanded = true;
 		//generating level
 		this.levelManager.createALevelAt(new Phaser.Math.Vector2(960, 540), 'StartLevel');
-		console.log(this.levelManager);
+
 		//Score
 		this.scoreText = this.add.bitmapText(
 			this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 16,
@@ -214,6 +215,7 @@ export default class SceneA extends Phaser.Scene {
 			48
 		);
 		this.streakText.setScrollFactor(0);
+
 		//var gui = new dat.GUI();
 
 		// var f1 = gui.addFolder('Test');

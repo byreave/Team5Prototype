@@ -59,7 +59,6 @@ export default class Player {
 		this.lastLanded = moonSprite;
 		this.scene.children.bringToTop(this.sprite);
 		this.moon = this.level.moons.get(moonSprite);
-		console.log(this.moon);
 		if (this.moon.isOrbiting == false) this.moon.isOrbiting = true;
 		this.orbit = this.moon.orbit;
 		this.isCCW = this.moon.isCCW;
@@ -215,7 +214,7 @@ export default class Player {
 			//3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
 			this.startOnDestroy(this.scene.cameras);
 		} else if (this.lives == 0) {
-			this.scene.scene.start('end', {Score: this.scene.score});
+			this.scene.scene.start('end', { Score: this.scene.score });
 			// scene.scene.switch('game', 'end');
 			// scene.scene.destroy();
 		}
