@@ -1,0 +1,180 @@
+{
+	"frames": {
+		"HermesKaboom_0000": {
+			"frame": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0001": {
+			"frame": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0002": {
+			"frame": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0003": {
+			"frame": { "x": 100, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0004": {
+			"frame": { "x": 100, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0005": {
+			"frame": { "x": 100, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0006": {
+			"frame": { "x": 200, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0007": {
+			"frame": { "x": 200, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0008": {
+			"frame": { "x": 200, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0009": {
+			"frame": { "x": 300, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0010": {
+			"frame": { "x": 300, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0011": {
+			"frame": { "x": 300, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0012": {
+			"frame": { "x": 400, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0013": {
+			"frame": { "x": 400, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0014": {
+			"frame": { "x": 400, "y": 0, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0015": {
+			"frame": { "x": 0, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0016": {
+			"frame": { "x": 0, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0017": {
+			"frame": { "x": 0, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0018": {
+			"frame": { "x": 100, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0019": {
+			"frame": { "x": 100, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0020": {
+			"frame": { "x": 100, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0021": {
+			"frame": { "x": 200, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0022": {
+			"frame": { "x": 200, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		},
+		"HermesKaboom_0023": {
+			"frame": { "x": 200, "y": 150, "w": 100, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+			"sourceSize": { "w": 100, "h": 150 }
+		}
+	},
+	"meta": {
+		"app": "Adobe Animate",
+		"version": "18.0.2.126",
+		"image": "Hermes_Kaboom.png",
+		"format": "RGBA8888",
+		"size": { "w": 512, "h": 512 },
+		"scale": "1"
+	}
+}

@@ -41,7 +41,7 @@ export default class SceneA extends Phaser.Scene {
 		// Read sprites from the atlas
 		// this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
 		this.load.atlas('character', 'assets/Hermes_animated.png', 'assets/Hermes_animated.json');
-
+        this.load.atlas('kaboom',  'assets/Hermes_Kaboom.png', 'assets/Hermes_Kaboom.json');
 		this.load.atlas('planet1', 'assets/Planet_1.png', 'assets/Planet_1.json');
 		this.load.atlas('planet2', 'assets/Planet_2.png', 'assets/Planet_2.json');
 		this.load.atlas('planet3', 'assets/Planet_3.png', 'assets/Planet_3.json');
@@ -50,12 +50,27 @@ export default class SceneA extends Phaser.Scene {
 		this.load.atlas('planet6', 'assets/Planet_6.png', 'assets/Planet_6.json');
 
 		this.load.atlas('moon', 'assets/Moon.png', 'assets/Moon.json');
-		this.load.atlas('goldenMoon', 'assets/GoldenMoon.png', 'assets/GoldenMoon.json');
+        this.load.atlas('goldenMoon', 'assets/GoldenMoon.png', 'assets/GoldenMoon.json');
+        
+        //Sound
+        this.load.audio('SFX', 'assets/Hermes.mp3');
+        this.load.audio('gold', 'assets/goldmoon.mp3');
+        this.load.audio('launch', 'assets/launch.mp3');
+        this.load.audio('catch', 'assets/catch.mp3');
+        this.load.audio('fail', 'assets/fail.mp3');
 	}
 
 	create() {
 		// Create animation resources here
-		this.anims.create({
+        this.anims.create({
+			key: 'die',
+			frames: this.anims.generateFrameNames('kaboom', {
+				prefix: 'HermesKaboom_',
+				end: 23,
+				zeroPad: 4
+			}),
+		});
+        this.anims.create({
 			key: 'hermes',
 			frames: this.anims.generateFrameNames('character', {
 				prefix: 'Hermes_',
@@ -135,6 +150,13 @@ export default class SceneA extends Phaser.Scene {
 			repeat: -1
 		});
 
+        //Sounds
+        this.soundFX = this.sound.add("SFX", {loop:true});
+        this.gold = this.sound.add("gold");
+        this.catch = this.sound.add("catch");
+        this.launch = this.sound.add("launch");
+        this.fail = this.sound.add("fail");
+        this.soundFX.play();
 		//BG
 		this.background = new Back(this, 960, 0.5, 540);
 
