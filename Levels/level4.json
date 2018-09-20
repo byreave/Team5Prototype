@@ -45,7 +45,7 @@
 			"isCCW": true,
 			"IsCCWRandom": false,
 			"speed": 1,
-			"isGoden": false
+			"isGolden": false
 		},
 		"m2": {
 			"orbit": "p2",
@@ -56,7 +56,7 @@
 			"isCCW": true,
 			"IsCCWRandom": true,
 			"speed": 0.4,
-			"isGoden": false
+			"isGolden": false
 		},
 		"m3": {
 			"orbit": "p3",
@@ -67,7 +67,7 @@
 			"isCCW": true,
 			"IsCCWRandom": true,
 			"speed": 1.5,
-			"isGoden": false
+			"isGolden": false
 		}
 	},
 	"exits": {
