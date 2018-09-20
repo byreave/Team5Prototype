@@ -8,7 +8,7 @@
 			"radiusSpan": 0,
 			"name": "p1",
 			"texture": "planet1",
-			"isTextureRandom": false,
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
@@ -19,7 +19,7 @@
 			"radiusSpan": 0,
 			"name": "p2",
 			"texture": "planet2",
-			"isTextureRandom": false,
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
@@ -30,7 +30,7 @@
 			"radiusSpan": 0,
 			"name": "p3",
 			"texture": "planet1",
-			"isTextureRandom": false,
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		}
