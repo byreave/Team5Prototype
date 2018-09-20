@@ -2,7 +2,7 @@ import { Scene } from 'phaser';
 export default class SceneB extends Phaser.Scene {
     constructor() {
         super();
-        Phaser.Scene.call(this, {key: 'end'});
+        Phaser.Scene.call(this, { key: 'end' });
     }
     preload() {
         this.load.image('EndScreen', 'assets/endscreen.png');
@@ -17,6 +17,9 @@ export default class SceneB extends Phaser.Scene {
         this.input.once('pointerdown', function (event) {
             // console.log(event);
             // if(event.key)
+            // this.scene.pause('end');
+            // this.start = this.scene.get('game');
+            // this.start.scene.restart();
             this.scene.start('game');
         }, this);
     }

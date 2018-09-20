@@ -9,7 +9,7 @@ export default class Player {
     this.traLine.setOrigin(0, 0.5);
 
     //this.traLine.setOrigin(0, this.traLine.displayHeight);
-    this.acceleration = 30;
+    this.acceleration = 60;
     this.isLanded = false;
     this.sprite.setVelocityX(100);
     this.keys = scene.input.keyboard.createCursorKeys();
@@ -24,14 +24,13 @@ export default class Player {
     this.joystickSensi = 0.5;
     this.isCCW = true;
     this.isLeaving = false; //for moon collider
-    this.lives = 0;
-    this.livearray = new Array(5);
+    this.lives = 4;
+    this.livearray = new Array(4);
     this.livearray[0] = scene.add.image(30, 1050, 'life').setScale(0.5).setAngle(0);
     this.livearray[1] = scene.add.image(70, 1050, 'life').setScale(0.5).setAngle(0);
     this.livearray[2] = scene.add.image(110, 1050, 'life').setScale(0.5).setAngle(0);
     this.livearray[3] = scene.add.image(150, 1050, 'life').setScale(0.5).setAngle(0);
-    this.livearray[4] = scene.add.image(190, 1050, 'life').setScale(0.5).setAngle(0);
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 4; i++) {
       this.livearray[i].setScrollFactor(0);
     }
     this.lastLanded = null;
@@ -81,7 +80,7 @@ export default class Player {
     direction = direction.normalize(); //debug found
     this.scene.graphics.clear();
     //var arcSpeed = this.moon.launchSpeed;
-    var arcSpeed = this.getArcSpeed();
+    var arcSpeed = 2 * this.getArcSpeed();
     this.sprite.setVelocityX(-arcSpeed * direction.x);
     this.sprite.setVelocityY(-arcSpeed * direction.y);
     this.isLanded = false;
@@ -90,76 +89,88 @@ export default class Player {
     this.traLine.setVisible(false);
 
   }
-  update(delta) {
-    const keys = this.keys;
-    const sprite = this.sprite;
-    if (this.isLanded == false) {
-      // boost identifier
-      var isBoosting = false;
-      var currentDir = new Phaser.Math.Vector2().copy(this.sprite.body.velocity).normalize();
+  update(delta, destroy) {
+    if (!destroy) {
+      const keys = this.keys;
+      const sprite = this.sprite;
+      if (this.isLanded == false) {
+        // boost identifier
+        var isBoosting = false;
+        var currentDir = new Phaser.Math.Vector2().copy(this.sprite.body.velocity).normalize();
 
-      // Horizontal movement
-      if (keys.left.isDown) {
-        this.scene.streak = 0;
-        sprite.setAccelerationX(-this.acceleration);
-        isBoosting = true;
-      } if (keys.right.isDown) {
-        this.scene.streak = 0;
-        sprite.setAccelerationX(this.acceleration);
-        isBoosting = true;
+        // Horizontal movement
+        if (keys.left.isDown) {
+          console.log("xxxx");
+          this.scene.streak = 0;
+          sprite.setAccelerationX(-this.acceleration);
+          isBoosting = true;
+        } else if (keys.right.isDown) {
+          this.scene.streak = 0;
+          sprite.setAccelerationX(this.acceleration);
+          isBoosting = true;
+        } else {
+          sprite.setAccelerationX(0);
+        }
+
+        // Vertical movement
+        if (keys.up.isDown) {
+          this.scene.streak = 0;
+          sprite.setAccelerationY(-this.acceleration);
+          isBoosting = true;
+        } else if (keys.down.isDown) {
+          this.scene.streak = 0;
+          sprite.setAccelerationY(this.acceleration);
+          isBoosting = true;
+        } else {
+          sprite.setAccelerationY(0);
+        }
+
+        // stop/play boosting animation
+        isBoosting ? this.sprite.play('hermes', true, 0) : this.sprite.setFrame(0);
+
+        // set sprite direction
+        var aimAngle = currentDir.angle(new Phaser.Math.Vector2(0, 1)) + Math.PI / 2;
+        this.sprite.setRotation(aimAngle);
       } else {
-        sprite.setAccelerationX(0);
-        sprite.setAccelerationY(0);
-      }
+        this.sprite.setX(this.moon.sprite.x);
+        this.sprite.setY(this.moon.sprite.y);
+        //Control launch angle
+        if (keys.up.isDown) {
+          if (this.angle <= Math.PI / 4) {
+            this.angle += this.joystickSensi * delta / 1000;
+          }
+        }
+        if (keys.down.isDown) {
+          if (this.angle >= - Math.PI / 4) {
+            this.angle -= this.joystickSensi * delta / 1000;
+          }
+        }
+        this.speedDirect = this.getCurrentArcDirection();
+        this.speedDirect.x = this.speedDirect.x * Math.cos(this.angle) - this.speedDirect.y * Math.sin(this.angle);
+        this.speedDirect.y = this.speedDirect.x * Math.sin(this.angle) + this.speedDirect.y * Math.cos(this.angle);
 
-      // Vertical movement
-      if (keys.up.isDown) {
-        this.scene.streak = 0;
-        sprite.setAccelerationY(-this.acceleration);
-        isBoosting = true;
-      } else if (keys.down.isDown) {
-        this.scene.streak = 0;
-        sprite.setAccelerationY(this.acceleration);
-        isBoosting = true;
-      } else {
-        sprite.setAccelerationX(0);
-        sprite.setAccelerationY(0);
-      }
-
-      // stop/play boosting animation
-      isBoosting ? this.sprite.play('hermes', true, 0) : this.sprite.setFrame(0);
-
-      // set sprite direction
-      var aimAngle = currentDir.angle(new Phaser.Math.Vector2(0, 1)) + Math.PI / 2;
-      this.sprite.setRotation(aimAngle);
-    } else {
-      this.sprite.setX(this.moon.sprite.x);
-      this.sprite.setY(this.moon.sprite.y);
-      //Control launch angle
-      if (keys.up.isDown) {
-        if (this.angle <= Math.PI / 4) {
-          this.angle += this.joystickSensi * delta / 1000;
-
+        //traBG
+        this.traBG.setX(this.sprite.x);
+        this.traBG.setY(this.sprite.y);
+        //traLine
+        this.traLine.setX(this.sprite.x)
+        this.traLine.setY(this.sprite.y);
+        this.traLine.setRotation(this.speedDirect.angle(new Phaser.Math.Vector2(1, 0)) + Math.PI);
+        if (keys.space.isDown) {
+          this.takeoff();
         }
       }
-      if (keys.down.isDown) {
-        if (this.angle >= - Math.PI / 4) {
-          this.angle -= this.joystickSensi * delta / 1000;
+      //moon collider
+      if (this.isLeaving == true) {
+        if (
+          (this.moon.sprite.x - this.sprite.x) * (this.moon.sprite.x - this.sprite.x) +
+          (this.moon.sprite.y - this.sprite.y) * (this.moon.sprite.y - this.sprite.y) >
+          2 * this.moon.sprite.displayWidth * this.moon.sprite.displayWidth +
+          2 * this.sprite.displayWidth * this.sprite.displayHeight
+        ) {
+          //distance vs two object size(approximately)
+          this.isLeaving = false;
         }
-      }
-      this.speedDirect = this.getCurrentArcDirection();
-      this.speedDirect.x = this.speedDirect.x * Math.cos(this.angle) - this.speedDirect.y * Math.sin(this.angle);
-      this.speedDirect.y = this.speedDirect.x * Math.sin(this.angle) + this.speedDirect.y * Math.cos(this.angle);
-
-      //traBG
-      this.traBG.setX(this.sprite.x);
-      this.traBG.setY(this.sprite.y);
-      //traLine
-      this.traLine.setX(this.sprite.x)
-      this.traLine.setY(this.sprite.y);
-      this.traLine.setRotation(this.speedDirect.angle(new Phaser.Math.Vector2(1, 0)) + Math.PI);
-      if (keys.space.isDown) {
-        this.takeoff();
       }
     }
   }
@@ -186,6 +197,7 @@ export default class Player {
       scene.player.startOnDestroy(scene.cameras);
     } else if (scene.player.lives == 0) {
       scene.scene.start('end');
+      // scene.scene.switch('game', 'end');
       // scene.scene.destroy();
     }
   }

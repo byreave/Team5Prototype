@@ -130,6 +130,10 @@ export default class SceneA extends Phaser.Scene {
         var f1 = gui.addFolder('Test');
         f1.add(this.player.sprite.body.velocity, 'x').listen();
         f1.add(this.player.sprite.body.velocity, 'y').listen();
+
+        f1.add(this.player.sprite.body.acceleration, 'x').listen();
+        f1.add(this.player.sprite.body.acceleration, 'y').listen();
+
         f1.add(this.player.sprite, 'x').listen();
         f1.add(this.player.sprite, 'y').listen();
         f1.add(this.player, 'isCCW').listen();
