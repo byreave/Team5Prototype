@@ -73,28 +73,28 @@
 	"exits": {
 		"up": {
 			"On": true,
-			"PlanetTexture": "planet1",
+			"PlanetTexture": "satellite",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
 			"isCCW": false
 		},
 		"down": {
 			"On": true,
-			"PlanetTexture": "planet1",
+			"PlanetTexture": "satellite",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
 			"isCCW": false
 		},
 		"left": {
 			"On": true,
-			"PlanetTexture": "planet1",
+			"PlanetTexture": "satellite",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
 			"isCCW": false
 		},
 		"right": {
 			"On": false,
-			"PlanetTexture": "planet1",
+			"PlanetTexture": "satellite",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
 			"isCCW": false
