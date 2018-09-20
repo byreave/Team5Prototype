@@ -13,7 +13,10 @@ var config = {
 			}
 		}
 	},
-	scene: SceneA
+	scene: SceneA,
+	audio: {
+		disableWebAudio: true
+	}
 };
 
 var game = new Phaser.Game(config);

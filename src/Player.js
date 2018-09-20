@@ -83,7 +83,7 @@ export default class Player {
         this.scene.streak = 0;
         sprite.setAccelerationX(-this.acceleration);
         isBoosting = true;
-      } else if (keys.right.isDown) {
+      } if (keys.right.isDown) {
         this.scene.streak = 0;
         sprite.setAccelerationX(this.acceleration);
         isBoosting = true;
