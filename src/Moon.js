@@ -17,12 +17,12 @@ export default class Moon {
 			texture
 		);
 		if (texture == 'goldenMoon') {
-			console.log(texture);
 			this.sprite.play(texture, true, 0);
 			this.sprite.setScale(0.7);
 		} else {
 			this.sprite.setScale(0.4);
 		}
+
 		this.sprite.name = name;
 		this.collider = this.scene.physics.add.overlap(
 			this.sprite,
@@ -31,6 +31,12 @@ export default class Moon {
 			null,
 			this.scene
 		);
+
+		// TEMP: temp first land
+		if (this.scene.notYetFirstLanded) {
+			this.scene.tempMoonSprite = this.sprite;
+			this.scene.notYetFirstLanded = false;
+		}
 	}
 
 	setStartingPos(angle) {
