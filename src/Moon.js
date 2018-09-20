@@ -93,18 +93,19 @@ export default class Moon {
     playerIncoming(moonSprite, playerSprite) {
         if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
             if (this.isExit == false) {
-                this.scene.catch.play();
-                this.scene.player.land(moonSprite);
                 if (this.isVisited == false) {
                     this.isVisited = true;
-                    if (this.isGolden == false)
-                        this.scene.score += 10 + 10 * this.scene.streak;
-                    else
+                    if (this.isGolden == false){
+                        this.scene.catch.play();
+                        this.scene.score += 10 + 10 * this.scene.streak;    
+                    }
+                    else{
+                        this.scene.gold.play();
                         this.scene.score += 200;
+                    }
                     this.scene.streak++;
-
                 }
-
+                this.scene.player.land(moonSprite);
             }
             else {
                 this.scene.catch.play();

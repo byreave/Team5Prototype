@@ -41,6 +41,7 @@ export default class SceneA extends Phaser.Scene {
         // Read sprites from the atlas
         // this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
         this.load.atlas('character', 'assets/Hermes_animated.png', 'assets/Hermes_animated.json');
+        this.load.atlas('kaboom', 'assets/Hermes_Kaboom.png', 'assets/Hermes_Kaboom.json');
         this.load.atlas('planet1', 'assets/Planet_1.png', 'assets/Planet_1.json');
         this.load.atlas('planet2', 'assets/Planet_2.png', 'assets/Planet_2.json');
         this.load.atlas('planet3', 'assets/Planet_3.png', 'assets/Planet_3.json');
@@ -55,6 +56,14 @@ export default class SceneA extends Phaser.Scene {
 
     create() {
         // Create animation resources here
+        this.anims.create({
+            key: 'die',
+            frames: this.anims.generateFrameNames('kaboom', {
+                prefix: 'HermesKaboom_',
+                end: 23,
+                zeroPad: 4
+            }),
+        });
         this.anims.create({
             key: 'hermes',
             frames: this.anims.generateFrameNames('character', {
@@ -141,18 +150,22 @@ export default class SceneA extends Phaser.Scene {
             48
         );
         this.streakText.setScrollFactor(0);
-        var gui = new dat.GUI();
+        //var gui = new dat.GUI();
 
-        var f1 = gui.addFolder('Test');
-        f1.add(this.player.sprite.body.velocity, 'x').listen();
-        f1.add(this.player.sprite.body.velocity, 'y').listen();
-        f1.add(this.player.sprite, 'x').listen();
-        f1.add(this.player.sprite, 'y').listen();
-        f1.add(this.player, 'isCCW').listen();
-        f1.add(this, 'score').listen();
-        f1.add(this, 'streak').listen();
+        // var f1 = gui.addFolder('Test');
+        // f1.add(this.player.sprite.body.velocity, 'x').listen();
+        // f1.add(this.player.sprite.body.velocity, 'y').listen();
 
-        f1.open();
+        // f1.add(this.player.sprite.body.acceleration, 'x').listen();
+        // f1.add(this.player.sprite.body.acceleration, 'y').listen();
+
+        // f1.add(this.player.sprite, 'x').listen();
+        // f1.add(this.player.sprite, 'y').listen();
+        // f1.add(this.player, 'isCCW').listen();
+        // f1.add(this, 'score').listen();
+        // f1.add(this, 'streak').listen();
+
+        // f1.open();
     }
 
     // callbackSound() {
