@@ -3,10 +3,12 @@ import * as dat from 'dat.gui';
 import Back from './Back.js';
 import LevelManager from './LevelManager.js';
 import { deflateSync } from 'zlib';
+import {Scene} from 'phaser';
 
 export default class SceneA extends Phaser.Scene {
     constructor() {
         super();
+        Phaser.Scene.call(this, { key: 'game'});
         this.level = 0;
     }
 
@@ -18,7 +20,7 @@ export default class SceneA extends Phaser.Scene {
         // debugger
         this.load.image('back', 'assets/space.png');
         
-        this.load.image('life', 'assets/life.png');
+        this.load.image('life', 'assets/life.png')
 
         // Resources for planets and moon
         this.load.image('moon', 'assets/Moon 1.png');
@@ -179,6 +181,6 @@ export default class SceneA extends Phaser.Scene {
 
         }
         // console.log(this.cameras);
-        this.player.checkPlayerpos(this.player, this.cameras);
+        this.player.checkPlayerpos(this);
     }
 }
