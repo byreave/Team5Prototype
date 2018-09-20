@@ -8,7 +8,9 @@ export default class LevelManager {
         this.levelWidth = 1920;
         this.levelHeight = 1080;
         this.moveTo = null;
-        this.levelJSON = ['StartLevel', 'level1', 'level2', 'level3'];
+        this.levelJSON = ['StartLevel', 'level1', 'level2', 'level3', 'level4'];
+        this.normallevelJSON = ['normallevel1', 'normallevel2', 'normallevel3', 'normallevel4'];
+
     }
 
     //Initial level
@@ -28,7 +30,10 @@ export default class LevelManager {
                 new Phaser.Math.Vector2(centerLevel.centerPoint.x, centerLevel.centerPoint.y - this.levelHeight)
             );
             newLevel.levelDown = centerLevel;
-            newLevel.createPlanetsFormJson(this.getRandomLevelFile());
+            if(this.scene.score > 100)
+              newLevel.createPlanetsFormJson(this.getRandomNormalLevelFile());
+            else
+              newLevel.createPlanetsFormJson(this.getRandomLevelFile());
             centerLevel.levelUp = newLevel;
             this.levels.push(newLevel);
         }
@@ -38,7 +43,10 @@ export default class LevelManager {
                 new Phaser.Math.Vector2(centerLevel.centerPoint.x, centerLevel.centerPoint.y + this.levelHeight)
             );
             newLevel.levelUp = centerLevel;
-            newLevel.createPlanetsFormJson(this.getRandomLevelFile());
+            if(this.scene.score > 100)
+              newLevel.createPlanetsFormJson(this.getRandomNormalLevelFile());
+            else
+              newLevel.createPlanetsFormJson(this.getRandomLevelFile());
             centerLevel.levelDown = newLevel;
             this.levels.push(newLevel);
         }
@@ -48,7 +56,10 @@ export default class LevelManager {
                 new Phaser.Math.Vector2(centerLevel.centerPoint.x - this.levelWidth, centerLevel.centerPoint.y)
             );
             newLevel.levelRight = centerLevel;
-            newLevel.createPlanetsFormJson(this.getRandomLevelFile());
+            if(this.scene.score > 100)
+              newLevel.createPlanetsFormJson(this.getRandomNormalLevelFile());
+            else
+              newLevel.createPlanetsFormJson(this.getRandomLevelFile());
             centerLevel.levelLeft = newLevel;
             this.levels.push(newLevel);
         }
@@ -58,7 +69,10 @@ export default class LevelManager {
                 new Phaser.Math.Vector2(centerLevel.centerPoint.x + this.levelWidth, centerLevel.centerPoint.y)
             );
             newLevel.levelLeft = centerLevel;
-            newLevel.createPlanetsFormJson(this.getRandomLevelFile());
+            if(this.scene.score > 100)
+              newLevel.createPlanetsFormJson(this.getRandomNormalLevelFile());
+            else
+              newLevel.createPlanetsFormJson(this.getRandomLevelFile());
             centerLevel.levelRight = newLevel;
             this.levels.push(newLevel);
         }
@@ -105,6 +119,10 @@ export default class LevelManager {
 
     getRandomLevelFile() {
         return this.levelJSON[Math.floor(Math.random() * this.levelJSON.length)];
+    }
+    getRandomNormalLevelFile(){
+      return this.normallevelJSON[Math.floor(Math.random() * this.normallevelJSON.length)];
+
     }
 
     deleteLevelsExcept(direction) {

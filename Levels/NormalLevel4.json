@@ -1,36 +1,47 @@
 {
-	"name": "EasyLevel1",
+	"name": "NormalLevel4",
 	"planets": {
 		"p1": {
-			"x": -0,
-			"y": -250,
-			"radius": 130,
-			"radiusSpan": 0,
+			"x": -550,
+			"y": 150,
+			"radius": 280,
+			"radiusSpan": 20,
 			"name": "p1",
-			"texture": "planet2",
+			"texture": "planet3",
 			"isTextureRandom": false,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
 		"p2": {
-			"x": -450,
-			"y": 50,
-			"radius": 150,
-			"radiusSpan": 0,
+			"x": 400,
+			"y": -250,
+			"radius": 250,
+			"radiusSpan": 10,
 			"name": "p2",
-			"texture": "planet1",
-			"isTextureRandom": false,
+			"texture": "planet2",
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
 		"p3": {
-			"x": 550,
-			"y": 150,
-			"radius": 100,
-			"radiusSpan": 0,
+			"x": 100,
+			"y": -300,
+			"radius": 180,
+			"radiusSpan": 10,
 			"name": "p3",
-			"texture": "planet3",
-			"isTextureRandom": false,
+			"texture": "planet1",
+			"isTextureRandom": true,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+    "p4": {
+			"x": 0,
+			"y": 400,
+			"radius": 120,
+			"radiusSpan": 10,
+			"name": "p4",
+			"texture": "planet1",
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		}
@@ -44,7 +55,7 @@
 			"startPos": 0,
 			"isCCW": true,
 			"IsCCWRandom": false,
-			"speed": 0.8,
+			"speed": 2,
 			"isGolden": false
 		},
 		"m2": {
@@ -55,7 +66,7 @@
 			"startPos": 1,
 			"isCCW": true,
 			"IsCCWRandom": true,
-			"speed": 0.7,
+			"speed": 1.4,
 			"isGolden": false
 		},
 		"m3": {
@@ -66,35 +77,46 @@
 			"startPos": 2,
 			"isCCW": true,
 			"IsCCWRandom": true,
-			"speed": 0.9,
+			"speed": 2.2,
+			"isGolden": true
+		},
+    "m4": {
+			"orbit": "p4",
+			"name": "moon4",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 2,
+			"isCCW": true,
+			"IsCCWRandom": true,
+			"speed": 3,
 			"isGolden": false
 		}
 	},
 	"exits": {
 		"up": {
 			"On": true,
-			"PlanetTexture": "planet1",
+			"PlanetTexture": "satellite",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
 			"isCCW": false
 		},
 		"down": {
 			"On": true,
-			"PlanetTexture": "planet1",
+			"PlanetTexture": "satellite",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
 			"isCCW": false
 		},
 		"left": {
-			"On": true,
-			"PlanetTexture": "planet1",
+			"On": false,
+			"PlanetTexture": "satellite",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
 			"isCCW": false
 		},
 		"right": {
-			"On": false,
-			"PlanetTexture": "planet1",
+			"On": true,
+			"PlanetTexture": "satellite",
 			"PlanetRadius": 50,
 			"MoonTexture": "star",
 			"isCCW": false
