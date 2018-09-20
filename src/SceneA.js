@@ -29,7 +29,7 @@ export default class SceneA extends Phaser.Scene {
 		this.load.image('life', 'assets/life.png');
 
 		// Resources for planets and moon
-		this.load.image('moon', 'assets/Moon 1.png');
+		// this.load.image('moon', 'assets/Moon 1.png');
 
 		//Json files for levels
 		this.load.json('StartLevel', 'Levels/StartLevel.json');
@@ -41,12 +41,16 @@ export default class SceneA extends Phaser.Scene {
 		// Read sprites from the atlas
 		// this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
 		this.load.atlas('character', 'assets/Hermes_animated.png', 'assets/Hermes_animated.json');
+
 		this.load.atlas('planet1', 'assets/Planet_1.png', 'assets/Planet_1.json');
 		this.load.atlas('planet2', 'assets/Planet_2.png', 'assets/Planet_2.json');
 		this.load.atlas('planet3', 'assets/Planet_3.png', 'assets/Planet_3.json');
 		this.load.atlas('planet4', 'assets/Planet_4.png', 'assets/Planet_4.json');
 		this.load.atlas('planet5', 'assets/Planet_5.png', 'assets/Planet_5.json');
 		this.load.atlas('planet6', 'assets/Planet_6.png', 'assets/Planet_6.json');
+
+		this.load.atlas('moon', 'assets/Moon.png', 'assets/Moon.json');
+		this.load.atlas('goldenMoon', 'assets/GoldenMoon.png', 'assets/GoldenMoon.json');
 	}
 
 	create() {
@@ -116,6 +120,16 @@ export default class SceneA extends Phaser.Scene {
 			frames: this.anims.generateFrameNames('planet6', {
 				prefix: 'Planet6_',
 				end: 23,
+				zeroPad: 4
+			}),
+			repeat: -1
+		});
+
+		this.anims.create({
+			key: 'goldenMoon',
+			frames: this.anims.generateFrameNames('goldenMoon', {
+				prefix: 'GoldenMoon_',
+				end: 43,
 				zeroPad: 4
 			}),
 			repeat: -1

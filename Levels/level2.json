@@ -61,13 +61,13 @@
 		"m3": {
 			"orbit": "p3",
 			"name": "moon3",
-			"texture": "moon",
+			"texture": "goldenMoon",
 			"IsTextureRandom": false,
 			"startPos": 2,
 			"isCCW": true,
 			"IsCCWRandom": true,
-			"speed": 0.9,
-			"isGoden": false
+			"speed": 3,
+			"isGoden": true
 		}
 	},
 	"exits": {

@@ -83,7 +83,7 @@
 		"m4": {
 			"orbit": "Golden",
 			"name": "StartMoon4",
-			"texture": "moon",
+			"texture": "goldenMoon",
 			"IsTextureRandom": false,
 			"startPos": 1.5,
 			"isCCW": true,
