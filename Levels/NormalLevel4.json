@@ -24,7 +24,7 @@
 			"displayHeight": 0
 		},
 		"p3": {
-			"x": 100,
+			"x": -100,
 			"y": -300,
 			"radius": 180,
 			"radiusSpan": 10,
@@ -72,7 +72,7 @@
 		"m3": {
 			"orbit": "p3",
 			"name": "moon3",
-			"texture": "moon",
+			"texture": "goldenMoon",
 			"IsTextureRandom": false,
 			"startPos": 2,
 			"isCCW": true,
