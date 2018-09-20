@@ -230,11 +230,12 @@ export default class Player {
 				this.sprite.y >= this.scene.cameras.main.scrollY + this.level.levelHeight + 80
 			) {
 				this.scene.fail.play();
-				this.sprite.setVisible(false);
 				this.explosion.x = this.sprite.x;
 				this.explosion.y = this.sprite.y;
-				this.sprite.x = this.scene.cameras.main.scrollX + 100;
-				this.sprite.y = this.scene.cameras.main.scrollY + 200;
+				this.land(this.lastLanded);
+				this.sprite.setVisible(false);
+				this.traBG.setVisible(false);
+				this.traLine.setVisible(false);
 				this.explosion.setVisible(true);
 				this.explosion.play('die');
 				this.explosion.once(
