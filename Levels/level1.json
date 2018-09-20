@@ -8,7 +8,7 @@
 			"radiusSpan": 0,
 			"name": "Start",
 			"texture": "planet1",
-			"isTextureRandom": false,
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
@@ -19,7 +19,7 @@
 			"radiusSpan": 0,
 			"name": "Start2",
 			"texture": "planet2",
-			"isTextureRandom": false,
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
@@ -30,7 +30,7 @@
 			"radiusSpan": 0,
 			"name": "Start3",
 			"texture": "planet1",
-			"isTextureRandom": false,
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		},
@@ -41,7 +41,7 @@
 			"radiusSpan": 0,
 			"name": "Golden",
 			"texture": "planet3",
-			"isTextureRandom": false,
+			"isTextureRandom": true,
 			"displayWidth": 0,
 			"displayHeight": 0
 		}
@@ -83,7 +83,7 @@
 		"m4": {
 			"orbit": "Golden",
 			"name": "StartMoon4",
-			"texture": "moon",
+			"texture": "goldenMoon",
 			"IsTextureRandom": false,
 			"startPos": 1.5,
 			"isCCW": true,

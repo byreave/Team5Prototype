@@ -1,0 +1,19 @@
+﻿{
+	"frames": {
+		"Moon_0000": {
+			"frame": { "x": 0, "y": 0, "w": 150, "h": 150 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 150, "h": 150 },
+			"sourceSize": { "w": 150, "h": 150 }
+		}
+	},
+	"meta": {
+		"app": "Adobe Animate",
+		"version": "18.0.2.126",
+		"image": "Moon.png",
+		"format": "RGBA8888",
+		"size": { "w": 256, "h": 256 },
+		"scale": "1"
+	}
+}
