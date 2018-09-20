@@ -10,7 +10,7 @@ export default class PlanetGenerator {
 		this.YStart = 100;
 		this.radiusMin = 50;
 		this.radiusMax = 100;
-		this.texturePack = [ 'planet1', 'planet2' ];
+		this.texturePack = [ 'planet1', 'planet2', 'planet3', 'planet4', 'planet5', 'planet6' ];
 		this.moonTexturePack = [ 'moon' ];
 		this.totalNumber = 0; //for naming
 	}
