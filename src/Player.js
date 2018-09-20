@@ -24,6 +24,18 @@ export default class Player {
     this.joystickSensi = 0.5;
     this.isCCW = true;
     this.isLeaving = false; //for moon collider
+    this.lives = 0;
+    this.livearray = new Array(5);
+    this.livearray[0] = scene.add.image(30, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[1] = scene.add.image(70, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[2] = scene.add.image(110, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[3] = scene.add.image(150, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[4] = scene.add.image(190, 1050, 'life').setScale(0.5).setAngle(0);
+    for (var i = 0; i < 5; i++) {
+      this.livearray[i].setScrollFactor(0);
+    }
+    this.lastLanded = null;
+    this.isDestroy = false;
   }
 
   stop() {
@@ -39,6 +51,7 @@ export default class Player {
     //bring to top
     this.scene.children.bringToTop(this.traBG);
     this.scene.children.bringToTop(this.traLine);
+    this.lastLanded = moonSprite;
     this.scene.children.bringToTop(this.sprite);
     this.moon = this.level.moons.get(moonSprite);
     console.log(this.moon);
@@ -51,6 +64,16 @@ export default class Player {
     this.sprite.setAccelerationY(0);
     this.speedDirect = this.getCurrentArcDirection();
 
+  }
+
+  startOnDestroy(camera) {
+    this.sprite.x = 100 + camera.main.scrollX;
+    this.sprite.y = 200 + camera.main.scrollY;
+    this.speed = 2; //radian per sec
+    this.sprite.setVelocityX(100);
+    this.sprite.setVelocityY(0);
+    this.sprite.setAccelerationX(0);
+    this.sprite.setAccelerationY(0);
   }
 
   takeoff() {
@@ -70,9 +93,6 @@ export default class Player {
   update(delta) {
     const keys = this.keys;
     const sprite = this.sprite;
-
-
-
     if (this.isLanded == false) {
       // boost identifier
       var isBoosting = false;
@@ -142,16 +162,43 @@ export default class Player {
         this.takeoff();
       }
     }
-    //moon collider
-    if (this.isLeaving == true) {
-      if (
-        (this.moon.sprite.x - this.sprite.x) * (this.moon.sprite.x - this.sprite.x) +
-        (this.moon.sprite.y - this.sprite.y) * (this.moon.sprite.y - this.sprite.y) >
-        2 * this.moon.sprite.displayWidth * this.moon.sprite.displayWidth +
-        2 * this.sprite.displayWidth * this.sprite.displayHeight
-      ) {
-        //distance vs two object size(approximately)
-        this.isLeaving = false;
+  }
+
+  reducelife(scene, moon = true) {
+    // console.log(player.lives -= 1);
+    if (scene.player.lives != 0 && moon) {
+      scene.player.lives -= 1;
+      scene.player.livearray[scene.player.lives].destroy();
+
+      //TODO: following three things:
+      //1. Change player sprite to kaboom animation sprite / Add Kaboom sprite to player.sprite.X,player.sprite.Y and make player invisible
+      //2. make this.isDestroy to true on Kaboom animation on start
+      //3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
+      scene.player.land(scene.player.lastLanded);
+
+    } else if (scene.player.lives != 0 && !moon) {
+      scene.player.lives -= 1;
+      scene.player.livearray[scene.player.lives].destroy();
+      //TODO: following three things:
+      //1. Change player sprite to kaboom animation sprite / Add Kaboom sprite to player.sprite.X,player.sprite.Y and make player invisible
+      //2. make this.isDestroy to true on Kaboom animation on start
+      //3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
+      scene.player.startOnDestroy(scene.cameras);
+    } else if (scene.player.lives == 0) {
+      scene.scene.start('end');
+      // scene.scene.destroy();
+    }
+  }
+
+  checkPlayerpos(scene) {
+
+    if (!scene.player.isLanded && this.lastLanded != null) {
+      if (scene.player.sprite.x <= scene.cameras.main.scrollX || scene.player.sprite.x >= (scene.cameras.main.scrollX + 1920) || scene.player.sprite.y <= scene.cameras.main.scrollY || scene.player.sprite.y >= (scene.cameras.main.scrollY + 1080)) {
+        this.reducelife(scene);
+      }
+    } else if (!scene.player.isLanded && this.lastLanded == null) {
+      if (scene.player.sprite.x <= scene.cameras.main.scrollX || scene.player.sprite.x >= (scene.cameras.main.scrollX + 1920) || scene.player.sprite.y <= scene.cameras.main.scrollY || scene.player.sprite.y >= (scene.cameras.main.scrollY + 1080)) {
+        this.reducelife(scene, false);
       }
     }
   }

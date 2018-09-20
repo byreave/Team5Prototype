@@ -3,10 +3,12 @@ import * as dat from 'dat.gui';
 import Back from './Back.js';
 import LevelManager from './LevelManager.js';
 import { deflateSync } from 'zlib';
+import { Scene } from 'phaser';
 
 export default class SceneA extends Phaser.Scene {
     constructor() {
         super();
+        Phaser.Scene.call(this, { key: 'game' });
         this.level = 0;
     }
 
@@ -23,6 +25,9 @@ export default class SceneA extends Phaser.Scene {
         //Trajectory
         this.load.image('TraLine', 'assets/TrajectoryLine.png');
         this.load.image('TraBG', 'assets/TrajectoryBG.png');
+
+        this.load.image('life', 'assets/life.png')
+
         // Resources for planets and moon
         this.load.image('moon', 'assets/Moon 1.png');
 
@@ -87,7 +92,7 @@ export default class SceneA extends Phaser.Scene {
         this.background = new Back(this, 960, 0.5, 540);
 
         //Player
-        this.player = new Player(this, 0, 200);
+        this.player = new Player(this, 100, 200);
         this.score = 0;
         this.streak = 0;
         //graphic for debug
@@ -135,7 +140,7 @@ export default class SceneA extends Phaser.Scene {
     }
 
     update(timestep, delta) {
-        this.player.update(delta);
+        this.player.update(delta, this.player.isDestroy);
         this.levelManager.currentLevel.update(delta);
         if (this.player.isLanded) {
             this.graphics.clear();
@@ -188,6 +193,9 @@ export default class SceneA extends Phaser.Scene {
             }
             this.background.image.x = this.cameras.main.scrollX + 960;
             this.background.image.y = this.cameras.main.scrollY + 540;
+
         }
+        // console.log(this.cameras);
+        this.player.checkPlayerpos(this);
     }
 }
