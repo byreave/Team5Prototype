@@ -25,9 +25,9 @@ export default class StartScreen extends Phaser.Scene {
 
 		this.add.image(960, 540, 'startScreen_BG');
 
-		this.add.sprite(960, 300, 'gameTitle').play('gameTitle', true, 0);
+		this.add.sprite(960, 450, 'gameTitle').play('gameTitle', true, 0);
 		// this.add.bitmapText(850, 450, 'd_p', "Credits: \n\nEngineers: \nByreave Luo, \nMit Doshi. \n\nTech-Art:\nSpencer Wang. \n\nArt:\nDani Powers. \n\nProducer:\nLis Moberly. ", 18, 1);
-		this.add.bitmapText(800, 540, 'd_p', 'Press Start', 25, 1);
+		this.add.bitmapText(800, 650, 'd_p', 'Press Start', 30, 1);
 		// console.log(this.input.keyboard.createCursorKeys());
 		this.input.once(
 			'pointerdown',
