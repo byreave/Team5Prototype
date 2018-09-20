@@ -1,0 +1,191 @@
+{
+	"name": "NormalLevel3",
+	"planets": {
+		"p1": {
+			"x": -650,
+			"y": -350,
+			"radius": 80,
+			"radiusSpan": 20,
+			"name": "p1",
+			"texture": "planet3",
+			"isTextureRandom": false,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p2": {
+			"x": -400,
+			"y": -250,
+			"radius": 80,
+			"radiusSpan": 10,
+			"name": "p2",
+			"texture": "planet2",
+			"isTextureRandom": true,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p3": {
+			"x": 200,
+			"y": -400,
+			"radius": 80,
+			"radiusSpan": 10,
+			"name": "p3",
+			"texture": "planet1",
+			"isTextureRandom": true,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+    "p4": {
+			"x": 600,
+			"y": 400,
+			"radius": 80,
+			"radiusSpan": 10,
+			"name": "p4",
+			"texture": "planet1",
+			"isTextureRandom": true,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+    "p5": {
+			"x": -600,
+			"y": 400,
+			"radius": 80,
+			"radiusSpan": 10,
+			"name": "p5",
+			"texture": "planet1",
+			"isTextureRandom": true,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+    "p6": {
+			"x": 200,
+			"y": 300,
+			"radius": 80,
+			"radiusSpan": 10,
+			"name": "p6",
+			"texture": "planet1",
+			"isTextureRandom": true,
+			"displayWidth": 0,
+			"displayHeight": 0
+		},
+		"p7": {
+			"x": 50,
+			"y": -50,
+			"radius": 80,
+			"radiusSpan": 10,
+			"name": "p7",
+			"texture": "planet1",
+			"isTextureRandom": true,
+			"displayWidth": 0,
+			"displayHeight": 0
+		}
+	},
+	"moons": {
+		"m1": {
+			"orbit": "p1",
+			"name": "moon1",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 0,
+			"isCCW": true,
+			"IsCCWRandom": false,
+			"speed": 2,
+			"isGolden": false
+		},
+		"m2": {
+			"orbit": "p2",
+			"name": "moon2",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 1,
+			"isCCW": true,
+			"IsCCWRandom": true,
+			"speed": 1.4,
+			"isGolden": false
+		},
+		"m3": {
+			"orbit": "p3",
+			"name": "moon3",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 2,
+			"isCCW": true,
+			"IsCCWRandom": true,
+			"speed": 2.2,
+			"isGolden": true
+		},
+    "m4": {
+			"orbit": "p4",
+			"name": "moon4",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 2,
+			"isCCW": true,
+			"IsCCWRandom": true,
+			"speed": 2.3,
+			"isGolden": false
+		},
+    "m5": {
+			"orbit": "p5",
+			"name": "moon5",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 2,
+			"isCCW": true,
+			"IsCCWRandom": true,
+			"speed": 2.2,
+			"isGolden": false
+		},
+    "m6": {
+			"orbit": "p6",
+			"name": "moon6",
+			"texture": "moon",
+			"IsTextureRandom": false,
+			"startPos": 2,
+			"isCCW": true,
+			"IsCCWRandom": true,
+			"speed": 2.8,
+			"isGolden": false
+		},
+		"m7": {
+			"orbit": "p7",
+			"name": "moon6",
+			"texture": "goldenMoon",
+			"IsTextureRandom": false,
+			"startPos": 2,
+			"isCCW": true,
+			"IsCCWRandom": true,
+			"speed": 2.8,
+			"isGolden": true
+		}
+	},
+	"exits": {
+		"up": {
+			"On": true,
+			"PlanetTexture": "satellite",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"down": {
+			"On": true,
+			"PlanetTexture": "satellite",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"left": {
+			"On": false,
+			"PlanetTexture": "satellite",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		},
+		"right": {
+			"On": true,
+			"PlanetTexture": "satellite",
+			"PlanetRadius": 50,
+			"MoonTexture": "star",
+			"isCCW": false
+		}
+	}
+}

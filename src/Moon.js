@@ -17,12 +17,12 @@ export default class Moon {
 			texture
 		);
 		if (texture == 'goldenMoon') {
-			console.log(texture);
 			this.sprite.play(texture, true, 0);
 			this.sprite.setScale(0.7);
 		} else {
 			this.sprite.setScale(0.4);
 		}
+
 		this.sprite.name = name;
 		this.collider = this.scene.physics.add.overlap(
 			this.sprite,
@@ -31,6 +31,12 @@ export default class Moon {
 			null,
 			this.scene
 		);
+
+		// TEMP: temp first land
+		if (this.scene.notYetFirstLanded) {
+			this.scene.tempMoonSprite = this.sprite;
+			this.scene.notYetFirstLanded = false;
+		}
 	}
 
 	setStartingPos(angle) {
@@ -96,33 +102,31 @@ export default class Moon {
 		this.sprite.destroy();
 	}
 
-    playerIncoming(moonSprite, playerSprite) {
-        if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
-            if (this.isExit == false) {
-                if (this.isVisited == false) {
-                    this.isVisited = true;
-                    if (this.isGolden == false){
-                        this.scene.catch.play();
-                        this.scene.score += 10 + 10 * this.scene.streak;    
-                    }
-                    else{
-                        this.scene.gold.play();
-                        this.scene.score += 200;
-                    }
-                    this.scene.streak++;
-                }
-                this.scene.player.land(moonSprite);
-            }
-            else {
-                this.scene.catch.play();
-                this.scene.player.land(moonSprite);
-                if (this.isVisited == false) {
-                    this.isVisited = true;
-                    this.scene.score += 10 + 10 * this.scene.streak;
-                    this.scene.streak++;
-                }
-                this.scene.levelManager.switchLevel(this.exit.direction, this.exit);
-            }
-        }
-    }
+	playerIncoming(moonSprite, playerSprite) {
+		if (this.scene.player.isLanded == false && this.scene.player.isLeaving == false) {
+			if (this.isExit == false) {
+				if (this.isVisited == false) {
+					this.isVisited = true;
+					if (this.isGolden == false) {
+						this.scene.catch.play();
+						this.scene.score += 10 + 10 * this.scene.streak;
+					} else {
+						this.scene.gold.play();
+						this.scene.score += 200;
+					}
+					this.scene.streak++;
+				}
+				this.scene.player.land(moonSprite);
+			} else {
+				this.scene.catch.play();
+				this.scene.player.land(moonSprite);
+				if (this.isVisited == false) {
+					this.isVisited = true;
+					this.scene.score += 10 + 10 * this.scene.streak;
+					this.scene.streak++;
+				}
+				this.scene.levelManager.switchLevel(this.exit.direction, this.exit);
+			}
+		}
+	}
 }

@@ -37,11 +37,16 @@ export default class SceneA extends Phaser.Scene {
 		this.load.json('level2', 'Levels/level2.json');
 		this.load.json('level3', 'Levels/level3.json');
 		this.load.json('level4', 'Levels/level4.json');
+		this.load.json('normallevel1', 'Levels/NormalLevel1.json');
+		this.load.json('normallevel2', 'Levels/NormalLevel2.json');
+		this.load.json('normallevel3', 'Levels/NormalLevel3.json');
+		this.load.json('normallevel4', 'Levels/NormalLevel4.json');
+
 
 		// Read sprites from the atlas
 		// this.load.atlas('gems', '_LocalAssets/gems.png', '_LocalAssets/gems.json');
 		this.load.atlas('character', 'assets/Hermes_animated.png', 'assets/Hermes_animated.json');
-        this.load.atlas('kaboom',  'assets/Hermes_Kaboom.png', 'assets/Hermes_Kaboom.json');
+		this.load.atlas('kaboom', 'assets/Hermes_Kaboom.png', 'assets/Hermes_Kaboom.json');
 		this.load.atlas('planet1', 'assets/Planet_1.png', 'assets/Planet_1.json');
 		this.load.atlas('planet2', 'assets/Planet_2.png', 'assets/Planet_2.json');
 		this.load.atlas('planet3', 'assets/Planet_3.png', 'assets/Planet_3.json');
@@ -50,27 +55,30 @@ export default class SceneA extends Phaser.Scene {
 		this.load.atlas('planet6', 'assets/Planet_6.png', 'assets/Planet_6.json');
 
 		this.load.atlas('moon', 'assets/Moon.png', 'assets/Moon.json');
-        this.load.atlas('goldenMoon', 'assets/GoldenMoon.png', 'assets/GoldenMoon.json');
-        
-        //Sound
-        this.load.audio('SFX', 'assets/Hermes.mp3');
-        this.load.audio('gold', 'assets/goldmoon.mp3');
-        this.load.audio('launch', 'assets/launch.mp3');
-        this.load.audio('catch', 'assets/catch.mp3');
-        this.load.audio('fail', 'assets/fail.mp3');
+		this.load.atlas('goldenMoon', 'assets/GoldenMoon.png', 'assets/GoldenMoon.json');
+
+		this.load.atlas('satellite', 'assets/Satellite.png', 'assets/Satellite.json');
+
+		//Sound
+		this.load.audio('SFX', 'assets/Hermes.mp3');
+		this.load.audio('gold', 'assets/goldmoon.mp3');
+		this.load.audio('launch', 'assets/launch.mp3');
+		this.load.audio('catch', 'assets/catch.mp3');
+		this.load.audio('fail', 'assets/fail.mp3');
 	}
 
 	create() {
 		// Create animation resources here
-        this.anims.create({
+		this.anims.create({
 			key: 'die',
 			frames: this.anims.generateFrameNames('kaboom', {
 				prefix: 'HermesKaboom_',
 				end: 23,
 				zeroPad: 4
-			}),
+			})
 		});
-        this.anims.create({
+
+		this.anims.create({
 			key: 'hermes',
 			frames: this.anims.generateFrameNames('character', {
 				prefix: 'Hermes_',
@@ -150,35 +158,46 @@ export default class SceneA extends Phaser.Scene {
 			repeat: -1
 		});
 
-        //Sounds
-        this.soundFX = this.sound.add("SFX", {loop:true});
-        this.gold = this.sound.add("gold");
-        this.catch = this.sound.add("catch");
-        this.launch = this.sound.add("launch");
-        this.fail = this.sound.add("fail");
-        this.soundFX.play();
+		this.anims.create({
+			key: 'satellite',
+			frames: this.anims.generateFrameNames('satellite', {
+				prefix: 'Satellite_',
+				end: 41,
+				zeroPad: 4
+			}),
+			repeat: -1
+		});
+
+		//Sounds
+		this.soundFX = this.sound.add('SFX', { loop: true });
+		this.gold = this.sound.add('gold');
+		this.catch = this.sound.add('catch');
+		this.launch = this.sound.add('launch');
+		this.fail = this.sound.add('fail');
+		this.soundFX.play();
 		//BG
 		this.background = new Back(this, 960, 0.5, 540);
 
-		//Player
-		this.player = new Player(this, 100, 200);
-		this.score = 0;
-		this.streak = 0;
 		//graphic for debug
 		this.graphics = this.add.graphics({
 			lineStyle: { width: 2, color: 0x00ff00 },
 			fillStyle: { color: 0xff00ff }
 		});
 		//Camera time to move to other screen(second)
+		//Player
+		this.player = new Player(this, 100, 200);
+		this.score = 0;
+		this.streak = 0;
 		this.camTime = 3;
 		this.oldCamScrollX = 0;
 		this.oldCamScrollY = 0;
 
 		//Level Manager
 		this.levelManager = new LevelManager(this);
+		this.notYetFirstLanded = true;
 		//generating level
 		this.levelManager.createALevelAt(new Phaser.Math.Vector2(960, 540), 'StartLevel');
-		console.log(this.levelManager);
+
 		//Score
 		this.scoreText = this.add.bitmapText(
 			this.levelManager.currentLevel.centerPoint.x - this.levelManager.levelWidth / 2 + 16,
@@ -196,6 +215,7 @@ export default class SceneA extends Phaser.Scene {
 			48
 		);
 		this.streakText.setScrollFactor(0);
+
 		//var gui = new dat.GUI();
 
 		// var f1 = gui.addFolder('Test');
