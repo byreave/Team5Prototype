@@ -224,9 +224,9 @@ export default class Player {
 		if (!this.isLanded && this.lastLanded != null) {
 			if (
 				this.sprite.x <= this.scene.cameras.main.scrollX ||
-				this.sprite.x >= this.scene.cameras.main.scrollX + this.level.levelWidth + 80 ||
+				this.sprite.x >= this.scene.cameras.main.scrollX + this.level.levelWidth ||
 				this.sprite.y <= this.scene.cameras.main.scrollY ||
-				this.sprite.y >= this.scene.cameras.main.scrollY + this.level.levelHeight + 80
+				this.sprite.y >= this.scene.cameras.main.scrollY + this.level.levelHeight
 			) {
 				this.scene.fail.play();
 				this.explosion.x = this.sprite.x;
@@ -236,6 +236,8 @@ export default class Player {
 				this.traBG.setVisible(false);
 				this.traLine.setVisible(false);
 				this.explosion.setVisible(true);
+				this.explosion.setAngle(this.sprite.angle);
+				this.explosion.setScale(2);
 				this.explosion.play('die');
 				this.explosion.once(
 					'animationcomplete',
@@ -251,9 +253,9 @@ export default class Player {
 		} else if (!this.isLanded && this.lastLanded == null) {
 			if (
 				this.sprite.x <= this.scene.cameras.main.scrollX ||
-				this.sprite.x >= this.scene.cameras.main.scrollX + this.level.levelWidth + 80 ||
+				this.sprite.x >= this.scene.cameras.main.scrollX + this.level.levelWidth||
 				this.sprite.y <= this.scene.cameras.main.scrollY ||
-				this.sprite.y >= this.scene.cameras.main.scrollY + this.level.levelHeight + 80
+				this.sprite.y >= this.scene.cameras.main.scrollY + this.level.levelHeight
 			) {
 				this.scene.fail.play();
 				this.sprite.setVisible(false);
@@ -261,6 +263,8 @@ export default class Player {
 				this.explosion.y = this.sprite.y;
 				this.sprite.x = this.scene.cameras.main.scrollX + 100;
 				this.sprite.y = this.scene.cameras.main.scrollY + 200;
+				this.explosion.setAngle(this.sprite.angle);
+				this.explosion.setScale(2);
 				this.explosion.setVisible(true);
 				this.explosion.play('die');
 				this.explosion.once(
