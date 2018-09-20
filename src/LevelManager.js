@@ -22,6 +22,7 @@ export default class LevelManager {
         // TEMP: temp cancel surronding level generation
         this.createLevelAround(newLevel);
         this.scene.player.level = newLevel;
+        //this.scene.player.land(this.scene.tempMoonSprite);
     }
     createLevelAround(centerLevel) {
         if (centerLevel.levelUp == null) {
