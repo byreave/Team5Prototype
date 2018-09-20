@@ -215,7 +215,7 @@ export default class Player {
 			//3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
 			this.startOnDestroy(this.scene.cameras);
 		} else if (this.lives == 0) {
-			this.scene.scene.start('end');
+			this.scene.scene.start('end', {Score: this.scene.score});
 			// scene.scene.switch('game', 'end');
 			// scene.scene.destroy();
 		}
