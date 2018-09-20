@@ -125,22 +125,22 @@ export default class SceneA extends Phaser.Scene {
             48
         );
         this.streakText.setScrollFactor(0);
-        var gui = new dat.GUI();
+        //var gui = new dat.GUI();
 
-        var f1 = gui.addFolder('Test');
-        f1.add(this.player.sprite.body.velocity, 'x').listen();
-        f1.add(this.player.sprite.body.velocity, 'y').listen();
+        // var f1 = gui.addFolder('Test');
+        // f1.add(this.player.sprite.body.velocity, 'x').listen();
+        // f1.add(this.player.sprite.body.velocity, 'y').listen();
 
-        f1.add(this.player.sprite.body.acceleration, 'x').listen();
-        f1.add(this.player.sprite.body.acceleration, 'y').listen();
+        // f1.add(this.player.sprite.body.acceleration, 'x').listen();
+        // f1.add(this.player.sprite.body.acceleration, 'y').listen();
 
-        f1.add(this.player.sprite, 'x').listen();
-        f1.add(this.player.sprite, 'y').listen();
-        f1.add(this.player, 'isCCW').listen();
-        f1.add(this, 'score').listen();
-        f1.add(this, 'streak').listen();
+        // f1.add(this.player.sprite, 'x').listen();
+        // f1.add(this.player.sprite, 'y').listen();
+        // f1.add(this.player, 'isCCW').listen();
+        // f1.add(this, 'score').listen();
+        // f1.add(this, 'streak').listen();
 
-        f1.open();
+        // f1.open();
     }
 
     update(timestep, delta) {

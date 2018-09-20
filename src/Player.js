@@ -44,6 +44,10 @@ export default class Player {
   }
 
   land(moonSprite) {
+    this.sprite.setVelocityX(0);
+    this.sprite.setVelocityY(0);
+    this.sprite.setAccelerationX(0);
+    this.sprite.setAccelerationY(0);
     this.isLanded = true;
     this.traBG.setVisible(true);
     this.traLine.setVisible(true);
@@ -57,10 +61,7 @@ export default class Player {
     if (this.moon.isOrbiting == false) this.moon.isOrbiting = true;
     this.orbit = this.moon.orbit;
     this.isCCW = this.moon.isCCW;
-    this.sprite.setVelocityX(0);
-    this.sprite.setVelocityY(0);
-    this.sprite.setAccelerationX(0);
-    this.sprite.setAccelerationY(0);
+
     this.speedDirect = this.getCurrentArcDirection();
 
   }
@@ -205,11 +206,11 @@ export default class Player {
   checkPlayerpos(scene) {
 
     if (!scene.player.isLanded && this.lastLanded != null) {
-      if (scene.player.sprite.x <= scene.cameras.main.scrollX || scene.player.sprite.x >= (scene.cameras.main.scrollX + 1920) || scene.player.sprite.y <= scene.cameras.main.scrollY || scene.player.sprite.y >= (scene.cameras.main.scrollY + 1080)) {
+      if (scene.player.sprite.x <= scene.cameras.main.scrollX || scene.player.sprite.x >= (scene.cameras.main.scrollX + this.level.levelWidth + 80) || scene.player.sprite.y <= scene.cameras.main.scrollY || scene.player.sprite.y >= (scene.cameras.main.scrollY + this.level.levelHeight + 80)) {
         this.reducelife(scene);
       }
     } else if (!scene.player.isLanded && this.lastLanded == null) {
-      if (scene.player.sprite.x <= scene.cameras.main.scrollX || scene.player.sprite.x >= (scene.cameras.main.scrollX + 1920) || scene.player.sprite.y <= scene.cameras.main.scrollY || scene.player.sprite.y >= (scene.cameras.main.scrollY + 1080)) {
+      if (scene.player.sprite.x <= scene.cameras.main.scrollX || scene.player.sprite.x >= (scene.cameras.main.scrollX + this.level.levelWidth + 80) || scene.player.sprite.y <= scene.cameras.main.scrollY || scene.player.sprite.y >= (scene.cameras.main.scrollY + this.level.levelHeight + 80)) {
         this.reducelife(scene, false);
       }
     }
