@@ -1,14 +1,14 @@
 export default class Player {
-  constructor(scene, x, y, level) {
-    this.scene = scene;
-    this.fuel = 100;
-    this.fuelSpendSpeed = 5; //per second
-    this.sprite = scene.physics.add.sprite(x, y, 'character').setScale(0.15).setAngle(0);
-    this.explosion = scene.physics.add.sprite(x, y, 'kaboom').setAngle(0);
-    this.explosion.setVisible(false);
-    this.traBG = scene.add.image(x, y, 'TraBG').setVisible(false).setScale(0.8);
-    this.traLine = scene.add.image(x, y, 'TraLine').setVisible(false).setScale(0.5);
-    this.traLine.setOrigin(0, 0.5);
+	constructor(scene, x, y, level) {
+		this.scene = scene;
+		this.fuel = 100;
+		this.fuelSpendSpeed = 5; //per second
+		this.sprite = scene.physics.add.sprite(x, y, 'character').setScale(0.15).setAngle(0);
+		this.explosion = scene.physics.add.sprite(x, y, 'kaboom').setAngle(0);
+		this.explosion.setVisible(false);
+		this.traBG = scene.add.image(x, y, 'TraBG').setVisible(false).setScale(0.8);
+		this.traLine = scene.add.image(x, y, 'TraLine').setVisible(false).setScale(0.5);
+		this.traLine.setOrigin(0, 0.5);
 
 		//this.traLine.setOrigin(0, this.traLine.displayHeight);
 		this.acceleration = 60;
@@ -99,6 +99,36 @@ export default class Player {
 				// boost identifier
 				var isBoosting = false;
 				var currentDir = new Phaser.Math.Vector2().copy(this.sprite.body.velocity).normalize();
+
+				// Horizontal movement
+				if (keys.left.isDown) {
+					if (this.fuel >= 0) {
+						this.scene.streak = 0;
+						sprite.setAccelerationX(-this.acceleration);
+						//fuel consume
+						this.fuel -= this.fuelSpendSpeed * delta / 1000;
+						isBoosting = true;
+					} else {
+						//not enough fuel
+						sprite.setAccelerationX(0);
+						sprite.setAccelerationY(0);
+					}
+				} else if (keys.right.isDown) {
+					if (this.fuel >= 0) {
+						this.scene.streak = 0;
+						sprite.setAccelerationX(this.acceleration);
+						//fuel consume
+						this.fuel -= this.fuelSpendSpeed * delta / 1000;
+						isBoosting = true;
+					} else {
+						//not enough fuel
+						sprite.setAccelerationX(0);
+						sprite.setAccelerationY(0);
+					}
+				} else {
+					sprite.setAccelerationX(0);
+					sprite.setAccelerationY(0);
+				}
 
 				// Vertical movement
 				if (keys.up.isDown) {
@@ -191,43 +221,61 @@ export default class Player {
 		}
 	}
 
-  checkPlayerpos() {
-    if (!this.isLanded && this.lastLanded != null) {
-      if (this.sprite.x <= this.scene.cameras.main.scrollX || this.sprite.x >= (this.scene.cameras.main.scrollX + this.level.levelWidth + 80) || this.sprite.y <= this.scene.cameras.main.scrollY || this.sprite.y >= (this.scene.cameras.main.scrollY + this.level.levelHeight + 80)) {
-        this.scene.fail.play();
-       this.sprite.setVisible(false);
-       this.explosion.x = this.sprite.x;
-       this.explosion.y = this.sprite.y;
-       this.sprite.x = this.scene.cameras.main.scrollX + 100;
-       this.sprite.y = this.scene.cameras.main.scrollY + 200;
-       this.explosion.setVisible(true);
-       this.explosion.play('die');
-        this.explosion.once('animationcomplete', function(anim, frame) {
-          console.log("after animation");
-          this.sprite.setVisible(true);
-          this.explosion.setVisible(false);
-          this.reducelife();
-        }, this);
-      }
-    } else if (!this.isLanded && this.lastLanded == null) {
-      if (this.sprite.x <= this.scene.cameras.main.scrollX || this.sprite.x >= (this.scene.cameras.main.scrollX + this.level.levelWidth + 80) || this.sprite.y <= this.scene.cameras.main.scrollY || this.sprite.y >= (this.scene.cameras.main.scrollY + this.level.levelHeight + 80)) {
-        this.scene.fail.play();
-        this.sprite.setVisible(false);
-       this.explosion.x = this.sprite.x;
-       this.explosion.y = this.sprite.y;
-       this.sprite.x = this.scene.cameras.main.scrollX + 100;
-       this.sprite.y = this.scene.cameras.main.scrollY + 200;
-       this.explosion.setVisible(true);
-       this.explosion.play('die');
-        this.explosion.once('animationcomplete', function(anim, frame) {
-          this.sprite.setVisible(true);
-          console.log("after animation");
-          this.explosion.setVisible(false);
-          this.reducelife(false);
-        }, this);
-      }
-    }
-  }
+	checkPlayerpos() {
+		if (!this.isLanded && this.lastLanded != null) {
+			if (
+				this.sprite.x <= this.scene.cameras.main.scrollX ||
+				this.sprite.x >= this.scene.cameras.main.scrollX + this.level.levelWidth + 80 ||
+				this.sprite.y <= this.scene.cameras.main.scrollY ||
+				this.sprite.y >= this.scene.cameras.main.scrollY + this.level.levelHeight + 80
+			) {
+				this.scene.fail.play();
+				this.sprite.setVisible(false);
+				this.explosion.x = this.sprite.x;
+				this.explosion.y = this.sprite.y;
+				this.sprite.x = this.scene.cameras.main.scrollX + 100;
+				this.sprite.y = this.scene.cameras.main.scrollY + 200;
+				this.explosion.setVisible(true);
+				this.explosion.play('die');
+				this.explosion.once(
+					'animationcomplete',
+					function(anim, frame) {
+						console.log('after animation');
+						this.sprite.setVisible(true);
+						this.explosion.setVisible(false);
+						this.reducelife();
+					},
+					this
+				);
+			}
+		} else if (!this.isLanded && this.lastLanded == null) {
+			if (
+				this.sprite.x <= this.scene.cameras.main.scrollX ||
+				this.sprite.x >= this.scene.cameras.main.scrollX + this.level.levelWidth + 80 ||
+				this.sprite.y <= this.scene.cameras.main.scrollY ||
+				this.sprite.y >= this.scene.cameras.main.scrollY + this.level.levelHeight + 80
+			) {
+				this.scene.fail.play();
+				this.sprite.setVisible(false);
+				this.explosion.x = this.sprite.x;
+				this.explosion.y = this.sprite.y;
+				this.sprite.x = this.scene.cameras.main.scrollX + 100;
+				this.sprite.y = this.scene.cameras.main.scrollY + 200;
+				this.explosion.setVisible(true);
+				this.explosion.play('die');
+				this.explosion.once(
+					'animationcomplete',
+					function(anim, frame) {
+						this.sprite.setVisible(true);
+						console.log('after animation');
+						this.explosion.setVisible(false);
+						this.reducelife(false);
+					},
+					this
+				);
+			}
+		}
+	}
 
 	//for playable
 	orbitPlanet(planet) {
@@ -244,22 +292,22 @@ export default class Player {
 		this.orbit = planet;
 	}
 	destroy() {
-        this.sprite.destroy();
-    }
+		this.sprite.destroy();
+	}
 
-    refill() {
-        this.fuel = 100;
-    }
+	refill() {
+		this.fuel = 100;
+	}
 
-    getArcSpeed() {
-        return this.moon.speed * this.orbit.gravityCircle.radius;
-    }
+	getArcSpeed() {
+		return this.moon.speed * this.orbit.gravityCircle.radius;
+	}
 
-    getCurrentArcDirection() {
-        if (this.isCCW == false)
-            return new Phaser.Math.Vector2(this.orbit.sprite.y - this.sprite.y, this.sprite.x - this.orbit.sprite.x);
-        else return new Phaser.Math.Vector2(this.sprite.y - this.orbit.sprite.y, this.orbit.sprite.x - this.sprite.x);
-    }
+	getCurrentArcDirection() {
+		if (this.isCCW == false)
+			return new Phaser.Math.Vector2(this.orbit.sprite.y - this.sprite.y, this.sprite.x - this.orbit.sprite.x);
+		else return new Phaser.Math.Vector2(this.sprite.y - this.orbit.sprite.y, this.orbit.sprite.x - this.sprite.x);
+	}
 	orbitUpdate(delta) {
 		if (this.isLanded) {
 			if (this.angle < 0) {
