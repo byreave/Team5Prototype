@@ -102,32 +102,18 @@ export default class Player {
 
         // Horizontal movement
         if (keys.left.isDown) {
-          if (this.fuel >= 0) {
-            this.scene.streak = 0;
-            sprite.setAccelerationX(-this.acceleration);
-            //fuel consume
-            this.fuel -= this.fuelSpendSpeed * delta / 1000;
-            isBoosting = true;
-          } else {
-            //not enough fuel
-            sprite.setAccelerationX(0);
-            sprite.setAccelerationY(0);
-          }
+          this.scene.streak = 0;
+          sprite.setAccelerationX(-this.acceleration);
+          //fuel consume
+          isBoosting = true;
+
         } else if (keys.right.isDown) {
-          if (this.fuel >= 0) {
-            this.scene.streak = 0;
-            sprite.setAccelerationX(this.acceleration);
-            //fuel consume
-            this.fuel -= this.fuelSpendSpeed * delta / 1000;
-            isBoosting = true;
-          } else {
-            //not enough fuel
-            sprite.setAccelerationX(0);
-            sprite.setAccelerationY(0);
-          }
+          this.scene.streak = 0;
+          sprite.setAccelerationX(this.acceleration);
+          //fuel consume
+          isBoosting = true;
         } else {
           sprite.setAccelerationX(0);
-          sprite.setAccelerationY(0);
         }
 
         // Vertical movement
