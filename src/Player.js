@@ -59,7 +59,7 @@ export default class Player {
     this.scene.children.bringToTop(this.traLine);
     this.lastLanded = moon;
     this.scene.children.bringToTop(this.sprite);
-    this.moon = moon
+    this.moon = moon;
     if (this.moon.isOrbiting == false) this.moon.isOrbiting = true;
     this.orbit = this.moon.orbit;
     this.isCCW = this.moon.isCCW;

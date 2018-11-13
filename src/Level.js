@@ -176,9 +176,26 @@ export default class Level {
 		}
 		this.moons.clear();
 		this.exits.splice(0, this.exits.length);
-		this.exitsUp = null;
-		this.exitsDown = null;
-		this.exitsLeft = null;
-		this.exitsRight = null;
+		//exits
+		if (this.levelUp == null) {
+			if (this.exitsUp != null)
+				this.exitsUp.destroy();
+			this.exitsUp = null;
+		}
+		if (this.levelDown == null) {
+			if (this.exitsDown != null)
+				this.exitsDown.destroy();
+			this.exitsDown = null;
+		}
+		if (this.levelLeft == null) {
+			if (this.exitsLeft != null)
+				this.exitsLeft.destroy();
+			this.exitsLeft = null;
+		}
+		if (this.levelRight == null) {
+			if (this.exitsRight != null)
+				this.exitsRight.destroy();
+			this.exitsRight = null;
+		}
 	}
 }

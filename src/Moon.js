@@ -96,6 +96,8 @@ export default class Moon {
             } else if (this.angle >= 2 * Math.PI) this.angle -= Math.PI * 2;
             else if (this.angle <= 0) this.angle = Math.PI * 2;*/
         }
+
+
     }
 
     destroy() {
@@ -120,6 +122,7 @@ export default class Moon {
             } else {
                 this.scene.catch.play();
                 this.scene.player.land(this);
+                this.isOrbiting = true;
                 if (this.isVisited == false) {
                     this.isVisited = true;
                     this.scene.score += 10 + 10 * this.scene.streak;

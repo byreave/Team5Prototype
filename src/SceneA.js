@@ -188,7 +188,7 @@ export default class SceneA extends Phaser.Scene {
         this.player = new Player(this, 100, 200);
         this.score = 0;
         this.streak = 0;
-        this.camTime = 3;
+        this.camTime = 1;
         this.oldCamScrollX = 0;
         this.oldCamScrollY = 0;
 

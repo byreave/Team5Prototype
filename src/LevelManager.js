@@ -4,6 +4,7 @@ export default class LevelManager {
     constructor(scene) {
         this.scene = scene;
         this.currentLevel;
+        this.prevLevel;
         this.levels = new Array();
         this.levelWidth = 1920;
         this.levelHeight = 1080;
@@ -20,9 +21,80 @@ export default class LevelManager {
         this.levels.push(newLevel);
         this.currentLevel = newLevel;
         // TEMP: temp cancel surronding level generation
-        this.createLevelAround(newLevel);
+        //this.createLevelAround(newLevel);
         this.scene.player.level = newLevel;
         //this.scene.player.land(this.scene.tempMoonSprite);
+    }
+    //generate new levels 
+    createNewLevel(direction) {
+        var pos;
+        var file;
+        var newLevel;
+        if (this.currentLevel == null)
+            return;
+        if (direction == 'up') {
+            if (this.currentLevel.levelUp != null) {//goes back to prev level
+                this.currentLevel.levelUp.levelDown = this.currentLevel;
+                this.prevLevel = this.currentLevel;
+                this.currentLevel = this.currentLevel.levelUp;
+                return;
+            } else {
+                pos = new Phaser.Math.Vector2(this.currentLevel.centerPoint.x, this.currentLevel.centerPoint.y - this.levelHeight);
+                newLevel = new Level(this.scene, pos);
+                newLevel.levelDown = this.currentLevel;
+            }
+        }
+        else if (direction == 'down') {
+            if (this.currentLevel.levelDown != null) {//goes back to prev level
+                this.currentLevel.levelDown.levelUp = this.currentLevel;
+                this.prevLevel = this.currentLevel;
+                this.currentLevel = this.currentLevel.levelDown;
+                return;
+            } else {
+                pos = new Phaser.Math.Vector2(this.currentLevel.centerPoint.x, this.currentLevel.centerPoint.y + this.levelHeight);
+                newLevel = new Level(this.scene, pos);
+                newLevel.levelUp = this.currentLevel;
+            }
+        }
+        else if (direction == 'left') {
+            if (this.currentLevel.levelLeft != null) {//goes back to prev level
+                this.currentLevel.levelLeft.levelRight = this.currentLevel;
+                this.prevLevel = this.currentLevel;
+                this.currentLevel = this.currentLevel.levelLeft;
+                return;
+            } else {
+                pos = new Phaser.Math.Vector2(this.currentLevel.centerPoint.x - this.levelWidth, this.currentLevel.centerPoint.y);
+                newLevel = new Level(this.scene, pos);
+                newLevel.levelRight = this.currentLevel;
+            }
+        }
+        else if (direction == 'right') {
+            if (this.currentLevel.levelRight != null) {//goes back to prev level
+                this.currentLevel.levelRight.levelLeft = this.currentLevel;
+                this.prevLevel = this.currentLevel;
+                this.currentLevel = this.currentLevel.levelRight;
+                return;
+            } else {
+                pos = new Phaser.Math.Vector2(this.currentLevel.centerPoint.x + this.levelWidth, this.currentLevel.centerPoint.y);
+                newLevel = new Level(this.scene, pos);
+                newLevel.levelLeft = this.currentLevel;
+            }
+        }
+        else {
+            //broken input
+            return;
+        }
+        if (this.scene.score > 100)
+            file = this.getRandomNormalLevelFile();
+        else
+            file = this.getRandomLevelFile();
+        if (this.prevLevel != null)
+            this.prevLevel.destroy();
+        this.prevLevel = this.currentLevel;
+
+        newLevel.createPlanetsFormJson(file);
+        this.levels.push(newLevel);
+        this.currentLevel = newLevel;
     }
     createLevelAround(centerLevel) {
         if (centerLevel.levelUp == null) {
@@ -81,41 +153,45 @@ export default class LevelManager {
 
     //para exit for change its direction
     switchLevel(direction, exit) {
-        console.log(this);
+        //console.log(this);
         if (direction == 'up') {
             //delete other levels to keep levels at 5
             //down
-            this.deleteLevelsExcept('up');
-            this.currentLevel = this.currentLevel.levelUp;
-            this.createLevelAround(this.currentLevel);
+            //this.deleteLevelsExcept('up');
+            //this.currentLevel = this.currentLevel.levelUp;
+            //this.createLevelAround(this.currentLevel);
+            this.createNewLevel('up');
             this.scene.player.level = this.currentLevel;
             exit.direction = 'down';
             console.log('changed to upper level');
             //TO DO Camera Move:
             this.moveTo = 'up';
         } else if (direction == 'down') {
-            this.deleteLevelsExcept('down');
-            this.currentLevel = this.currentLevel.levelDown;
-            this.createLevelAround(this.currentLevel);
+            //this.deleteLevelsExcept('down');
+            //this.currentLevel = this.currentLevel.levelDown;
+            //this.createLevelAround(this.currentLevel);
+            this.createNewLevel('down');
             this.scene.player.level = this.currentLevel;
             exit.direction = 'up';
             this.moveTo = 'down';
         } else if (direction == 'left') {
-            this.deleteLevelsExcept('left');
-            this.currentLevel = this.currentLevel.levelLeft;
-            this.createLevelAround(this.currentLevel);
+            //this.deleteLevelsExcept('left');
+            //this.currentLevel = this.currentLevel.levelLeft;
+            //this.createLevelAround(this.currentLevel);
+            this.createNewLevel('left');
             this.scene.player.level = this.currentLevel;
             exit.direction = 'right';
             this.moveTo = 'left';
         } else if (direction == 'right') {
-            this.deleteLevelsExcept('right');
-            this.currentLevel = this.currentLevel.levelRight;
-            this.createLevelAround(this.currentLevel);
+            //this.deleteLevelsExcept('right');
+            //this.currentLevel = this.currentLevel.levelRight;
+            //this.createLevelAround(this.currentLevel);
+            this.createNewLevel('right');
             this.scene.player.level = this.currentLevel;
             exit.direction = 'left';
             this.moveTo = 'right';
         }
-        console.log(this.currentLevel);
+        //console.log(this.currentLevel);
     }
 
     getRandomLevelFile() {
