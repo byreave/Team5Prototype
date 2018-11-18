@@ -38,6 +38,9 @@ export default class Player {
     }
     this.lastLanded = null;
     this.isDestroy = false;
+    this.isInvincible = false;
+    this.invincibleTime = 2.0;
+    this.blinkTime = 0.0;
   }
 
   stop() {
@@ -178,6 +181,24 @@ export default class Player {
           this.isLeaving = false;
         }
       }
+
+      if (this.isInvincible) {
+        this.blinkTime += delta / 1000;
+        this.invincibleTime += delta / 1000;
+        if (this.invincibleTime > 1.0) {
+          this.isInvincible = false;
+          this.invincibleTime = 0.0;
+          this.blinkTime = 0.0;
+          this.sprite.setVisible(true);
+        }
+        if (this.blinkTime > 0.0 && this.blinkTime < 0.25)
+          this.sprite.setVisible(false);
+        else if (this.blinkTime < 0.5)
+          this.sprite.setVisible(true);
+        else {
+          this.blinkTime = 0.0;
+        }
+      }
     }
   }
 
@@ -185,20 +206,15 @@ export default class Player {
     // console.log(player.lives -= 1);
     if (this.lives != 0 && moon) {
       this.lives -= 1;
+      this.isInvincible = true;
       this.livearray[this.lives].destroy();
 
-      //TODO: following three things:
-      //1. Change player sprite to kaboom animation sprite / Add Kaboom sprite to player.sprite.X,player.sprite.Y and make player invisible
-      //2. make this.isDestroy to true on Kaboom animation on start
-      //3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
       this.land(this.lastLanded);
     } else if (this.lives != 0 && !moon) {
+      this.isInvincible = true;
       this.lives -= 1;
       this.livearray[this.lives].destroy();
-      //TODO: following three things:
-      //1. Change player sprite to kaboom animation sprite / Add Kaboom sprite to player.sprite.X,player.sprite.Y and make player invisible
-      //2. make this.isDestroy to true on Kaboom animation on start
-      //3. Change The player sprite to Character / Destroy the Kaboom sprite and make player visible
+
       this.startOnDestroy(this.scene.cameras);
     } else if (this.lives == 0) {
       this.scene.scene.start('end', { Score: this.scene.score });
