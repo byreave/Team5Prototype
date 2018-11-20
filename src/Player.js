@@ -1,13 +1,24 @@
 export default class Player {
-  constructor(scene, x, y, level) {
+  constructor(scene, x, y) {
+
+    this.sprite = scene.physics.add.sprite(x, y, 'character').setScale(0.15).setAngle(0);
+    this.explosion = scene.physics.add.sprite(x, y, 'kaboom').setAngle(0);
+    this.traBG = scene.add.image(x, y, 'TraBG').setVisible(false).setScale(0.8);
+    this.traLine = scene.add.image(x, y, 'TraLine').setVisible(false).setScale(0.5);
+    this.lives = 4;
+    this.livearray = new Array(this.lives);
+    this.livearray[0] = scene.add.image(30, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[1] = scene.add.image(70, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[2] = scene.add.image(110, 1050, 'life').setScale(0.5).setAngle(0);
+    this.livearray[3] = scene.add.image(150, 1050, 'life').setScale(0.5).setAngle(0);
+    for (var i = 0; i < this.lives; i++) {
+      this.livearray[i].setScrollFactor(0);
+    }
+    this.explosion.setVisible(false);
+
     this.scene = scene;
     this.fuel = 100;
     this.fuelSpendSpeed = 5; //per second
-    this.sprite = scene.physics.add.sprite(x, y, 'character').setScale(0.15).setAngle(0);
-    this.explosion = scene.physics.add.sprite(x, y, 'kaboom').setAngle(0);
-    this.explosion.setVisible(false);
-    this.traBG = scene.add.image(x, y, 'TraBG').setVisible(false).setScale(0.8);
-    this.traLine = scene.add.image(x, y, 'TraLine').setVisible(false).setScale(0.5);
     this.traLine.setOrigin(0, 0.5);
 
     this.boundaryMargin = 30; //for re-collide of the boundary(quick death)
@@ -19,7 +30,7 @@ export default class Player {
     //console.log(this.keys);
     this.orbit; //planets player orbiting around ps:not moons
     this.moon; // the moon player come across
-    this.level = level;
+    this.level;
     this.landedOn = 0;
     this.angle = 0.0; //joystick control
     this.speedDirect; //joystick speed direction
@@ -27,15 +38,7 @@ export default class Player {
     this.joystickSensi = 0.5;
     this.isCCW = true;
     this.isLeaving = false; //for moon collider
-    this.lives = 4;
-    this.livearray = new Array(4);
-    this.livearray[0] = scene.add.image(30, 1050, 'life').setScale(0.5).setAngle(0);
-    this.livearray[1] = scene.add.image(70, 1050, 'life').setScale(0.5).setAngle(0);
-    this.livearray[2] = scene.add.image(110, 1050, 'life').setScale(0.5).setAngle(0);
-    this.livearray[3] = scene.add.image(150, 1050, 'life').setScale(0.5).setAngle(0);
-    for (var i = 0; i < 4; i++) {
-      this.livearray[i].setScrollFactor(0);
-    }
+
     this.lastLanded = null;
     this.isDestroy = false;
     this.isInvincible = false;
@@ -43,6 +46,38 @@ export default class Player {
     this.blinkTime = 0.0;
   }
 
+  init() {
+    console.log("initializing!");
+    this.explosion.setVisible(false);
+
+    //this.scene = scene;
+    this.fuel = 100;
+    this.fuelSpendSpeed = 5; //per second
+    this.traLine.setOrigin(0, 0.5);
+
+    this.boundaryMargin = 30; //for re-collide of the boundary(quick death)
+    //this.traLine.setOrigin(0, this.traLine.displayHeight);
+    this.acceleration = 60;
+    this.isLanded = false;
+    this.sprite.setVelocityX(100);
+    //this.keys = scene.input.keyboard.createCursorKeys();
+    //console.log(this.keys);
+    this.orbit; //planets player orbiting around ps:not moons
+    this.moon; // the moon player come across
+    this.landedOn = 0;
+    this.angle = 0.0; //joystick control
+    this.speedDirect; //joystick speed direction
+
+    this.joystickSensi = 0.5;
+    this.isCCW = true;
+    this.isLeaving = false; //for moon collider
+
+    this.lastLanded = null;
+    this.isDestroy = false;
+    this.isInvincible = false;
+    this.invincibleTime = 2.0;
+    this.blinkTime = 0.0;
+  }
   stop() {
     this.sprite.setVelocityX(0);
     this.sprite.setVelocityY(0);
@@ -55,6 +90,7 @@ export default class Player {
     this.sprite.setAccelerationX(0);
     this.sprite.setAccelerationY(0);
     this.isLanded = true;
+    console.log("Land");
     this.traBG.setVisible(true);
     this.traLine.setVisible(true);
     //bring to top
@@ -185,7 +221,7 @@ export default class Player {
       if (this.isInvincible) {
         this.blinkTime += delta / 1000;
         this.invincibleTime += delta / 1000;
-        if (this.invincibleTime > 1.0) {
+        if (this.invincibleTime > 2.0) {
           this.isInvincible = false;
           this.invincibleTime = 0.0;
           this.blinkTime = 0.0;
@@ -209,22 +245,20 @@ export default class Player {
       this.isInvincible = true;
       this.livearray[this.lives].destroy();
 
-      this.land(this.lastLanded);
+      //this.land(this.lastLanded);
     } else if (this.lives != 0 && !moon) {
       this.isInvincible = true;
       this.lives -= 1;
       this.livearray[this.lives].destroy();
 
       this.startOnDestroy(this.scene.cameras);
-    } else if (this.lives == 0) {
-      this.scene.scene.start('end', { Score: this.scene.score });
-      // scene.scene.switch('game', 'end');
-      // scene.scene.destroy();
-    }
+    } //else if (this.lives == 0) {
+    //this.scene.scene.start('end', { Score: this.scene.score });
+    //}
   }
 
   checkPlayerpos() {
-    if (!this.isLanded && this.lastLanded != null) {
+    if (!this.isLanded && !this.isLeaving && this.lastLanded != null) {
       if (
         this.sprite.x <= this.scene.cameras.main.scrollX - this.boundaryMargin ||
         this.sprite.x >= this.scene.cameras.main.scrollX + this.level.levelWidth + this.boundaryMargin ||
@@ -255,13 +289,15 @@ export default class Player {
           function (anim, frame) {
             console.log('after animation');
             this.sprite.setVisible(true);
+            this.traBG.setVisible(true);
+            this.traLine.setVisible(true);
             this.explosion.setVisible(false);
             this.reducelife();
           },
           this
         );
       }
-    } else if (!this.isLanded && this.lastLanded == null) {
+    } else if (!this.isLanded && !this.isLeaving && this.lastLanded == null) {
       if (
         this.sprite.x <= this.scene.cameras.main.scrollX - this.boundaryMargin ||
         this.sprite.x >= this.scene.cameras.main.scrollX + this.level.levelWidth + this.boundaryMargin ||
@@ -289,6 +325,9 @@ export default class Player {
           this
         );
       }
+    }
+    else {
+      console.log("IS LANDING!");
     }
   }
 

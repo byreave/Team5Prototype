@@ -186,6 +186,7 @@ export default class SceneA extends Phaser.Scene {
         //Camera time to move to other screen(second)
         //Player
         this.player = new Player(this, 100, 200);
+        this.player.init(this);
         this.score = 0;
         this.streak = 0;
         this.camTime = 1;
@@ -232,9 +233,11 @@ export default class SceneA extends Phaser.Scene {
         // f1.add(this, 'streak').listen();
 
         // f1.open();
+        console.log(this.scene.manager.scenes);
     }
 
     update(timestep, delta) {
+
         this.player.update(delta, this.player.isDestroy);
         this.levelManager.currentLevel.update(delta);
         //Score
@@ -287,5 +290,9 @@ export default class SceneA extends Phaser.Scene {
         }
         // console.log(this.cameras);
         this.player.checkPlayerpos(this);
+        if (this.player.lives == 0) {
+
+            this.scene.start('end', { Score: this.score });
+        }
     }
 }
