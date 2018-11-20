@@ -32,7 +32,7 @@ export default class StartScreen extends Phaser.Scene {
 		// console.log(this.input.keyboard.createCursorKeys());
 		this.input.once(
 			'pointerdown',
-			function(event) {
+			function (event) {
 				// console.log(event);
 				// if(event.key)
 				this.scene.start('game');
@@ -41,5 +41,5 @@ export default class StartScreen extends Phaser.Scene {
 		);
 	}
 
-	update(timestep, delta) {}
+	update(timestep, delta) { }
 }

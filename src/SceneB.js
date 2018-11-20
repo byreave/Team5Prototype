@@ -4,11 +4,11 @@ export default class SceneB extends Phaser.Scene {
         super();
         Phaser.Scene.call(this, { key: 'end' });
     }
-    
+
     init(data) {
         this._score = data.Score;
     }
-    
+
     preload() {
         this.load.image('EndScreen', 'assets/endscreen.png');
         this.load.bitmapFont('d_p', 'assets/font.png', 'assets/font.fnt');
@@ -28,7 +28,8 @@ export default class SceneB extends Phaser.Scene {
             // this.scene.pause('end');
             // this.start = this.scene.get('game');
             // this.start.scene.restart();
-            this.scene.start('game');
+            //this.scene.start('game');
+            location.reload();
         }, this);
     }
 
