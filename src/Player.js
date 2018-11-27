@@ -1,3 +1,5 @@
+import ExplodingHealth from "./ExplodingHealth";
+
 export default class Player {
   constructor(scene, x, y) {
 
@@ -243,14 +245,22 @@ export default class Player {
     if (this.lives != 0 && moon) {
       this.lives -= 1;
       this.isInvincible = true;
+      var hpExplode =
+        new ExplodingHealth(
+          this.scene,
+          this.livearray[this.lives].x,
+          this.livearray[this.lives].y);
       this.livearray[this.lives].destroy();
-
       //this.land(this.lastLanded);
     } else if (this.lives != 0 && !moon) {
       this.isInvincible = true;
       this.lives -= 1;
+      var hpExplode =
+        new ExplodingHealth(
+          this.scene,
+          this.livearray[this.lives].x,
+          this.livearray[this.lives].y);
       this.livearray[this.lives].destroy();
-
       this.startOnDestroy(this.scene.cameras);
     } //else if (this.lives == 0) {
     //this.scene.scene.start('end', { Score: this.scene.score });
