@@ -38,4 +38,13 @@
 	* left
 	* right
 * }
+* collectibles
+* {
+	* textures
+	* planetIndex1
+	* planetIndex2
+	* ratio //how much between two planets
+	* scores //0 if health isn't 0
+	* health //0 if scores isn't 0
+* }
 ## 

@@ -1,4 +1,5 @@
 import Planet from './Planet.js';
+import Collectible from './Collectible.js';
 import Moon from './Moon.js';
 import PlanetGenerator from './PlanetGenerator.js';
 import Exit from './Exit.js';
@@ -9,6 +10,7 @@ export default class Level {
 		this.planets = new Array();
 		this.moons = new Map();
 		this.exits = new Array();
+		this.collectibles = new Array();
 		this.levelWidth = 1920;
 		this.levelHeight = 1080;
 		this.centerPoint = pos;
@@ -113,7 +115,7 @@ export default class Level {
 			this.moons.set(this.exitsDown.moon.sprite, this.exitsDown.moon);
 			this.exits.push(this.exitsDown);
 		}
-		//Left left
+		//Left
 		if (data.exits.left.On == true && (this.levelLeft == null || this.levelLeft.exitsRight == null)) {
 			this.exitsLeft = new Exit(
 				this.scene,
@@ -131,7 +133,7 @@ export default class Level {
 			this.moons.set(this.exitsLeft.moon.sprite, this.exitsLeft.moon);
 			this.exits.push(this.exitsLeft);
 		}
-		//Right right
+		//Right
 		if (data.exits.right.On == true && (this.levelRight == null || this.levelRight.exitsLeft == null)) {
 			this.exitsRight = new Exit(
 				this.scene,
@@ -149,6 +151,20 @@ export default class Level {
 			this.moons.set(this.exitsRight.moon.sprite, this.exitsRight.moon);
 			this.exits.push(this.exitsRight);
 		}
+		//Collectibles
+		for (var i in data.collectibles) {
+			var c = data.collectibles[i];
+			//generate collectible between two planets with ratio: ratio
+			var planetIndex1 = c.planetIndex1;
+			var planetIndex2 = c.planetIndex2;
+			var ratio = c.ratio;
+			var x = data.planets[planetIndex1].x * ratio + data.planets[planetIndex2].x * (1 - ratio);
+			var y = data.planets[planetIndex1].y * ratio + data.planets[planetIndex2].y * (1 - ratio);
+			console.log(x);
+			console.log(y);
+			var colle = new Collectible(this.scene, x + this.centerPoint.x, y + this.centerPoint.y, c.texture, c.scores, c.health);
+			this.collectibles.push(colle);
+		}
 	}
 
 	update(delta) {
@@ -163,6 +179,10 @@ export default class Level {
 
 		for (var e of this.exits) {
 			e.update(delta);
+		}
+
+		for (var c of this.collectibles) {
+			c.update(delta);
 		}
 	}
 	destroy() {
@@ -197,5 +217,10 @@ export default class Level {
 				this.exitsRight.destroy();
 			this.exitsRight = null;
 		}
+		//collectibles
+		for (var c of this.collectibles) {
+			c.destroy();
+		}
+		this.collectibles.splice(0, this.collectibles.length);
 	}
 }

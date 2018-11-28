@@ -99,5 +99,23 @@
 			"MoonTexture": "star",
 			"isCCW": false
 		}
+	},
+	"collectibles": {
+		"c1": {
+			"texture": "starplus20",
+			"planetIndex1": "p1",
+			"planetIndex2": "p2",
+			"ratio": 0.5,
+			"scores": 20,
+			"health": 0
+		},
+		"c2": {
+			"texture": "plushealth",
+			"planetIndex1": "p2",
+			"planetIndex2": "p3",
+			"ratio": 0.5,
+			"scores": 0,
+			"health": 1
+		}
 	}
 }

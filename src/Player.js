@@ -9,11 +9,8 @@ export default class Player {
     this.traLine = scene.add.image(x, y, 'TraLine').setVisible(false).setScale(0.5);
     this.lives = 4;
     this.livearray = new Array(this.lives);
-    this.livearray[0] = scene.add.image(30, 1050, 'life').setScale(0.5).setAngle(0);
-    this.livearray[1] = scene.add.image(70, 1050, 'life').setScale(0.5).setAngle(0);
-    this.livearray[2] = scene.add.image(110, 1050, 'life').setScale(0.5).setAngle(0);
-    this.livearray[3] = scene.add.image(150, 1050, 'life').setScale(0.5).setAngle(0);
     for (var i = 0; i < this.lives; i++) {
+      this.livearray[i] = scene.add.image(30 + i * 40, 1050, 'life').setScale(0.5).setAngle(0);
       this.livearray[i].setScrollFactor(0);
     }
     this.explosion.setVisible(false);
@@ -49,7 +46,6 @@ export default class Player {
   }
 
   init() {
-    console.log("initializing!");
     this.explosion.setVisible(false);
 
     //this.scene = scene;
@@ -250,7 +246,7 @@ export default class Player {
           this.scene,
           this.livearray[this.lives].x,
           this.livearray[this.lives].y);
-      this.livearray[this.lives].destroy();
+      this.livearray[this.lives].setVisible(false);
       //this.land(this.lastLanded);
     } else if (this.lives != 0 && !moon) {
       this.isInvincible = true;
@@ -260,11 +256,18 @@ export default class Player {
           this.scene,
           this.livearray[this.lives].x,
           this.livearray[this.lives].y);
-      this.livearray[this.lives].destroy();
+      this.livearray[this.lives].setVisible(false);
       this.startOnDestroy(this.scene.cameras);
     } //else if (this.lives == 0) {
     //this.scene.scene.start('end', { Score: this.scene.score });
     //}
+  }
+
+  gainHealth() {
+    if (this.lives < 4) {
+      this.lives++;
+      this.livearray[this.lives - 1].setVisible(true);
+    }
   }
 
   checkPlayerpos() {
@@ -297,7 +300,6 @@ export default class Player {
         this.explosion.once(
           'animationcomplete',
           function (anim, frame) {
-            console.log('after animation');
             this.sprite.setVisible(true);
             this.traBG.setVisible(true);
             this.traLine.setVisible(true);
@@ -328,7 +330,6 @@ export default class Player {
           'animationcomplete',
           function (anim, frame) {
             this.sprite.setVisible(true);
-            console.log('after animation');
             this.explosion.setVisible(false);
             this.reducelife(false);
           },
@@ -337,7 +338,6 @@ export default class Player {
       }
     }
     else {
-      console.log("IS LANDING!");
     }
   }
 
@@ -350,8 +350,6 @@ export default class Player {
     } else this.angle = Math.PI / 2;
     if (this.sprite.body.velocity.x < 0) this.isCCW = false;
     else this.isCCW = true;
-    console.log(radio);
-    console.log(this.angle);
     this.sprite.body.allowGravity = false;
     this.orbit = planet;
   }

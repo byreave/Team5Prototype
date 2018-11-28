@@ -27,6 +27,8 @@ export default class SceneA extends Phaser.Scene {
         this.load.image('TraBG', 'assets/TrajectoryBG.png');
 
         this.load.image('life', 'assets/life.png');
+        this.load.image('plushealth', 'assets/plushealth.png');
+        this.load.image('starplus20', 'assets/starplus20.png');
 
         // Resources for planets and moon
         // this.load.image('moon', 'assets/Moon 1.png');
@@ -233,7 +235,6 @@ export default class SceneA extends Phaser.Scene {
         // f1.add(this, 'streak').listen();
 
         // f1.open();
-        console.log(this.scene.manager.scenes);
     }
 
     update(timestep, delta) {
