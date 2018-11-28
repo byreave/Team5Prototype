@@ -160,8 +160,6 @@ export default class Level {
 			var ratio = c.ratio;
 			var x = data.planets[planetIndex1].x * ratio + data.planets[planetIndex2].x * (1 - ratio);
 			var y = data.planets[planetIndex1].y * ratio + data.planets[planetIndex2].y * (1 - ratio);
-			console.log(x);
-			console.log(y);
 			var colle = new Collectible(this.scene, x + this.centerPoint.x, y + this.centerPoint.y, c.texture, c.scores, c.health);
 			this.collectibles.push(colle);
 		}
@@ -184,6 +182,10 @@ export default class Level {
 		for (var c of this.collectibles) {
 			c.update(delta);
 		}
+	}
+	removeColle(c) {
+		var index = this.collectibles.lastIndexOf(c);
+		this.collectibles.splice(index, 1);
 	}
 	destroy() {
 		for (var p of this.planets) {

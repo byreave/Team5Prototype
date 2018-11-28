@@ -17,9 +17,9 @@ export default class Collectible {
         );
 
         //for floating
-        this.smallMovingDistance = 50.0;
-        this.smallMovingTime = 2.0;
-        this.currentDifference = 0.0;
+        this.smallMovingSpeed = 10.0;
+        this.smallMovingTime = 0.5;
+        this.currentTime = 0.0;
         this.movesUp = true;
     }
     playerIncoming() {
@@ -32,25 +32,28 @@ export default class Collectible {
             this.scene.player.gainHealth();
         }
         this.destroy();
+        this.scene.levelManager.currentLevel.removeColle(this);
     }
     update(delta) {
         //make it floating a bit.
-        var step = (this.smallMovingDistance / this.smallMovingTime) * delta / 1000;
+        this.currentTime += delta / 1000.0;
         if (this.movesUp) {
-            if (this.currentDifference >= -this.smallMovingDistance / 2.0) {
-                this.sprite.setY(this.sprite.y - step);
-                this.currentDifference -= this.step;
+            if (this.sprite != null && this.currentTime <= this.smallMovingTime) {
+                this.sprite.setVelocityY(-50)
             }
-            else
+            else {
                 this.movesUp = false;
+                this.currentTime = 0.0;
+            }
         }
         if (!this.movesUp) {
-            if (this.currentDifference <= this.smallMovingDistance / 2.0) {
-                this.sprite.setY(this.sprite.y - step);
-                this.currentDifference += this.step;
+            if (this.sprite != null && this.currentTime <= this.smallMovingTime) {
+                this.sprite.setVelocityY(50)
             }
-            else
+            else {
                 this.movesUp = true;
+                this.currentTime = 0.0;
+            }
         }
 
     }
