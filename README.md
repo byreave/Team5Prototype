@@ -13,9 +13,7 @@
 
 ## Use NodeJS to build.
 ## Known Issues:
-1. If the moonlander goes in circle(come back to the level that has been deleted once but regenerated), exits seem to have been destroyed.
-2. Restart the game level may cause moonlander fail to land. (F5 to restart if this happens)
-3. Launch(space) while in satellite outside of the screen will cause instantly death. (Repeatly cause reduce life function)
+Fixed.
 
 
 ## Credits
